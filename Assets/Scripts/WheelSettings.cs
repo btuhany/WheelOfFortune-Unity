@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace WheelOfFortune.Wheel
 {
-    [CreateAssetMenu(menuName = "Wheel Of Fortune/Wheel/Wheel Settings")]
+    [CreateAssetMenu(menuName = "Wheel Of Fortune/Wheel/Wheel Setting")]
     public class WheelSettings : ScriptableObject
     {
         [Header("Temp Input")]
