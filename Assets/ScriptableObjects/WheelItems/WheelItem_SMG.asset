@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6fb5f6dc302210448f1c17bf89f54d5, type: 3}
+  m_Name: WheelItem_SMG
+  m_EditorClassIdentifier: 
+  _name: SMG
+  _type: 0
+  _spriteWheel: {fileID: 21300000, guid: 3b071ebac78aa4e47810a1f7453f60d5, type: 3}
+  _spriteReward: {fileID: 21300000, guid: e032c925c28f4e84c98256f38dd29bcb, type: 3}
+  _minCount: 2
+  _maxCount: 10

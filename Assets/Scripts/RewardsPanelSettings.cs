@@ -1,4 +1,5 @@
 using UnityEngine;
+using WheelOfFortune.Panels;
 
 namespace WheelOfFortune.Settings
 {
@@ -6,8 +7,8 @@ namespace WheelOfFortune.Settings
     public class RewardsPanelSettings : ScriptableObject
     {
         [Header("Rewards Panel")]
-        [SerializeField] private RewardsPanelContent _rewardsPanelContentPrefab;
+        [SerializeField] private RewardsPanelContentController _rewardsPanelContentPrefab;
 
-        public RewardsPanelContent RewardsPanelContentPrefab { get => _rewardsPanelContentPrefab; }
+        public RewardsPanelContentController RewardsPanelContentPrefab { get => _rewardsPanelContentPrefab; }
     }
 }

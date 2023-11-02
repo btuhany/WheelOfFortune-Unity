@@ -1,7 +1,8 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using WheelOfFortune.Items;
 using WheelOfFortune.Settings;
-using WheelOfFortune.Wheel;
 
 namespace WheelOfFortune.Panels
 {
@@ -13,13 +14,22 @@ namespace WheelOfFortune.Panels
         [Header("References")]
         [SerializeField] private RectTransform _rewardsContentHolder;
 
-        private List<RewardsPanelContent> _rewards;
-        public void AddReward(WheelSliceController slice)
+        private Dictionary<WheelItem, RewardsPanelContentController> _rewardsDictionary = new Dictionary<WheelItem, RewardsPanelContentController>();
+        public void AddReward(WheelItem item)
         {
-            RewardsPanelContent newReward = Instantiate(_settings.RewardsPanelContentPrefab, _rewardsContentHolder);
-            newReward.SetReward(slice.Content.Sprite, slice.ContentCount);
-        }
-        
+            if (_rewardsDictionary.ContainsKey(item))
+            {
+                RewardsPanelContentController rewardsContent = _rewardsDictionary[item];
+                rewardsContent.IncreaseCount(item.Count);
+                
+            }
+            else
+            {
+                RewardsPanelContentController newReward = Instantiate(_settings.RewardsPanelContentPrefab, _rewardsContentHolder);
+                newReward.SetReward(item);
+                _rewardsDictionary.Add(item, newReward);
+            }
+        }        
     }
 }
 

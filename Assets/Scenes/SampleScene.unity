@@ -530,6 +530,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 262185510}
+  - component: {fileID: 262185513}
   - component: {fileID: 262185512}
   - component: {fileID: 262185511}
   m_Layer: 5
@@ -602,6 +603,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 262185509}
   m_CullTransparentMesh: 1
+--- !u!114 &262185513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 262185509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24eb2702bb1997c4ab86ae4d71a7ddf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _settings: {fileID: 11400000, guid: 7e7e148fb4ae4d446b1cccb63928d400, type: 2}
 --- !u!1 &300194423
 GameObject:
   m_ObjectHideFlags: 0
@@ -631,9 +645,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c7958755046f4e4fab400f07dd4642b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _wheelPanelRectTransform: {fileID: 462326281}
-  _prizePanelController: {fileID: 498903525}
+  _spinPanelController: {fileID: 262185513}
+  _contentPanelController: {fileID: 498903525}
   _rewardsPanelController: {fileID: 1706020461}
+  _wheelController: {fileID: 462326284}
 --- !u!4 &300194425
 Transform:
   m_ObjectHideFlags: 0
@@ -1011,7 +1026,7 @@ GameObject:
   - component: {fileID: 453984205}
   - component: {fileID: 453984204}
   m_Layer: 5
-  m_Name: ui_text_prize_count
+  m_Name: ui_text_content_count
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1367,17 +1382,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2d4803a626301146902cf5356f86820, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _wheelSpinPanelRect: {fileID: 262185510}
   _settings: {fileID: 11400000, guid: fe17d93de44ae8a468e8d8e9da717bd0, type: 2}
   _sliceContents:
-  - {fileID: 11400000, guid: 411586748f7b4bb46a318be853bda66f, type: 2}
-  - {fileID: 11400000, guid: 605084a4ffde6444498d0e564d2007d1, type: 2}
-  - {fileID: 11400000, guid: 411586748f7b4bb46a318be853bda66f, type: 2}
-  - {fileID: 11400000, guid: 93bdee1050b315746bd570e22e0e0bb6, type: 2}
-  - {fileID: 11400000, guid: c611073deda9d5b42b4717342b2498bd, type: 2}
-  - {fileID: 11400000, guid: affa55c68ca7e7247ad4ccab572effcc, type: 2}
-  - {fileID: 11400000, guid: fe6aecf723c66ad4b80dbfc5aff079ed, type: 2}
-  - {fileID: 11400000, guid: 1f79e064f568d424f83df8f54e33fc08, type: 2}
+  - {fileID: 11400000, guid: b2d4fa655bc20ef40a946a9e5d641f86, type: 2}
+  - {fileID: 11400000, guid: 2a1b44eff6badf9419b41c21256e0e88, type: 2}
+  - {fileID: 11400000, guid: 1319cd4b43d319045b608e1066601ddf, type: 2}
+  - {fileID: 11400000, guid: 7d473bafa0cbd854794eb3fc1457a9e6, type: 2}
+  - {fileID: 11400000, guid: 7345a528fe82d644c95dde7df13a0aad, type: 2}
+  - {fileID: 11400000, guid: 41500a3ecb6db23489810b8a04589941, type: 2}
+  - {fileID: 11400000, guid: 7ee9e61cb3b1a524fab50e7eae12860a, type: 2}
+  - {fileID: 11400000, guid: d6a5f70626f047847bdf20f75f236768, type: 2}
 --- !u!1 &473685321
 GameObject:
   m_ObjectHideFlags: 0
@@ -1526,12 +1540,12 @@ GameObject:
   - component: {fileID: 498903524}
   - component: {fileID: 498903523}
   m_Layer: 5
-  m_Name: ui_panel_prize
+  m_Name: ui_panel_content
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &498903522
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1554,7 +1568,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.000004136935}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 558.5, y: 780.01}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &498903523
@@ -1607,7 +1621,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 608ba9c29a884f24f8704ca6960adb07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rewardImg: {fileID: 7436597984359599680, guid: 577b46ed354a1794f9d38e58dc22ea32, type: 3}
+  _settings: {fileID: 11400000, guid: b11becd0e2e06c34c8c2b552a85beb64, type: 2}
   _contentImage: {fileID: 1820115238}
   _contentHeaderText: {fileID: 670585649}
   _contentCountText: {fileID: 453984204}
@@ -1788,7 +1802,7 @@ GameObject:
   - component: {fileID: 670585650}
   - component: {fileID: 670585649}
   m_Layer: 5
-  m_Name: ui_text_prize_header
+  m_Name: ui_text_content_header
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2491,8 +2505,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1159016602}
+  m_Children: []
   m_Father: {fileID: 1349620403}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2651,103 +2664,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1132815051}
   m_CullTransparentMesh: 1
---- !u!1001 &1147089076
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1120313051}
-    m_Modifications:
-    - target: {fileID: 3147380760272807165, guid: ecff8276a55b55043ba15df094e1bdbc, type: 3}
-      propertyPath: m_Name
-      value: ui_holder_reward_info
-      objectReference: {fileID: 0}
-    - target: {fileID: 5598550979130610418, guid: ecff8276a55b55043ba15df094e1bdbc, type: 3}
-      propertyPath: m_Pivot.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5598550979130610418, guid: ecff8276a55b55043ba15df094e1bdbc, type: 3}
-      propertyPath: m_Pivot.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5598550979130610418, guid: ecff8276a55b55043ba15df094e1bdbc, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5598550979130610418, guid: ecff8276a55b55043ba15df094e1bdbc, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5598550979130610418, guid: ecff8276a55b55043ba15df094e1bdbc, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5598550979130610418, guid: ecff8276a55b55043ba15df094e1bdbc, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5598550979130610418, guid: ecff8276a55b55043ba15df094e1bdbc, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5598550979130610418, guid: ecff8276a55b55043ba15df094e1bdbc, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5598550979130610418, guid: ecff8276a55b55043ba15df094e1bdbc, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5598550979130610418, guid: ecff8276a55b55043ba15df094e1bdbc, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5598550979130610418, guid: ecff8276a55b55043ba15df094e1bdbc, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5598550979130610418, guid: ecff8276a55b55043ba15df094e1bdbc, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5598550979130610418, guid: ecff8276a55b55043ba15df094e1bdbc, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5598550979130610418, guid: ecff8276a55b55043ba15df094e1bdbc, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5598550979130610418, guid: ecff8276a55b55043ba15df094e1bdbc, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5598550979130610418, guid: ecff8276a55b55043ba15df094e1bdbc, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5598550979130610418, guid: ecff8276a55b55043ba15df094e1bdbc, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5598550979130610418, guid: ecff8276a55b55043ba15df094e1bdbc, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5598550979130610418, guid: ecff8276a55b55043ba15df094e1bdbc, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5598550979130610418, guid: ecff8276a55b55043ba15df094e1bdbc, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5598550979130610418, guid: ecff8276a55b55043ba15df094e1bdbc, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: ecff8276a55b55043ba15df094e1bdbc, type: 3}
 --- !u!1 &1148315327
 GameObject:
   m_ObjectHideFlags: 0
@@ -2830,7 +2746,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_HandleRect: {fileID: 185332913}
   m_Direction: 0
-  m_Value: -0.000000034169428
+  m_Value: -0.000000068338856
   m_Size: 0.2186987
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -2850,11 +2766,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scroll: {fileID: 1148315329}
   value: 0
---- !u!224 &1159016602 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 5598550979130610418, guid: ecff8276a55b55043ba15df094e1bdbc, type: 3}
-  m_PrefabInstance: {fileID: 1147089076}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1187656962
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3896,7 +3807,7 @@ GameObject:
   - component: {fileID: 1584004574}
   - component: {fileID: 1584004573}
   m_Layer: 5
-  m_Name: ui_image_prize_frame
+  m_Name: ui_image_content_frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4358,8 +4269,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d2784de803c7ba479cb0bba378615ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _settings: {fileID: 11400000, guid: 8b7410be105e89941bb63c281d338d59, type: 2}
   _rewardsContentHolder: {fileID: 1120313051}
-  _rewardsInfo: {fileID: 3147380760272807165, guid: ecff8276a55b55043ba15df094e1bdbc, type: 3}
 --- !u!1001 &1734934628
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4612,7 +4523,7 @@ GameObject:
   - component: {fileID: 1820115239}
   - component: {fileID: 1820115238}
   m_Layer: 5
-  m_Name: ui_image_prize_value
+  m_Name: ui_image_content_value
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

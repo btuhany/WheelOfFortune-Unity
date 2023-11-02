@@ -3,6 +3,7 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using WheelOfFortune.Items;
 using WheelOfFortune.Settings;
 using WheelOfFortune.Wheel;
 
@@ -28,24 +29,24 @@ namespace WheelOfFortune.Panels
             if (_rectTransform == null)
                 _rectTransform = GetComponent<RectTransform>();
         }
-        private void HandleOnAnimStart(WheelSliceController slice)
+        private void HandleOnAnimStart(WheelItem content)
         {
-            SetContent(slice.Content, slice.ContentCount);
+            SetContent(content);
             this.gameObject.SetActive(true);
         }
         private void HandleOnAnimEnd()
         {
             this.gameObject.SetActive(false); //UI optimization
         }
-        private void SetContent(WheelSliceContent content, int count)
+        private void SetContent(WheelItem item)
         {
-            _contentImage.sprite = content.Sprite;
-            _contentHeaderText.text = content.Name;
-            _contentCountText.text = "x" + count.ToString();
+            _contentImage.sprite = item.SpriteWheel;
+            _contentHeaderText.text = item.Name;
+            _contentCountText.text = "x" + item.Count.ToString();
         }
-        public async UniTask ShowContentAnimation(WheelSliceController slice)
+        public async UniTask ShowContentAnimation(WheelItem content)
         {
-            HandleOnAnimStart(slice);
+            HandleOnAnimStart(content);
 
             await _rectTransform.DOScaleX(
                 _settings.ContentPanelDefaultScaleX,

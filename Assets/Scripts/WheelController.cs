@@ -1,5 +1,6 @@
 using DG.Tweening;
 using UnityEngine;
+using WheelOfFortune.Items;
 using WheelOfFortune.Settings;
 
 namespace WheelOfFortune.Wheel
@@ -10,7 +11,7 @@ namespace WheelOfFortune.Wheel
         [SerializeField] private WheelSettings _settings;
 
         [Header("Wheel Slice Contents")]
-        [SerializeField] private WheelSliceContent[] _sliceContents;
+        [SerializeField] private WheelItem[] _sliceContents;
 
         #region Component References
         private RectTransform _rectTransform;

@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using WheelOfFortune.Items;
 using WheelOfFortune.Panels;
 using WheelOfFortune.Wheel;
 
@@ -29,13 +30,13 @@ namespace WheelOfFortune.Managers
         private async void HandleSpinProcess()
         {
             WheelSliceController randomSlice = _wheelController.SelectRandomSlice();
-
+            WheelItem randomItem = randomSlice.Content;
             await _wheelController.SpinToTargetSlice(randomSlice.SliceIndex * _anglePerSlice);
 
             await _spinPanelController.HideSpinPanelAnimation();
-            await _contentPanelController.ShowContentAnimation(randomSlice);
+            await _contentPanelController.ShowContentAnimation(randomItem);
 
-            _rewardsPanelController.AddReward(randomSlice);
+            _rewardsPanelController.AddReward(randomItem);
 
             await UniTask.Delay(2000);
 

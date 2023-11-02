@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 010075de5a35d7f4f989799d566c45b5, type: 3}
   m_Name: SpinPanelSettings_Default
   m_EditorClassIdentifier: 
-  _animShowSpinPanelTime: 1
+  _animShowSpinPanelTime: 0.3
   _animShowSpinPanelEase: 1
-  _animHideSpinPanelTime: 1
+  _animHideSpinPanelTime: 0.3
   _animHideSpinPanelEase: 1

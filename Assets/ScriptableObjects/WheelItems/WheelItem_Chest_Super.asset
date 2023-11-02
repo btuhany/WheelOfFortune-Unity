@@ -9,10 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b805f5b023bad8249a8c679d242d0c41, type: 3}
-  m_Name: WheelSliceContent_Cash
+  m_Script: {fileID: 11500000, guid: a6fb5f6dc302210448f1c17bf89f54d5, type: 3}
+  m_Name: WheelItem_Chest_Super
   m_EditorClassIdentifier: 
-  _sprite: {fileID: 21300000, guid: 4b056dff4a07612458f60849b702dcc7, type: 3}
+  _name: Super Chest
+  _type: 0
+  _spriteWheel: {fileID: 21300000, guid: 98a5265296fdc154eb778675fd5c2938, type: 3}
+  _spriteReward: {fileID: 21300000, guid: 98a5265296fdc154eb778675fd5c2938, type: 3}
   _minCount: 1
   _maxCount: 5
-  _name: Cash

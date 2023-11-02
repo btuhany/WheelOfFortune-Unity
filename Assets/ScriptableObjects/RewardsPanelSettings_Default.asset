@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66a5f07da4e580349b1d089a0164c514, type: 3}
   m_Name: RewardsPanelSettings_Default
   m_EditorClassIdentifier: 
-  _rewardsPanelContentPrefab: {fileID: 0}
+  _rewardsPanelContentPrefab: {fileID: -4314525041144641986, guid: ecff8276a55b55043ba15df094e1bdbc, type: 3}
