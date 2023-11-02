@@ -15,3 +15,4 @@ MonoBehaviour:
   _sprite: {fileID: 21300000, guid: 3dd7a9093e161ed458bc8811efc9d55f, type: 3}
   _minCount: 1
   _maxCount: 50
+  _name: Gold

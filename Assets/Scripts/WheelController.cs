@@ -1,23 +1,18 @@
 using DG.Tweening;
-using System.Collections.Generic;
-using UnityEditor.Tilemaps;
 using UnityEngine;
-using UnityEngine.UI;
+using WheelOfFortune.Settings;
 
 namespace WheelOfFortune.Wheel
 {
     public class WheelController : MonoBehaviour
     {
-        [Header("Prefabs")]
-        [SerializeField] private Image _uiSliceImagePrefab;
-
         [Header("Settings")]
         [SerializeField] private WheelSettings _settings;
 
         [Header("Wheel Slice Contents")]
         [SerializeField] private WheelSliceContent[] _sliceContents;
 
-        #region Components
+        #region Component References
         private RectTransform _rectTransform;
         #endregion
 
@@ -48,15 +43,6 @@ namespace WheelOfFortune.Wheel
         {
             SetWheelSliceContents();
         }
-        private void Update()
-        {
-            if(Input.GetKeyDown(KeyCode.Space))
-            {
-                WheelSliceController randomSlice = _sliceControllers[Random.Range(0, _sliceControllers.Length)];
-                Debug.Log(randomSlice.SliceIndex);
-                Spin(randomSlice.SliceIndex * 45);
-            }
-        }
         private void SetWheelSliceContents()
         {
             for (int i = 0; i < _sliceControllers.Length; i++)
@@ -67,7 +53,12 @@ namespace WheelOfFortune.Wheel
                     _sliceControllers[i].SetContent(_sliceContents[i]);
             }
         }
-        private void Spin(int targetAngle)
+        public WheelSliceController SelectRandomSlice()
+        {
+            WheelSliceController randomSlice = _sliceControllers[Random.Range(0, _sliceControllers.Length)];
+            return randomSlice;
+        }
+        public Sequence SpinToTargetSlice(int targetAngle)
         {
             float angleDifference = targetAngle - _rectTransform.rotation.eulerAngles.z;
             Sequence spinSequence = DOTween.Sequence();
@@ -75,27 +66,36 @@ namespace WheelOfFortune.Wheel
             //Spin start animation append
             spinSequence.Append(
             _rectTransform.DOLocalRotate
-            (new Vector3(0f, 0f, _settings.SpinStartAnimDegree),
-            _settings.SpinStartAnimTime, RotateMode.FastBeyond360)
+            (new Vector3(0f, 0f, _settings.AnimSpinStartDegree),
+            _settings.AnimSpinStartTime, RotateMode.FastBeyond360)
             .SetRelative(true)
-            .SetEase(_settings.SpinStartAnimEase));
+            .SetEase(_settings.AnimSpinStartEase));
 
             //Spin animation append
             spinSequence.Append(
             _rectTransform.DOLocalRotate
-            (new Vector3(0f, 0f, _settings.SpinAnimDegree),
-            _settings.SpinAnimTime, RotateMode.FastBeyond360)
+            (new Vector3(0f, 0f, _settings.AnimSpinDegree),
+            _settings.AnimSpinTime, RotateMode.FastBeyond360)
             .SetRelative(true)
-            .SetEase(_settings.SpinAnimEase)
-            .SetLoops(_settings.SpinAnimLoopCount));
+            .SetEase(_settings.AnimSpinEase)
+            .SetLoops(_settings.AnimSpinLoopCount));
 
             //Spin end animation append
             spinSequence.Append(
             _rectTransform.DOLocalRotate
             (new Vector3(0f, 0f, targetAngle - _fullRotationDegree),
-            _settings.SpinEndAnimTime * ((_fullRotationDegree - angleDifference) / _fullRotationDegree), RotateMode.FastBeyond360)
+            _settings.AnimSpinEndTime * ((_fullRotationDegree - angleDifference) / _fullRotationDegree), RotateMode.FastBeyond360)
             .SetRelative(false)
-            .SetEase(_settings.SpinEndAnimEase));
+            .SetEase(_settings.AnimSpinEndEase));
+
+            return spinSequence;
+            //spinSequence.Append(
+            //    _wheelSpinPanelRect.DOScaleX(0, _settings.AnimContentInfoStartTime / 2).SetEase(Ease.Flash).SetDelay(_settings.AnimContentShowDelay)
+            //    );
+
+            //spinSequence.Append(
+            //    _wheelSpinPanelRect.DOScaleX(1, _settings.AnimContentInfoStartTime / 2).SetEase(Ease.Flash)
+            //    );
         }
         
         //private void SetSlicePositions()

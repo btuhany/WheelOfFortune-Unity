@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b805f5b023bad8249a8c679d242d0c41, type: 3}
-  m_Name: WheelSliceContent_Chest_Small
+  m_Script: {fileID: 11500000, guid: cb762fd64494ce140912cf4ebaa9c1d5, type: 3}
+  m_Name: ContentPanelSettings_Default
   m_EditorClassIdentifier: 
-  _sprite: {fileID: 21300000, guid: 5deca646f87687547924a4f256b5b16a, type: 3}
-  _minCount: 5
-  _maxCount: 15
-  _name: Small Chest
+  _animShowSliceContentTime: 1
+  _animShowSliceEase: 30
+  _animHideSliceContentTime: 1
+  _animHideSliceContentEase: 30
+  _contentRewImgPrefab: {fileID: 0}

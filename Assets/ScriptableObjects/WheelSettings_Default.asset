@@ -13,12 +13,15 @@ MonoBehaviour:
   m_Name: WheelSettings_Default
   m_EditorClassIdentifier: 
   targetAngle: 90
-  _spinStartAnimDegree: -360
-  _spinStartAnimTime: 1
-  _spinStartAnimEase: 11
-  _spinAnimDegree: -360
-  _spinAnimTime: 0.25
-  _spinAnimEase: 1
-  _spinAnimLoopCount: 1
-  _spinEndAnimTime: 1
-  _spinEndAnimEase: 6
+  _animSpinStartDegree: -360
+  _animSpinStartTime: 1
+  _animSpinStartEase: 11
+  _animSpinDegree: -360
+  _animSpinTime: 0.25
+  _animSpinEase: 1
+  _animSpinLoopCount: 2
+  _animSpinEndTime: 1
+  _animSpinEndEase: 6
+  _animContentInfoDuration: 1
+  _animContentInfoStartTime: 1
+  _animContentShowDelay: 1

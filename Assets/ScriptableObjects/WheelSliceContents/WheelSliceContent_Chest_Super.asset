@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b805f5b023bad8249a8c679d242d0c41, type: 3}
   m_Name: WheelSliceContent_Chest_Super
   m_EditorClassIdentifier: 
-  _sprite: {fileID: 0}
-  _minCount: 0
-  _maxCount: 0
+  _sprite: {fileID: 21300000, guid: 98a5265296fdc154eb778675fd5c2938, type: 3}
+  _minCount: 5
+  _maxCount: 15
+  _name: Super Chest

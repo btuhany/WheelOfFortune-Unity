@@ -1,37 +1,41 @@
 using DG.Tweening;
 using UnityEngine;
 
-namespace WheelOfFortune.Wheel
+namespace WheelOfFortune.Settings
 {
     [CreateAssetMenu(menuName = "Wheel Of Fortune/Wheel/Wheel Setting")]
     public class WheelSettings : ScriptableObject
     {
-        [Header("Temp Input")]
-        [SerializeField] public int targetAngle;
         [Header("Spin Start Animation")]
-        [SerializeField] private float _spinStartAnimDegree;
-        [SerializeField] private float _spinStartAnimTime;
-        [SerializeField] private Ease _spinStartAnimEase;
+        [SerializeField] private float _animSpinStartDegree;
+        [SerializeField] private float _animSpinStartTime;
+        [SerializeField] private Ease _animSpinStartEase;
         [Header("Spin Animation")]
-        [SerializeField] private float _spinAnimDegree;
-        [SerializeField] private float _spinAnimTime;
-        [SerializeField] private Ease _spinAnimEase;
-        [SerializeField] private int _spinAnimLoopCount;
+        [SerializeField] private float _animSpinDegree;
+        [SerializeField] private float _animSpinTime;
+        [SerializeField] private Ease _animSpinEase;
+        [SerializeField] private int _animSpinLoopCount;
         [Header("Spin End Animation")]
-        [SerializeField] private float _spinEndAnimTime;
-        [SerializeField] private Ease _spinEndAnimEase;
+        [SerializeField] private float _animSpinEndTime;
+        [SerializeField] private Ease _animSpinEndEase;
+        [Header("Content Info Animation")]
+        [SerializeField] private float _animContentInfoDuration;
+        [SerializeField] private float _animContentInfoStartTime;
+        [SerializeField] private float _animContentShowDelay;
+        public float AnimSpinStartDegree { get => _animSpinStartDegree; }
+        public float AnimSpinStartTime { get => _animSpinStartTime; }
+        public Ease AnimSpinStartEase { get => _animSpinStartEase; }
 
-        public float SpinStartAnimDegree { get => _spinStartAnimDegree; }
-        public float SpinStartAnimTime { get => _spinStartAnimTime; }
-        public Ease SpinStartAnimEase { get => _spinStartAnimEase; }
+        public float AnimSpinDegree { get => _animSpinDegree; }
+        public float AnimSpinTime { get => _animSpinTime; }
+        public Ease AnimSpinEase { get => _animSpinEase; }
 
-        public float SpinAnimDegree { get => _spinAnimDegree; }
-        public float SpinAnimTime { get => _spinAnimTime; }
-        public Ease SpinAnimEase { get => _spinAnimEase; }
+        public float AnimSpinEndTime { get => _animSpinEndTime; }
+        public Ease AnimSpinEndEase { get => _animSpinEndEase; }
 
-        public float SpinEndAnimTime { get => _spinEndAnimTime; }
-        public Ease SpinEndAnimEase { get => _spinEndAnimEase; }
-
-        public int SpinAnimLoopCount { get => _spinAnimLoopCount; }
+        public int AnimSpinLoopCount { get => _animSpinLoopCount; }
+        public float AnimContentInfoStartTime { get => _animContentInfoStartTime; }
+        public float AnimContentInfoDuration { get => _animContentInfoDuration; }
+        public float AnimContentShowDelay { get => _animContentShowDelay; }
     }
 }
