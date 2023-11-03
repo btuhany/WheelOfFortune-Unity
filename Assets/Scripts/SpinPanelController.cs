@@ -21,14 +21,14 @@ namespace WheelOfFortune.Panels
             await _rectTransform.DOScaleX(
                 _settings.SpinPanelHidedScaleX,
                 _settings.AnimHideSpinPanelTime)
-                .SetEase(_settings.AnimHideSpinPanelEase);
+                .SetEase(_settings.AnimHideSpinPanelEase).ToUniTask();
         }
         public async UniTask ShowSpinPanelAnimation()
         {
             await _rectTransform.DOScaleX(
                 _settings.SpinPanelDefaultScaleX,
                 _settings.AnimShowSpinPanelTime)
-                .SetEase(_settings.AnimShowSpinPanelEase);
+                .SetEase(_settings.AnimShowSpinPanelEase).ToUniTask();
         }
     }
 }

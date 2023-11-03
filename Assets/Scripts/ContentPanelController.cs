@@ -51,20 +51,14 @@ namespace WheelOfFortune.Panels
             await _rectTransform.DOScaleX(
                 _settings.ContentPanelDefaultScaleX,
                 _settings.AnimShowSliceContentTime)
-                .SetEase(_settings.AnimShowSliceEase);
+                .SetEase(_settings.AnimShowSliceEase).ToUniTask();
         }
-        //TODO: Try transform instead of rect transform.
-        //public async UniTask SpawnAndAnimateRewards(RectTransform target)
-        //{
-        //    RectTransform rewardTransform = Instantiate(_rewardImg, _rectTransform);
-        //    await rewardTransform.DOMove(target.position, 1f);
-        //}
         public async UniTask HideContentAnimation()
         {
             await _rectTransform.DOScaleX(
                 _settings.ContentPanelHidedScaleX,
                 _settings.AnimHideSliceContentTime)
-                .SetEase(_settings.AnimHideSliceContentEase);
+                .SetEase(_settings.AnimHideSliceContentEase).ToUniTask();
             
             HandleOnAnimEnd();
         }

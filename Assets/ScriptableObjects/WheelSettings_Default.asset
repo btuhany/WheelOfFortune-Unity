@@ -12,16 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d20ce5d3c56e5c14fa5ac2d399979376, type: 3}
   m_Name: WheelSettings_Default
   m_EditorClassIdentifier: 
-  targetAngle: 90
   _animSpinStartDegree: -360
-  _animSpinStartTime: 1
-  _animSpinStartEase: 11
+  _animSpinStartTime: 1.2
+  _animSpinStartEase: 26
   _animSpinDegree: -360
   _animSpinTime: 0.25
   _animSpinEase: 1
-  _animSpinLoopCount: 2
-  _animSpinEndTime: 1
-  _animSpinEndEase: 6
-  _animContentInfoDuration: 1
-  _animContentInfoStartTime: 1
-  _animContentShowDelay: 1
+  _animSpinLoopCount: 5
+  _animSpinEndTime: 3
+  _animSpinEndEase: 27

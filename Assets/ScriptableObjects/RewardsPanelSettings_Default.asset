@@ -13,3 +13,21 @@ MonoBehaviour:
   m_Name: RewardsPanelSettings_Default
   m_EditorClassIdentifier: 
   _rewardsPanelContentPrefab: {fileID: -4314525041144641986, guid: ecff8276a55b55043ba15df094e1bdbc, type: 3}
+  _rewardContentImage: {fileID: 3563871557339872935, guid: f91e76d9f6d3ba14789ef2d6d2b56f04, type: 3}
+  _gatherAnimStartDelay: 50
+  _gatherMaxRewPart: 10
+  _gatherRewPartsDelayFrame: 1
+  _moveRewPartsMinDelay: 10
+  _moveRewPartsMaxDelay: 100
+  _moveRewPartTime: 0.7
+  _moveRewPartEase: 8
+  _collectionReactTime: 0.2
+  _collectionReactScaleFactor: 1.1
+  _collectionReactEase: 2
+  _spawnMoveOffsetMinVector: {x: -100, y: -100}
+  _spawnMoveOffsetMaxVector: {x: 100, y: 100}
+  _spawnMoveOffsetTime: 0.4
+  _spawnMoveOffsetEase: 27
+  _spawnRewPartScaleFactor: 1
+  _spawnRewPartScaleTime: 0.4
+  _spawnRePartScaleEase: 28

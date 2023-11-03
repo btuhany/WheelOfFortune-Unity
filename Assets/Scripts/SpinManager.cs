@@ -1,5 +1,7 @@
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 using WheelOfFortune.Items;
 using WheelOfFortune.Panels;
 using WheelOfFortune.Wheel;
@@ -8,6 +10,8 @@ namespace WheelOfFortune.Managers
 {
     public class SpinManager : MonoBehaviour
     {
+        [Header("Temp")]
+        [SerializeField] private Image _vfxImage;
         [Header("References")]
         [SerializeField] private SpinPanelController _spinPanelController;
         [SerializeField] private ContentPanelController _contentPanelController;
@@ -36,9 +40,7 @@ namespace WheelOfFortune.Managers
             await _spinPanelController.HideSpinPanelAnimation();
             await _contentPanelController.ShowContentAnimation(randomItem);
 
-            _rewardsPanelController.AddReward(randomItem);
-
-            await UniTask.Delay(2000);
+            await _rewardsPanelController.GetReward(randomItem, _contentPanelController.transform);
 
             await _contentPanelController.HideContentAnimation();
             await _spinPanelController.ShowSpinPanelAnimation();

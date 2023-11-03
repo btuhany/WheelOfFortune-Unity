@@ -18,10 +18,7 @@ namespace WheelOfFortune.Settings
         [Header("Spin End Animation")]
         [SerializeField] private float _animSpinEndTime;
         [SerializeField] private Ease _animSpinEndEase;
-        [Header("Content Info Animation")]
-        [SerializeField] private float _animContentInfoDuration;
-        [SerializeField] private float _animContentInfoStartTime;
-        [SerializeField] private float _animContentShowDelay;
+
         public float AnimSpinStartDegree { get => _animSpinStartDegree; }
         public float AnimSpinStartTime { get => _animSpinStartTime; }
         public Ease AnimSpinStartEase { get => _animSpinStartEase; }
@@ -34,8 +31,5 @@ namespace WheelOfFortune.Settings
         public Ease AnimSpinEndEase { get => _animSpinEndEase; }
 
         public int AnimSpinLoopCount { get => _animSpinLoopCount; }
-        public float AnimContentInfoStartTime { get => _animContentInfoStartTime; }
-        public float AnimContentInfoDuration { get => _animContentInfoDuration; }
-        public float AnimContentShowDelay { get => _animContentShowDelay; }
     }
 }

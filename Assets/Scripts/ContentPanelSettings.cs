@@ -1,6 +1,5 @@
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace WheelOfFortune.Settings
 {
@@ -15,9 +14,6 @@ namespace WheelOfFortune.Settings
         [SerializeField] private float _animHideSliceContentTime = 1f;
         [SerializeField] private Ease _animHideSliceContentEase = Ease.OutBounce;
 
-        [Header("Content Rewards Animation")]
-        [SerializeField] private Image _rewContentImgPrefab;
-
         private readonly int _contentPanelDefaultScaleX = 1;
         private readonly int _contentPanelHidedScaleX = 0;
 
@@ -25,10 +21,7 @@ namespace WheelOfFortune.Settings
         public Ease AnimShowSliceEase { get => _animShowSliceEase; }
         public float AnimHideSliceContentTime { get => _animHideSliceContentTime; }
         public Ease AnimHideSliceContentEase { get => _animHideSliceContentEase; }
-        public Image ContentRewImgPrefab { get => _rewContentImgPrefab; }
-
         public int ContentPanelDefaultScaleX => _contentPanelDefaultScaleX;
-
         public int ContentPanelHidedScaleX => _contentPanelHidedScaleX;
     }
 }

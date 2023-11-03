@@ -62,7 +62,7 @@ namespace WheelOfFortune.Wheel
         public Sequence SpinToTargetSlice(int targetAngle)
         {
             float angleDifference = targetAngle - _rectTransform.rotation.eulerAngles.z;
-            Sequence spinSequence = DOTween.Sequence();
+            Sequence spinSequence = DOTween.Sequence().SetSpeedBased(true);
 
             //Spin start animation append
             spinSequence.Append(

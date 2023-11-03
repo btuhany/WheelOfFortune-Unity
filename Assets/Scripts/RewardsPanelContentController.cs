@@ -7,13 +7,16 @@ namespace WheelOfFortune.Panels
 {
     public class RewardsPanelContentController : MonoBehaviour
     {
-        [SerializeField] private Image _image;
+        [SerializeField] private Image _itemImage;
         [SerializeField] private TextMeshProUGUI _countText;
         private int _count;
+
+        public Image ItemImage { get => _itemImage; }
+
         private void Awake()
         {
-            if (_image == null)
-                _image = GetComponentInChildren<Image>();
+            if (_itemImage == null)
+                _itemImage = GetComponentInChildren<Image>();
             if (_countText == null)
                 _countText = GetComponentInChildren<TextMeshProUGUI>();
         }
@@ -21,10 +24,10 @@ namespace WheelOfFortune.Panels
         {
             _countText.text = _count.ToString();
         }
-        public void SetReward(WheelItem item)
+        public void SetReward(WheelItem item, bool setCount = false)
         {
-            _image.sprite = item.SpriteReward;
-            _count = item.Count;
+            _itemImage.sprite = item.SpriteReward;
+            _count = setCount ? item.Count : 0;
             UpdateCountText();
         }
         public void IncreaseCount(int value)
