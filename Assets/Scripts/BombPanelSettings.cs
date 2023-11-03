@@ -4,7 +4,7 @@ using UnityEngine;
 namespace WheelOfFortune.Settings
 {
     [CreateAssetMenu(menuName = "Wheel Of Fortune/Panels/Exit Panel Settings")]
-    public class ExitPanelSettings : ScriptableObject
+    public class BombPanelSettings : ScriptableObject
     {
         [Header("Background Image Config")]
         [SerializeField] private float _backgroundFadeTime = 1.0f;

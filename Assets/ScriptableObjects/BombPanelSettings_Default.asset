@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a000ce34fdbb2e5439ff79f226887059, type: 3}
+  m_Name: BombPanelSettings_Default
+  m_EditorClassIdentifier: 
+  _backgroundFadeTime: 0.2
+  _bombAnimPunchScale: {x: 0.03, y: 0.03, z: 0.03}
+  _bombAnimTime: 0.2
+  _bombAnimEase: 32
+  _bombAnimLoopInterval: 2
+  _bombAnimPunchInterval: 0.1
+  _flashRotationTimePeriod: 100
+  _flashImgFadeTime: 0.7
+  _flashImgScaleAnimTime: 0.3
+  _flashImgScaleAnimEase: 27
+  _flashImgAlphaVal: 0.65
+  _textFadeTime: 0.7
+  _buttonAnimTime: 0.3

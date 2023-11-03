@@ -8,16 +8,17 @@ using WheelOfFortune.Settings;
 
 namespace WheelOfFortune.Panels
 {
-    public class ExitPanelController : MonoBehaviour
+    public class BombPanelController : MonoBehaviour
     {
         [Header("Settings")]
-        [SerializeField] private ExitPanelSettings _settings;
+        [SerializeField] private BombPanelSettings _settings;
         [Header("References")]
         [SerializeField] private RectTransform _bombImgsHolder;
         [SerializeField] private Image _bombImage;
         [SerializeField] private Image _flashImage;
         [SerializeField] private Image _backgroundImage;
         [SerializeField] private TextMeshProUGUI _textInfo;
+        [SerializeField] private TextMeshProUGUI _reviveGoldCostTxt;
 
         //Give-up and revive buttons
         private Button[] _buttons = new Button[2];
@@ -28,6 +29,7 @@ namespace WheelOfFortune.Panels
 
         public event System.Action OnGiveUpButtonClick;
         public event System.Action OnReviveButtonClick;
+        public event System.Action OnEnter;
         private void OnValidate()
         {
             if (_rectTransform == null)
@@ -114,6 +116,7 @@ namespace WheelOfFortune.Panels
         }
         public async UniTask StartEnterAnim()
         {
+            OnEnter?.Invoke();
             this.gameObject.SetActive(true);
 
             List<UniTask> fadeAnims = new List<UniTask>();
@@ -137,6 +140,12 @@ namespace WheelOfFortune.Panels
         {
             SetUIElementsStart();
             this.gameObject.SetActive(false);
+        }
+        public void UpdateReviveBtn(bool isEnable, int goldCost)
+        {
+            //Set revive button disabled.
+            _buttons[1].gameObject.SetActive(isEnable);
+            _reviveGoldCostTxt.text = goldCost.ToString();
         }
     }
 }

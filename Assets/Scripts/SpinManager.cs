@@ -14,7 +14,7 @@ namespace WheelOfFortune.Managers
         [SerializeField] private RewardsPanelController _rewardsPanelController;
         [SerializeField] private WheelController _wheelController;
         [SerializeField] private ZonesPanelController _zonesPanelController;
-        [SerializeField] private ExitPanelController _exitPanelController;
+        [SerializeField] private BombPanelController _exitPanelController;
 
         #region Constants
         private const int _anglePerSlice = 45;

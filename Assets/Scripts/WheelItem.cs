@@ -15,6 +15,11 @@ namespace WheelOfFortune.Items
         [SerializeField] private string _name;
         [SerializeField] private ItemType _type = ItemType.Reward;
 
+        //To track the gold currency.
+        //Normally It would be better to use it with an item enum type
+        //but there is no need for it in this current situtation.
+        [SerializeField] private bool _isGold = false; 
+
         [Header("Sprites")]
         [SerializeField] private Sprite _spriteWheel;
         [SerializeField] private Sprite _spriteReward;
@@ -38,6 +43,7 @@ namespace WheelOfFortune.Items
         public Sprite SpriteWheel { get => _spriteWheel; }
         public Sprite SpriteReward { get => _spriteReward; }
         public int Count { get => _count; }
+        public bool IsGold { get => _isGold; }
         #endregion
     }
 }

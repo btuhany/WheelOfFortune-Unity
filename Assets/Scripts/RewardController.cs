@@ -35,6 +35,11 @@ namespace WheelOfFortune.Panels
             _count += value;
             UpdateCountText();
         }
+        public void SetCount(int value)
+        {
+            _count = value;
+            UpdateCountText();
+        }
         
     }
 }

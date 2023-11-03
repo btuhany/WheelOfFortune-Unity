@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using WheelOfFortune.Items;
 using WheelOfFortune.Settings;
+using static UnityEditor.Progress;
 
 namespace WheelOfFortune.Panels
 {
@@ -26,7 +27,8 @@ namespace WheelOfFortune.Panels
         
         private Tweener _collectionTween;
         private Vector2 _maskRectOffset;
-
+        private int _totalGold = 0;
+        private RewardController _goldRewardController;
         private void OnValidate()
         {
             if (_exitButton == null)
@@ -133,6 +135,13 @@ namespace WheelOfFortune.Panels
 
             await UniTask.WhenAll(rewardPartTasks);
         }
+        private void CheckItemIsGold(WheelItem item, RewardController reward)
+        {
+            if (!item.IsGold) return;
+            _totalGold += item.Count;
+
+            _goldRewardController = reward;
+        }
         private void HandleOnExitButtonClick()
         {
             Debug.Log("Exit");
@@ -182,6 +191,9 @@ namespace WheelOfFortune.Panels
             }
             await UniTask.Delay(_settings.GatherAnimStartDelay);
             await GatherRewardPartsAnim(item, animImgSpawnPoint, rewardContent);
+
+            CheckItemIsGold(item, rewardContent);
+
         }
         [ContextMenu("Reset")]
         public void ResetRewards()
@@ -191,8 +203,22 @@ namespace WheelOfFortune.Panels
                 Destroy(rewardController.gameObject);
             }
             _rewardsDictionary.Clear();
+            _totalGold = 0;
+            UnhideExitButton(true);
         }
-
+        public void HandleOnRevived(int goldCost)
+        {
+            UnhideExitButton(true);
+            _totalGold -= goldCost;
+            if(_goldRewardController != null)
+                _goldRewardController.SetCount(_totalGold);
+        }
+        public bool IsGoldEnough(int value)
+        {
+            if (_totalGold < value)
+                return false;
+            return true;
+        }
 
     }
 }
