@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace WheelOfFortune.Settings
 {
-    [CreateAssetMenu(menuName = "Wheel Of Fortune/Wheel/Wheel Setting")]
+    [CreateAssetMenu(menuName = "Wheel Of Fortune/Wheel/Wheel Settings")]
     public class WheelSettings : ScriptableObject
     {
         [Header("Spin Start Animation")]

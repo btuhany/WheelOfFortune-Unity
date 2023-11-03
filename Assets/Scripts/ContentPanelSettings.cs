@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace WheelOfFortune.Settings
 {
-    [CreateAssetMenu(menuName = "Wheel Of Fortune/Panels/Content Panel Setting")]
+    [CreateAssetMenu(menuName = "Wheel Of Fortune/Panels/Content Panel Settings")]
     public class ContentPanelSettings : ScriptableObject
     {
         [Header("Show Slice Content Animation")]

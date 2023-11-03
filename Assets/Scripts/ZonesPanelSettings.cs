@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace WheelOfFortune.Settings
 {
-    [CreateAssetMenu(menuName = "Wheel Of Fortune/Panels/Zones Panel Setting")]
+    [CreateAssetMenu(menuName = "Wheel Of Fortune/Panels/Zones Panel Settings")]
     public class ZonesPanelSettings : ScriptableObject
     {
         [Header("Config")]

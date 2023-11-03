@@ -26,7 +26,10 @@ namespace WheelOfFortune.Items
         private int _count = 0;
         public void SetRandomCount()
         {
-            _count = Random.Range(_minCount, _maxCount);
+            if (_type == ItemType.Reward)
+                _count = Random.Range(_minCount, _maxCount);
+            else
+                _count = -1;
         }
 
         #region Properties

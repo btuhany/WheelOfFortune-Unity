@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,12 +16,15 @@ namespace WheelOfFortune.Panels
         [SerializeField] private RectTransform _gridHolderRect;
         [SerializeField] private GridLayoutGroup _zonesGridLayout;
         [SerializeField] private RectTransform _zoneBackground;
+
+        private List<TextMeshProUGUI> _zoneTexts = new List<TextMeshProUGUI>();
         private enum ZoneType
         {
             Normal,
             Safe,
             Super
         }
+        private Vector3 _gridHolderInitialPos;
         private Image _zoneBackgroundImg;
         private int _zoneCounter = 1;
         private float _zoneRectWidth;
@@ -36,6 +40,7 @@ namespace WheelOfFortune.Panels
         {
             InitializeScrollGrid();
             AddZones(_settings.GroupMaxActiveSize * _settings.GroupsAtStart);
+            _gridHolderInitialPos = _gridHolderRect.anchoredPosition;
         }
         private void InitializeScrollGrid()
         {
@@ -53,6 +58,8 @@ namespace WheelOfFortune.Panels
             {
                 TextMeshProUGUI zoneText =  Instantiate(_settings.ZonePrefab, _zonesGridLayout.transform);
                 zoneText.text = i.ToString();
+
+                _zoneTexts.Add(zoneText);
 
                 ZoneType type = GetZoneType(i);
                 if (type == ZoneType.Safe)
@@ -100,12 +107,28 @@ namespace WheelOfFortune.Panels
         }
         public void ScrollZone(int value)
         {
-            _gridHolderRect.DOLocalMove(_gridHolderRect.localPosition + _settings.GroupSlideDir * _zoneRectWidth * value, _settings.ScrollTime)
+            _gridHolderRect.DOLocalMove(
+                _gridHolderRect.localPosition + _settings.GroupSlideDir * _zoneRectWidth * value,
+                _settings.ScrollTime)
                 .SetEase(_settings.ScrollEase);
 
+            _zoneTexts[_zoneCounter - 1].color = Color.white;
             _zoneCounter += value;
 
+            _zoneTexts[_zoneCounter - 1].color = Color.black;
+
             CurrentZoneBgChangeAnim();
+        }
+        public void ResetZones()
+        {
+            foreach (TextMeshProUGUI text in _zoneTexts)
+            {
+                Destroy(text.gameObject);
+            }
+            _zoneTexts.Clear();
+            _zoneCounter = 1;
+            AddZones(_settings.GroupMaxActiveSize * _settings.GroupsAtStart);
+            _gridHolderRect.anchoredPosition = _gridHolderInitialPos;
         }
     }
 }

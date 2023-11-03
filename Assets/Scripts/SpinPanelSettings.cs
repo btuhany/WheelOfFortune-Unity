@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace WheelOfFortune.Settings
 {
-    [CreateAssetMenu(menuName = "Wheel Of Fortune/Panels/Spin Panel Setting")]
+    [CreateAssetMenu(menuName = "Wheel Of Fortune/Panels/Spin Panel Settings")]
     public class SpinPanelSettings : ScriptableObject
     {
         [Header("Show Spin Panel Animation")]

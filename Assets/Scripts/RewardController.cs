@@ -5,7 +5,7 @@ using WheelOfFortune.Items;
 
 namespace WheelOfFortune.Panels
 {
-    public class RewardsPanelContentController : MonoBehaviour
+    public class RewardController : MonoBehaviour
     {
         [SerializeField] private Image _itemImage;
         [SerializeField] private TextMeshProUGUI _countText;

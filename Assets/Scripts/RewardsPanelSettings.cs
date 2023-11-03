@@ -5,11 +5,11 @@ using WheelOfFortune.Panels;
 
 namespace WheelOfFortune.Settings
 {
-    [CreateAssetMenu(menuName = "Wheel Of Fortune/Panels/Rewards Panel Setting")]
+    [CreateAssetMenu(menuName = "Wheel Of Fortune/Panels/Rewards Panel Settings")]
     public class RewardsPanelSettings : ScriptableObject
     {
         [Header("Rewards Panel")]
-        [SerializeField] private RewardsPanelContentController _rewardsPanelContentPrefab;
+        [SerializeField] private RewardController _rewardsPanelContentPrefab;
         [SerializeField] private Image _rewardContentImage;  //Used in animation.
 
         [Header("Reward Part Gather Animation")]
@@ -31,8 +31,13 @@ namespace WheelOfFortune.Settings
         [SerializeField] private float _spawnRewPartScaleTime = 0.3f;
         [SerializeField] private Ease _spawnRePartScaleEase = Ease.OutElastic;
 
+        [Header("Exit Button")]
+        [SerializeField] private float _exitBtnHideAnimTime = 0.2f;
+        [SerializeField] private float _exitBtnUnhideAnimTime = 0.2f;
+        [SerializeField] private Ease _exitBtnHideAnimEase = Ease.Flash;
+        [SerializeField] private Ease _exitBtnUnhideAnimEase = Ease.Flash;
 
-        public RewardsPanelContentController RewardsPanelContentPrefab { get => _rewardsPanelContentPrefab; }
+        public RewardController RewardsPanelContentPrefab { get => _rewardsPanelContentPrefab; }
         public Image RewardContentImage { get => _rewardContentImage; }
         public int GatherMaxRewPart { get => _gatherMaxRewPart; }
         public int GatherRewPartsDelayFrame { get => _gatherRewPartsDelayFrame; }
@@ -51,5 +56,9 @@ namespace WheelOfFortune.Settings
         public Vector2 SpawnMoveOffsetMinVector { get => _spawnMoveOffsetMinVector; }
         public Vector2 SpawnMoveOffsetMaxVector { get => _spawnMoveOffsetMaxVector; }
         public int GatherAnimStartDelay { get => _gatherAnimStartDelay; }
+        public float ExitBtnHideAnimTime { get => _exitBtnHideAnimTime; }
+        public float ExitBtnUnhideAnimTime { get => _exitBtnUnhideAnimTime; }
+        public Ease ExitBtnHideAnimEase { get => _exitBtnHideAnimEase; }
+        public Ease ExitBtnUnhideAnimEase { get => _exitBtnUnhideAnimEase; }
     }
 }

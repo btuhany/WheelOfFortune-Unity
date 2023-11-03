@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using WheelOfFortune.Items;
@@ -17,12 +18,27 @@ namespace WheelOfFortune.Panels
         [Header("References")]
         [SerializeField] private RectTransform _rewardsContentHolder;
         [SerializeField] private Transform _rewardPartsParent;
+        [SerializeField] private Button _exitButton;
+        [SerializeField] private RectTransform _maskRect;
 
-        private Dictionary<WheelItem, RewardsPanelContentController> _rewardsDictionary = new Dictionary<WheelItem, RewardsPanelContentController>();
+        private Dictionary<WheelItem, RewardController> _rewardsDictionary 
+            = new Dictionary<WheelItem, RewardController>();
+        
         private Tweener _collectionTween;
+        private Vector2 _maskRectOffset;
 
+        private void OnValidate()
+        {
+            if (_exitButton == null)
+                _exitButton = GetComponentInChildren<Button>();
+        }
+        private void Awake()
+        {
+            _exitButton.onClick.AddListener(HandleOnExitButtonClick);
+            _maskRectOffset = _maskRect.offsetMax;
+        }
         //To use Tweeners in async methods, they should be called from sync methods.
-        private void RewardPartScaleAnim(Image rewardPart, RewardsPanelContentController targetRewardContent)
+        private void RewardPartScaleAnim(Image rewardPart, RewardController targetRewardContent)
         {
             rewardPart.transform.DOScale(targetRewardContent.transform.localScale, _settings.MoveRewPartTime);
         }
@@ -58,7 +74,7 @@ namespace WheelOfFortune.Panels
                 _collectionTween = null;
             }
         }
-        private async UniTask MoveAddRewardPart(Image rewardPart, RewardsPanelContentController targetRewardContent, int addCount)
+        private async UniTask MoveAddRewardPart(Image rewardPart, RewardController targetRewardContent, int addCount)
         {
             RewardPartScaleAnim(rewardPart, targetRewardContent);
             await rewardPart.transform.DOMove(
@@ -69,7 +85,7 @@ namespace WheelOfFortune.Panels
             targetRewardContent.IncreaseCount(addCount);
             await ReactToRewardPartCollection(targetRewardContent.ItemImage.transform);
         }
-        private async UniTask GatherRewardPartsAnim(WheelItem item, Transform startPosition, RewardsPanelContentController targetRewardContent)
+        private async UniTask GatherRewardPartsAnim(WheelItem item, Transform startPosition, RewardController targetRewardContent)
         {
             Sprite rewardSprite = item.SpriteReward;
             int rewardPartCount;
@@ -117,9 +133,41 @@ namespace WheelOfFortune.Panels
 
             await UniTask.WhenAll(rewardPartTasks);
         }
+        private void HandleOnExitButtonClick()
+        {
+            Debug.Log("Exit");
+        }
+        public void HideExitButton(bool handleRewardsPos = false)
+        {
+            _exitButton.enabled = false;
+
+            _exitButton.transform
+                .DOScale(Vector3.zero, _settings.ExitBtnHideAnimTime)
+                .SetEase(_settings.ExitBtnHideAnimEase)
+                .onComplete = () => {
+                    _exitButton.gameObject.SetActive(false);
+
+                    if(handleRewardsPos)
+                        _maskRect.offsetMax = Vector2.zero;
+                };
+        }
+        public void UnhideExitButton(bool handleRewardsPos = false)
+        {
+            _exitButton.gameObject.SetActive(true);
+
+            if(handleRewardsPos)
+                _maskRect.offsetMax = _maskRectOffset;
+
+            _exitButton.transform.
+                DOScale(Vector3.one, _settings.ExitBtnUnhideAnimTime)
+                .SetEase(_settings.ExitBtnUnhideAnimEase)
+                .onComplete = () => {
+                    _exitButton.enabled = true;
+                };
+        }
         public async UniTask GetReward(WheelItem item, Transform animImgSpawnPoint)
         {
-            RewardsPanelContentController rewardContent;
+            RewardController rewardContent;
 
             //Check if item is already registered to the dictionary.
             if (_rewardsDictionary.ContainsKey(item))
@@ -135,6 +183,16 @@ namespace WheelOfFortune.Panels
             await UniTask.Delay(_settings.GatherAnimStartDelay);
             await GatherRewardPartsAnim(item, animImgSpawnPoint, rewardContent);
         }
+        [ContextMenu("Reset")]
+        public void ResetRewards()
+        {
+            foreach (RewardController rewardController in _rewardsDictionary.Values)
+            {
+                Destroy(rewardController.gameObject);
+            }
+            _rewardsDictionary.Clear();
+        }
+
 
     }
 }
