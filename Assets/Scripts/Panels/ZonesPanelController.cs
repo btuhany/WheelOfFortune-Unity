@@ -1,8 +1,10 @@
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using WheelOfFortune.Pools;
 using WheelOfFortune.Settings;
 
 namespace WheelOfFortune.Panels
@@ -27,7 +29,8 @@ namespace WheelOfFortune.Panels
         }
         private Vector3 _gridHolderInitialPos;
         [SerializeField] private Image _zoneBackgroundImg;
-        private int _zoneCounter = 1;   
+        private int _counterZone = 1;
+        private int _counterZoneGroupRtrnPool = 0;
         private float _zoneRectWidth;
 
         public event System.Action<ZoneType> OnZoneChangedEvent;
@@ -63,7 +66,10 @@ namespace WheelOfFortune.Panels
         {
             for (int i = 1; i <= value; i++)
             {
-                TextMeshProUGUI zoneText =  Instantiate(_settings.ZonePrefab, _zonesGridLayout.transform);
+                //TextMeshProUGUI zoneText =  Instantiate(_settings.ZonePrefab, _zonesGridLayout.transform);
+                TextMeshProUGUI zoneText = UITextZonePool.Instance.GetObject(true);
+                zoneText.transform.SetParent(_zonesGridLayout.transform);
+
                 zoneText.text = i.ToString();
 
                 _zonesList.Add(zoneText);
@@ -86,7 +92,7 @@ namespace WheelOfFortune.Panels
                 .SetEase(_settings.ZoneBgClrFadeStartEase));
 
             colorSequence.AppendCallback(
-                () => ChangeZoneBgImg(GetZoneType(_zoneCounter)));
+                () => ChangeZoneBgImg(GetZoneType(_counterZone)));
 
             colorSequence.Append(
                 _zoneBackgroundImg.DOColor(
@@ -117,37 +123,53 @@ namespace WheelOfFortune.Panels
         //zone counter must decreased by 1.
         private void UpdateZoneTextColor()
         {
-            ZoneType currentType = GetZoneType(_zoneCounter);
+            ZoneType currentType = GetZoneType(_counterZone);
 
             //Prewious zone (decrease counter by two)
-            if (_zoneCounter > 1 && GetZoneType(_zoneCounter - 1) == ZoneType.Normal)
-                _zonesList[_zoneCounter - 2].color = Color.white;
+            if (_counterZone > 1 && GetZoneType(_counterZone - 1) == ZoneType.Normal)
+                _zonesList[_counterZone - 2].color = Color.white;
             
 
             //Current zone (decrease counter by one)
             if (currentType == ZoneType.Normal)
-                _zonesList[_zoneCounter - 1].color = Color.black;
+                _zonesList[_counterZone - 1].color = Color.black;
         }
         private void InvokeCurrentZoneEvent()
         {
-            ZoneType prewZoneType = GetZoneType(_zoneCounter - 1);
-            ZoneType currentZoneType = GetZoneType(_zoneCounter);
+            ZoneType prewZoneType = GetZoneType(_counterZone - 1);
+            ZoneType currentZoneType = GetZoneType(_counterZone);
 
             if (prewZoneType != currentZoneType)
                 OnZoneChangedEvent?.Invoke(currentZoneType);
         }
-        public void ScrollZones(int value)
+        private void HandleScrollOnZonesReturnPool()
         {
+            int returnObjectCount = _settings.GroupMaxActiveSize / 2;
+            for (int i = 0; i < returnObjectCount; i++)
+                UITextZonePool.Instance.ReturnObject(_zonesList[_counterZone - returnObjectCount - i]);
             _gridHolderRect.DOLocalMove(
+            _gridHolderRect.localPosition - _settings.GroupSlideDir * _zoneRectWidth * returnObjectCount,
+            _settings.ScrollTime / 3f)
+            .SetEase(Ease.Linear).ToUniTask();
+        }
+        public async void ScrollZones(int value)
+        {
+            await _gridHolderRect.DOLocalMove(
                 _gridHolderRect.localPosition + _settings.GroupSlideDir * _zoneRectWidth * value,
                 _settings.ScrollTime)
-                .SetEase(_settings.ScrollEase);
+                .SetEase(_settings.ScrollEase).ToUniTask();
 
-            _zoneCounter += value;
+            _counterZone += value;
+            _counterZoneGroupRtrnPool++;
+
+            if (_counterZoneGroupRtrnPool > _settings.GroupMaxActiveSize - 1)
+            {
+                HandleScrollOnZonesReturnPool();
+                _counterZoneGroupRtrnPool = 0;
+            }
+
             UpdateZoneTextColor();
-
             CurrentZoneBgChangeAnim();
-
             InvokeCurrentZoneEvent();
         }
         public void ResetZones()
@@ -157,13 +179,14 @@ namespace WheelOfFortune.Panels
                 Destroy(text.gameObject);
             }
             _zonesList.Clear();
-            _zoneCounter = 1;
+            _counterZone = 1;
             AddZones(_settings.GroupMaxActiveSize * _settings.GroupsAtStart);
             _gridHolderRect.anchoredPosition = _gridHolderInitialPos;
+            InvokeZoneChangeEvent();
         }
         public void InvokeZoneChangeEvent()
         {
-            OnZoneChangedEvent?.Invoke(GetZoneType(_zoneCounter));
+            OnZoneChangedEvent?.Invoke(GetZoneType(_counterZone));
         }
     }
 }

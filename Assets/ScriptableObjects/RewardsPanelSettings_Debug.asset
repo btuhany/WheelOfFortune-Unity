@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66a5f07da4e580349b1d089a0164c514, type: 3}
+  m_Name: RewardsPanelSettings_Debug
+  m_EditorClassIdentifier: 
+  _rewardsPanelContentPrefab: {fileID: -4314525041144641986, guid: ecff8276a55b55043ba15df094e1bdbc, type: 3}
+  _rewardContentImage: {fileID: 3563871557339872935, guid: f91e76d9f6d3ba14789ef2d6d2b56f04, type: 3}
+  _gatherAnimStartDelay: 10
+  _gatherMaxRewPart: 10
+  _gatherRewPartsDelayFrame: 1
+  _moveRewPartsMinDelay: 10
+  _moveRewPartsMaxDelay: 100
+  _moveRewPartTime: 0.1
+  _moveRewPartEase: 31
+  _collectionTargetScale: {x: 0, y: 0, z: 0}
+  _collectionReactTime: 0.2
+  _collectionReactScaleFactor: 1.2
+  _collectionReactEase: 25
+  _spawnMoveOffsetMinVector: {x: 0, y: 0}
+  _spawnMoveOffsetMaxVector: {x: 0, y: 0}
+  _spawnMoveOffsetTime: 0.1
+  _spawnMoveOffsetEase: 23
+  _spawnRewPartScaleFactor: 1.2
+  _spawnRewPartScaleTime: 0.3
+  _spawnRePartScaleEase: 24
+  _btnExitHideAnimTime: 0.2
+  _btnExitUnhideAnimTime: 0.2
+  _btnExitHideAnimEase: 32
+  _btnExitUnhideAnimEase: 32
+  _exitMoveAnimTime: 0.1
+  _exitMoveAnimEase: 0

@@ -195,6 +195,7 @@ MonoBehaviour:
   _contentImage: {fileID: 3048071043013433025}
   _contentHeaderText: {fileID: 3048071041847706838}
   _contentCountText: {fileID: 3048071042318444587}
+  _rectTransform: {fileID: 3048071042212314629}
 --- !u!222 &3048071042212314627
 CanvasRenderer:
   m_ObjectHideFlags: 0

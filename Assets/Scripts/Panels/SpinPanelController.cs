@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using WheelOfFortune.Settings;
+using WheelOfFortune.Wheel;
 
 namespace WheelOfFortune.Panels
 {
@@ -16,11 +17,15 @@ namespace WheelOfFortune.Panels
         [SerializeField] private Image _imageWheelSpin;
         [SerializeField] private Image _imageWheelIndicator;
         [SerializeField] private TextMeshProUGUI _textHeaderSpin;
+        [SerializeField] private WheelController _wheelController;
 
         [SerializeField] private RectTransform _rectTransform;
         [SerializeField] private Button _buttonSpin;
         public event System.Action OnButtonClickedSpin;
         private ZonesPanelController.ZoneType _currentZoneType;
+
+        public WheelController WheelController { get => _wheelController; }
+
         private void OnValidate()
         {
             if (_rectTransform == null)
@@ -64,6 +69,7 @@ namespace WheelOfFortune.Panels
         {
             if (_currentZoneType == zoneType) return;
             _currentZoneType = zoneType;
+            _wheelController.HandleOnZoneChanged(zoneType);
             switch (zoneType)
             {
                 case ZonesPanelController.ZoneType.Normal:

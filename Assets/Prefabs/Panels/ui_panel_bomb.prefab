@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -35.999924}
+  m_AnchoredPosition: {x: 0, y: -36}
   m_SizeDelta: {x: 1000, y: 50}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &221170307483875871
@@ -427,11 +427,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _settings: {fileID: 11400000, guid: 495ad37f25a099042b20cce6c83a42e6, type: 2}
-  _bombImgsHolder: {fileID: 221170307514303925}
-  _flashImage: {fileID: 221170308812247723}
-  _backgroundImage: {fileID: 221170307854986134}
+  _imgAnimsHolder: {fileID: 221170307514303925}
+  _imgFlash: {fileID: 221170308812247723}
+  _imgBackground: {fileID: 221170307854986134}
   _textInfo: {fileID: 221170307483875868}
-  _reviveGoldCostTxt: {fileID: 221170308231291649}
+  _textReviveGold: {fileID: 221170308231291649}
+  _buttons:
+  - {fileID: 221170307830010701}
+  - {fileID: 221170308349532427}
+  _rectTransform: {fileID: 221170307854986135}
 --- !u!222 &221170307854986129
 CanvasRenderer:
   m_ObjectHideFlags: 0

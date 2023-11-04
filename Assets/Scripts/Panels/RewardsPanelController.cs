@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using WheelOfFortune.Items;
+using WheelOfFortune.Pools;
 using WheelOfFortune.Settings;
 
 namespace WheelOfFortune.Panels
@@ -60,9 +61,14 @@ namespace WheelOfFortune.Panels
             for (int i = 0; i < count; i++)
             {
                 //Spawn & set the reward part and add to the list.
-                Image rewardPart = Instantiate(_settings.RewardContentImage,
-                    startPosition.position,
-                    startPosition.rotation, _transformRewPartsParent);
+                //Image rewardPart = Instantiate(_settings.RewardContentImage,
+                //    startPosition.position,
+                //    startPosition.rotation, _transformRewPartsParent);
+                Image rewardPart = UIRewardPartImgPool.Instance.GetObject(true);
+                rewardPart.transform.SetParent(_transformRewPartsParent);
+                rewardPart.transform.position = startPosition.position;
+                rewardPart.transform.rotation = startPosition.rotation;
+
                 rewardsImgList.Add(rewardPart);
                 rewardPart.sprite = rewardPartSprite;
 
@@ -93,7 +99,8 @@ namespace WheelOfFortune.Panels
                 targetRewardContent.ItemImage.transform.position,
                 _settings.MoveRewPartTime)
                 .SetEase(_settings.MoveRewPartEase)
-                .OnComplete(() => Destroy(rewardPart)).ToUniTask();
+                .OnComplete(() => UIRewardPartImgPool.Instance.ReturnObject(rewardPart))
+                .ToUniTask();
             targetRewardContent.IncreaseCount(addCount);
             await ReactToRewardPartCollection(targetRewardContent.ItemImage.transform);
         }
@@ -202,7 +209,9 @@ namespace WheelOfFortune.Panels
             }
             else
             {
-                rewardContent = Instantiate(_settings.RewardsPanelContentPrefab, _rectContentHolder);
+                //rewardContent = Instantiate(_settings.RewardsPanelContentPrefab, _rectContentHolder);
+                rewardContent = UIRewardHolderPool.Instance.GetObject(true);
+                rewardContent.transform.SetParent(_rectContentHolder);
                 rewardContent.SetReward(item);
                 _rewardsDictionary.Add(item, rewardContent);
             }
@@ -217,7 +226,7 @@ namespace WheelOfFortune.Panels
         {
             foreach (RewardController rewardController in _rewardsDictionary.Values)
             {
-                Destroy(rewardController.gameObject);
+                UIRewardHolderPool.Instance.ReturnObject(rewardController);
             }
             _rewardsDictionary.Clear();
             _totalGold = 0;

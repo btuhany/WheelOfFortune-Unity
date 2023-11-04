@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &9205798527323321640
+--- !u!1 &2149402393350699181
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,44 +8,43 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 9205798527323321638}
-  - component: {fileID: 9205798527323321639}
+  - component: {fileID: 3511100580211874487}
+  - component: {fileID: 4245408876780187777}
   m_Layer: 0
-  m_Name: '[SpinManager]'
+  m_Name: '[UIRewardHolderPool]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &9205798527323321638
+--- !u!4 &3511100580211874487
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9205798527323321640}
+  m_GameObject: {fileID: 2149402393350699181}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1161.0186, y: 1315.9695, z: 0.50296926}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9205798527323321639
+--- !u!114 &4245408876780187777
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9205798527323321640}
+  m_GameObject: {fileID: 2149402393350699181}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c7958755046f4e4fab400f07dd4642b, type: 3}
+  m_Script: {fileID: 11500000, guid: d0ab4d139b0d2be41bf3c774a6c299d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spinPanelController: {fileID: 0}
-  _contentPanelController: {fileID: 0}
-  _rewardsPanelController: {fileID: 0}
-  _zonesPanelController: {fileID: 0}
-  _bombPanelController: {fileID: 0}
+  _dontDestroyOnLoad: 0
+  _prefab: {fileID: -4314525041144641986, guid: ecff8276a55b55043ba15df094e1bdbc, type: 3}
+  _size: 20
+  _expandingSize: 5

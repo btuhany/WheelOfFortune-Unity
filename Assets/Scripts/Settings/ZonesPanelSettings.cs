@@ -28,14 +28,11 @@ namespace WheelOfFortune.Settings
         [SerializeField] private Sprite _zoneSpriteNormal;
         [SerializeField] private Sprite _zoneSpriteSafe;
         [SerializeField] private Sprite _zoneSpriteSuper;
-        [Header("Zone Prefab")]
-        [SerializeField] private TextMeshProUGUI _zonePrefab;
 
         public int GroupMaxActiveSize { get => _groupMaxActiveSize; }
         public Vector3 GroupSlideDir { get => _groupSlideDir; }
         public float ScrollTime { get => _scrollTime; }
         public Ease ScrollEase { get => _scrollEase; }
-        public TextMeshProUGUI ZonePrefab { get => _zonePrefab; }
         public Color ZoneSafeColor { get => _zoneSafeColor; }
         public Color ZoneSuperColor { get => _zoneSuperColor; }
         public int GroupsAtStart { get => _groupsAtStart; }

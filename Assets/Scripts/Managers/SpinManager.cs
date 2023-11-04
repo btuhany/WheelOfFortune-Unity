@@ -13,7 +13,6 @@ namespace WheelOfFortune.Managers
         [SerializeField] private SpinPanelController _spinPanelController;
         [SerializeField] private ContentPanelController _contentPanelController;
         [SerializeField] private RewardsPanelController _rewardsPanelController;
-        [SerializeField] private WheelController _wheelController;
         [SerializeField] private ZonesPanelController _zonesPanelController;
         [SerializeField] private BombPanelController _bombPanelController;
 
@@ -24,12 +23,10 @@ namespace WheelOfFortune.Managers
         private void OnEnable()
         {
             _spinPanelController.OnButtonClickedSpin += HandleOnBtnClkSpin;
-            _zonesPanelController.OnZoneChangedEvent += _wheelController.HandleOnZoneChanged;
         }
         private void OnDisable()
         {
             _spinPanelController.OnButtonClickedSpin -= HandleOnBtnClkSpin;
-            _zonesPanelController.OnZoneChangedEvent -= _wheelController.HandleOnZoneChanged;
         }
 
         private void HandleOnBtnClkSpin()
@@ -40,9 +37,9 @@ namespace WheelOfFortune.Managers
         private async void HandleSpinProcess()
         {
             _rewardsPanelController.HideExitButton();
-            WheelSliceController randomSlice = _wheelController.SelectRandomSlice();
+            WheelSliceController randomSlice = _spinPanelController.WheelController.SelectRandomSlice();
             WheelItem randomItem = randomSlice.Content;
-            await _wheelController.SpinToTargetSlice(randomSlice.SliceIndex * _anglePerSlice);
+            await _spinPanelController.WheelController.SpinToTargetSlice(randomSlice.SliceIndex * _anglePerSlice);
 
             if (randomItem.Type == WheelItem.ItemType.Reward)
                 await HandleAtReward(randomItem);
@@ -58,7 +55,7 @@ namespace WheelOfFortune.Managers
 
             _rewardsPanelController.ShowExitButton();
             _zonesPanelController.ScrollZones(1);
-            _wheelController.TryRandomizeItemsCounts();
+            _spinPanelController.WheelController.TryRandomizeItemsCounts();
 
             await _contentPanelController.HideContentAnimation();
             await _spinPanelController.ShowSpinPanelAnimation();
