@@ -16,8 +16,9 @@ namespace WheelOfFortune.Panels
         [SerializeField] private RectTransform _gridHolderRect;
         [SerializeField] private GridLayoutGroup _zonesGridLayout;
         [SerializeField] private RectTransform _zoneBackground;
+        [SerializeField] private RectTransform _prewZonesFilter;
 
-        private List<TextMeshProUGUI> _zoneTexts = new List<TextMeshProUGUI>();
+        private List<TextMeshProUGUI> _zonesList = new List<TextMeshProUGUI>();
         private enum ZoneType
         {
             Normal,
@@ -26,7 +27,7 @@ namespace WheelOfFortune.Panels
         }
         private Vector3 _gridHolderInitialPos;
         private Image _zoneBackgroundImg;
-        private int _zoneCounter = 1;
+        private int _zoneCounter = 1;   
         private float _zoneRectWidth;
         private void OnValidate()
         {
@@ -41,16 +42,21 @@ namespace WheelOfFortune.Panels
             InitializeScrollGrid();
             AddZones(_settings.GroupMaxActiveSize * _settings.GroupsAtStart);
             _gridHolderInitialPos = _gridHolderRect.anchoredPosition;
+            UpdateZoneTextColor();
         }
         private void InitializeScrollGrid()
         {
             _zoneRectWidth = _panelRect.rect.width / _settings.GroupMaxActiveSize;
+            Debug.Log(_zoneRectWidth);
             _zonesGridLayout.cellSize = new Vector2(_zoneRectWidth, _settings.GroupCellHeight);
             _zoneBackground.sizeDelta = new Vector2(_zoneRectWidth, _zoneBackground.sizeDelta.y);
             _zonesGridLayout.transform.localPosition = new Vector3(
                 -_zonesGridLayout.cellSize.x / 2,
                 _zonesGridLayout.transform.localPosition.y,
                 _zonesGridLayout.transform.localPosition.z);
+            _prewZonesFilter.sizeDelta = new Vector2(
+                _zoneRectWidth * (_settings.GroupMaxActiveSize - 1) * 0.5f,
+                _settings.GroupCellHeight);
         }
         private void AddZones(int value)
         {
@@ -59,7 +65,7 @@ namespace WheelOfFortune.Panels
                 TextMeshProUGUI zoneText =  Instantiate(_settings.ZonePrefab, _zonesGridLayout.transform);
                 zoneText.text = i.ToString();
 
-                _zoneTexts.Add(zoneText);
+                _zonesList.Add(zoneText);
 
                 ZoneType type = GetZoneType(i);
                 if (type == ZoneType.Safe)
@@ -105,27 +111,41 @@ namespace WheelOfFortune.Panels
             else
                 _zoneBackgroundImg.sprite = _settings.ZoneSpriteNormal;
         }
-        public void ScrollZone(int value)
+        //Zone counter starts from 1.
+        //To reach the zones from the zoneList,
+        //zone counter must decreased by 1.
+        private void UpdateZoneTextColor()
+        {
+            ZoneType currentType = GetZoneType(_zoneCounter);
+
+            //Prewious zone (decrease counter by two)
+            if (_zoneCounter > 1 && GetZoneType(_zoneCounter - 1) == ZoneType.Normal)
+                _zonesList[_zoneCounter - 2].color = Color.white;
+            
+
+            //Current zone (decrease counter by one)
+            if (currentType == ZoneType.Normal)
+                _zonesList[_zoneCounter - 1].color = Color.black;
+        }
+        public void ScrollZones(int value)
         {
             _gridHolderRect.DOLocalMove(
                 _gridHolderRect.localPosition + _settings.GroupSlideDir * _zoneRectWidth * value,
                 _settings.ScrollTime)
                 .SetEase(_settings.ScrollEase);
 
-            _zoneTexts[_zoneCounter - 1].color = Color.white;
             _zoneCounter += value;
-
-            _zoneTexts[_zoneCounter - 1].color = Color.black;
+            UpdateZoneTextColor();
 
             CurrentZoneBgChangeAnim();
         }
         public void ResetZones()
         {
-            foreach (TextMeshProUGUI text in _zoneTexts)
+            foreach (TextMeshProUGUI text in _zonesList)
             {
                 Destroy(text.gameObject);
             }
-            _zoneTexts.Clear();
+            _zonesList.Clear();
             _zoneCounter = 1;
             AddZones(_settings.GroupMaxActiveSize * _settings.GroupsAtStart);
             _gridHolderRect.anchoredPosition = _gridHolderInitialPos;

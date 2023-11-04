@@ -20,6 +20,7 @@ namespace WheelOfFortune.Settings
         [Tooltip("Milliseconds")][SerializeField] private int _moveRewPartsMaxDelay = 400;
         [SerializeField] private float _moveRewPartTime = 1.0f;
         [SerializeField] private Ease _moveRewPartEase = Ease.InOutBounce;
+        [SerializeField] private Vector3 _collectionTargetScale;
         [SerializeField] private float _collectionReactTime = 0.2f;
         [SerializeField] private float _collectionReactScaleFactor = 1.2f;
         [SerializeField] private Ease _collectionReactEase = Ease.InOutElastic;
@@ -60,5 +61,6 @@ namespace WheelOfFortune.Settings
         public float ExitBtnUnhideAnimTime { get => _exitBtnUnhideAnimTime; }
         public Ease ExitBtnHideAnimEase { get => _exitBtnHideAnimEase; }
         public Ease ExitBtnUnhideAnimEase { get => _exitBtnUnhideAnimEase; }
+        public Vector3 CollectionTargetScale { get => _collectionTargetScale; }
     }
 }

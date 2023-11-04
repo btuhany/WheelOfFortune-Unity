@@ -42,7 +42,7 @@ namespace WheelOfFortune.Panels
         //To use Tweeners in async methods, they should be called from sync methods.
         private void RewardPartScaleAnim(Image rewardPart, RewardController targetRewardContent)
         {
-            rewardPart.transform.DOScale(targetRewardContent.transform.localScale, _settings.MoveRewPartTime);
+            rewardPart.transform.DOScale(_settings.CollectionTargetScale, _settings.MoveRewPartTime);
         }
         private List<Image> SpawnRewardParts(Transform startPosition, int count, Sprite rewardPartSprite)
         {

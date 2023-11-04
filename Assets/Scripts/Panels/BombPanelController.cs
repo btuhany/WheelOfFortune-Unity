@@ -14,7 +14,6 @@ namespace WheelOfFortune.Panels
         [SerializeField] private BombPanelSettings _settings;
         [Header("References")]
         [SerializeField] private RectTransform _bombImgsHolder;
-        [SerializeField] private Image _bombImage;
         [SerializeField] private Image _flashImage;
         [SerializeField] private Image _backgroundImage;
         [SerializeField] private TextMeshProUGUI _textInfo;

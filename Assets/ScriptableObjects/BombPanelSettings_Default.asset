@@ -16,7 +16,7 @@ MonoBehaviour:
   _bombAnimPunchScale: {x: 0.03, y: 0.03, z: 0.03}
   _bombAnimTime: 0.2
   _bombAnimEase: 32
-  _bombAnimLoopInterval: 2
+  _bombAnimLoopInterval: 1
   _bombAnimPunchInterval: 0.1
   _flashRotationTimePeriod: 100
   _flashImgFadeTime: 0.7

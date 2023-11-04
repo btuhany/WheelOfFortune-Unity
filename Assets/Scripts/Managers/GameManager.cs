@@ -8,20 +8,20 @@ namespace WheelOfFortune.Managers
     public class GameManager : MonoBehaviour
     {
         [SerializeField] private GameSettings _settings;
-        [SerializeField] private BombPanelController _exitPanelController;
+        [SerializeField] private BombPanelController _bombPanelController;
         [SerializeField] private RewardsPanelController _rewardsPanelController;
         [SerializeField] private ZonesPanelController _zonesPanelController;
         private void OnEnable()
         {
-            _exitPanelController.OnGiveUpButtonClick += HandleOnGiveUpBtnClk;
-            _exitPanelController.OnEnter += HandleOnExitPanelEnter;
-            _exitPanelController.OnReviveButtonClick += HandleOnRevBtnClk;
+            _bombPanelController.OnGiveUpButtonClick += HandleOnGiveUpBtnClk;
+            _bombPanelController.OnEnter += HandleOnExitPanelEnter;
+            _bombPanelController.OnReviveButtonClick += HandleOnRevBtnClk;
         }
         private void HandleOnExitPanelEnter()
         {
             int reviveGoldCost = _settings.ReviveGoldCost;
             bool enableReviveBtn = _rewardsPanelController.IsGoldEnough(reviveGoldCost);
-            _exitPanelController.UpdateReviveBtn(enableReviveBtn, reviveGoldCost);
+            _bombPanelController.UpdateReviveBtn(enableReviveBtn, reviveGoldCost);
         }
         private void HandleOnGiveUpBtnClk()
         {
@@ -30,13 +30,13 @@ namespace WheelOfFortune.Managers
         [ContextMenu("Restart Game")]
         private void RestartGame()
         {
-            _exitPanelController.ResetPanel();
+            _bombPanelController.ResetPanel();
             _rewardsPanelController.ResetRewards();
             _zonesPanelController.ResetZones();
         }
         private void HandleOnRevBtnClk()
         {
-            _exitPanelController.ResetPanel();
+            _bombPanelController.ResetPanel();
             _rewardsPanelController.HandleOnRevived(_settings.ReviveGoldCost);
         }
     }

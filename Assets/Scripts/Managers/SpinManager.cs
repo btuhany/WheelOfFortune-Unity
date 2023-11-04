@@ -14,7 +14,7 @@ namespace WheelOfFortune.Managers
         [SerializeField] private RewardsPanelController _rewardsPanelController;
         [SerializeField] private WheelController _wheelController;
         [SerializeField] private ZonesPanelController _zonesPanelController;
-        [SerializeField] private BombPanelController _exitPanelController;
+        [SerializeField] private BombPanelController _bombPanelController;
 
         #region Constants
         private const int _anglePerSlice = 45;
@@ -49,7 +49,7 @@ namespace WheelOfFortune.Managers
             await _rewardsPanelController.GetReward(randomItem, _contentPanelController.transform);
 
             _rewardsPanelController.UnhideExitButton();
-            _zonesPanelController.ScrollZone(1);
+            _zonesPanelController.ScrollZones(1);
 
             await _contentPanelController.HideContentAnimation();
             await _spinPanelController.ShowSpinPanelAnimation();
@@ -57,7 +57,7 @@ namespace WheelOfFortune.Managers
         private async UniTask HandleAtBomb()
         {
             _rewardsPanelController.HideExitButton(true);
-            await _exitPanelController.StartEnterAnim();
+            await _bombPanelController.StartEnterAnim();
         }
 
     }

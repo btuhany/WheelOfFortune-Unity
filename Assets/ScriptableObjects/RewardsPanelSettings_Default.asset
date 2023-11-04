@@ -20,14 +20,19 @@ MonoBehaviour:
   _moveRewPartsMinDelay: 10
   _moveRewPartsMaxDelay: 100
   _moveRewPartTime: 0.7
-  _moveRewPartEase: 8
+  _moveRewPartEase: 1
+  _collectionTargetScale: {x: 0.4, y: 0.4, z: 0.4}
   _collectionReactTime: 0.2
   _collectionReactScaleFactor: 1.1
   _collectionReactEase: 2
   _spawnMoveOffsetMinVector: {x: -100, y: -100}
   _spawnMoveOffsetMaxVector: {x: 100, y: 100}
   _spawnMoveOffsetTime: 0.4
-  _spawnMoveOffsetEase: 27
+  _spawnMoveOffsetEase: 1
   _spawnRewPartScaleFactor: 1
   _spawnRewPartScaleTime: 0.4
   _spawnRePartScaleEase: 28
+  _exitBtnHideAnimTime: 0.2
+  _exitBtnUnhideAnimTime: 0.2
+  _exitBtnHideAnimEase: 32
+  _exitBtnUnhideAnimEase: 32
