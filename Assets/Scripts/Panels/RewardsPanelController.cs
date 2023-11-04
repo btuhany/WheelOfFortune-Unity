@@ -1,13 +1,10 @@
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using WheelOfFortune.Items;
 using WheelOfFortune.Settings;
-using static UnityEditor.Progress;
 
 namespace WheelOfFortune.Panels
 {
@@ -17,28 +14,41 @@ namespace WheelOfFortune.Panels
         [SerializeField] private RewardsPanelSettings _settings;
 
         [Header("References")]
-        [SerializeField] private RectTransform _rewardsContentHolder;
-        [SerializeField] private Transform _rewardPartsParent;
-        [SerializeField] private Button _exitButton;
-        [SerializeField] private RectTransform _maskRect;
+        [SerializeField] private RectTransform _rectContentHolder;
+        [SerializeField] private RectTransform _rectTransform;
+        [SerializeField] private Transform _transformRewPartsParent;
+        [SerializeField] private Button _buttonExit;
+        [SerializeField] private RectTransform _rectMask;
+        [SerializeField] private GridLayoutGroup _gridLayout;
 
         private Dictionary<WheelItem, RewardController> _rewardsDictionary 
             = new Dictionary<WheelItem, RewardController>();
         
-        private Tweener _collectionTween;
-        private Vector2 _maskRectOffset;
+        private Tweener _tweenCollect;
+        private Vector2 _rectMaskMaxOffset;
         private int _totalGold = 0;
-        private RewardController _goldRewardController;
+        private RewardController _rewardControllerGold;
+        private float _initialRectSizeDeltaY;
+        private float _initalRectAnchoredPosY;
+        private Vector3 _initalRectAnchoredPos;
+        public event System.Action OnButtonClickExit;
         private void OnValidate()
         {
-            if (_exitButton == null)
-                _exitButton = GetComponentInChildren<Button>();
+            if (_buttonExit == null)
+                _buttonExit = GetComponentInChildren<Button>();
+            if (_rectTransform == null)
+                _rectTransform = GetComponent<RectTransform>();
         }
         private void Awake()
         {
-            _exitButton.onClick.AddListener(HandleOnExitButtonClick);
-            _maskRectOffset = _maskRect.offsetMax;
+            _buttonExit.onClick.AddListener(HandleOnExitButtonClick);
+            _rectMaskMaxOffset = _rectMask.offsetMax;
+            _rectMask.offsetMin = Vector2.zero;
+            _initialRectSizeDeltaY = _rectTransform.sizeDelta.y;
+            _initalRectAnchoredPos = _rectTransform.anchoredPosition;
+            _initalRectAnchoredPosY = _initalRectAnchoredPos.y;
         }
+
         //To use Tweeners in async methods, they should be called from sync methods.
         private void RewardPartScaleAnim(Image rewardPart, RewardController targetRewardContent)
         {
@@ -52,7 +62,7 @@ namespace WheelOfFortune.Panels
                 //Spawn & set the reward part and add to the list.
                 Image rewardPart = Instantiate(_settings.RewardContentImage,
                     startPosition.position,
-                    startPosition.rotation, _rewardPartsParent);
+                    startPosition.rotation, _transformRewPartsParent);
                 rewardsImgList.Add(rewardPart);
                 rewardPart.sprite = rewardPartSprite;
 
@@ -66,14 +76,14 @@ namespace WheelOfFortune.Panels
         }
         private async UniTask ReactToRewardPartCollection(Transform targetReward)
         {
-            if (_collectionTween == null)
+            if (_tweenCollect == null)
             {
-                _collectionTween = targetReward.transform.DOPunchScale(
+                _tweenCollect = targetReward.transform.DOPunchScale(
                     Vector3.one * _settings.CollectionReactScaleFactor,
                     _settings.CollectionReactTime)
                     .SetEase(_settings.CollectionReactEase);
-                await _collectionTween.ToUniTask();
-                _collectionTween = null;
+                await _tweenCollect.ToUniTask();
+                _tweenCollect = null;
             }
         }
         private async UniTask MoveAddRewardPart(Image rewardPart, RewardController targetRewardContent, int addCount)
@@ -140,38 +150,45 @@ namespace WheelOfFortune.Panels
             if (!item.IsGold) return;
             _totalGold += item.Count;
 
-            _goldRewardController = reward;
+            _rewardControllerGold = reward;
         }
         private void HandleOnExitButtonClick()
         {
-            Debug.Log("Exit");
+            OnButtonClickExit?.Invoke();
+        }
+        private List<UniTask> ShowEndRewardsTasks(float sizeDeltaY, float anchorPosY)
+        {
+            List<UniTask> exitTasks = new List<UniTask>();
+            exitTasks.Add(_rectTransform.DOSizeDelta(new Vector2(_rectTransform.sizeDelta.x, sizeDeltaY), 0.2f).ToUniTask());
+            exitTasks.Add(_rectTransform.DOAnchorPosY(anchorPosY, 0.2f).ToUniTask());
+            return exitTasks;
         }
         public void HideExitButton(bool handleRewardsPos = false)
         {
-            _exitButton.enabled = false;
+            _buttonExit.enabled = false;
 
-            _exitButton.transform
+            _buttonExit.transform
                 .DOScale(Vector3.zero, _settings.ExitBtnHideAnimTime)
                 .SetEase(_settings.ExitBtnHideAnimEase)
                 .onComplete = () => {
-                    _exitButton.gameObject.SetActive(false);
+                    _buttonExit.gameObject.SetActive(false);
 
                     if(handleRewardsPos)
-                        _maskRect.offsetMax = Vector2.zero;
+                        _rectMask.offsetMax = Vector2.zero;
                 };
         }
-        public void UnhideExitButton(bool handleRewardsPos = false)
+        public void ShowExitButton(bool handleRewardsPos = false)
         {
-            _exitButton.gameObject.SetActive(true);
+            _buttonExit.gameObject.SetActive(true);
 
             if(handleRewardsPos)
-                _maskRect.offsetMax = _maskRectOffset;
+                _rectMask.offsetMax = _rectMaskMaxOffset;
 
-            _exitButton.transform.
+            _buttonExit.transform.
                 DOScale(Vector3.one, _settings.ExitBtnUnhideAnimTime)
                 .SetEase(_settings.ExitBtnUnhideAnimEase)
                 .onComplete = () => {
-                    _exitButton.enabled = true;
+                    _buttonExit.enabled = true;
                 };
         }
         public async UniTask GetReward(WheelItem item, Transform animImgSpawnPoint)
@@ -185,7 +202,7 @@ namespace WheelOfFortune.Panels
             }
             else
             {
-                rewardContent = Instantiate(_settings.RewardsPanelContentPrefab, _rewardsContentHolder);
+                rewardContent = Instantiate(_settings.RewardsPanelContentPrefab, _rectContentHolder);
                 rewardContent.SetReward(item);
                 _rewardsDictionary.Add(item, rewardContent);
             }
@@ -204,14 +221,14 @@ namespace WheelOfFortune.Panels
             }
             _rewardsDictionary.Clear();
             _totalGold = 0;
-            UnhideExitButton(true);
+            ShowExitButton(true);
         }
         public void HandleOnRevived(int goldCost)
         {
-            UnhideExitButton(true);
+            ShowExitButton(true);
             _totalGold -= goldCost;
-            if(_goldRewardController != null)
-                _goldRewardController.SetCount(_totalGold);
+            if(_rewardControllerGold != null)
+                _rewardControllerGold.SetCount(_totalGold);
         }
         public bool IsGoldEnough(int value)
         {
@@ -219,6 +236,30 @@ namespace WheelOfFortune.Panels
                 return false;
             return true;
         }
+        public async UniTask ShowEndRewards(RectTransform targetRectTransfrom)
+        {
+            HideExitButton(true);
+            _gridLayout.constraintCount = 2;
+            await _rectTransform.DOAnchorPos(
+                Vector3.right * 0.5f * (targetRectTransfrom.rect.width - _rectTransform.sizeDelta.x),
+                _settings.ExitMoveAnimTime)
+                .SetEase(_settings.ExitMoveAnimEase)
+                .ToUniTask();
+            await UniTask.WhenAll(ShowEndRewardsTasks(targetRectTransfrom.rect.height / 2, targetRectTransfrom.rect.height / 8));
+        }
+        public async UniTask UnshowEndRewards(RectTransform targetRectTransfrom)
+        {
+            _gridLayout.constraintCount = 1;
+            _rectMask.offsetMin = Vector2.zero;
+            await UniTask.WhenAll(ShowEndRewardsTasks(_initialRectSizeDeltaY, _initalRectAnchoredPosY));
+            await _rectTransform.DOAnchorPos(
+                _initalRectAnchoredPos,
+                _settings.ExitMoveAnimTime)
+                .SetEase(_settings.ExitMoveAnimEase)
+                .ToUniTask();
+            ShowExitButton(true);
+        }
+
 
     }
 }

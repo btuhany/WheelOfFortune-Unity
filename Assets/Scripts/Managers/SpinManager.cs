@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using System;
 using UnityEngine;
 using WheelOfFortune.Items;
 using WheelOfFortune.Panels;
@@ -20,14 +21,19 @@ namespace WheelOfFortune.Managers
         private const int _anglePerSlice = 45;
         #endregion
 
-        private void Update()
+        private void OnEnable()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                HandleSpinProcess();
-            }
+            _spinPanelController.OnButtonClickedSpin += HandleOnBtnClkSpin;
+        }
+        private void OnDisable()
+        {
+            _spinPanelController.OnButtonClickedSpin -= HandleOnBtnClkSpin;
         }
 
+        private void HandleOnBtnClkSpin()
+        {
+            HandleSpinProcess();
+        }
         //TODO: Try UniTaskVoid (fire and forget) instead of void.
         private async void HandleSpinProcess()
         {
@@ -48,8 +54,9 @@ namespace WheelOfFortune.Managers
 
             await _rewardsPanelController.GetReward(randomItem, _contentPanelController.transform);
 
-            _rewardsPanelController.UnhideExitButton();
+            _rewardsPanelController.ShowExitButton();
             _zonesPanelController.ScrollZones(1);
+            _wheelController.TryRandomizeItemsCounts();
 
             await _contentPanelController.HideContentAnimation();
             await _spinPanelController.ShowSpinPanelAnimation();
@@ -57,7 +64,7 @@ namespace WheelOfFortune.Managers
         private async UniTask HandleAtBomb()
         {
             _rewardsPanelController.HideExitButton(true);
-            await _bombPanelController.StartEnterAnim();
+            await _bombPanelController.PlayEnter();
         }
 
     }

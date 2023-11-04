@@ -58,10 +58,18 @@ namespace WheelOfFortune.Wheel
                 _itemImageRect.anchoredPosition = _bombPosOffset;
             }
         }
+        public void TryRandomizeContentCount()
+        {
+            if (!_content.IsRandomizeCount) return;
+            _content.SetRandomCount();
+            UpdateUIElements(_content);
+        }
         public void SetContent(WheelItem item)
         {
             _content = item;
-            _content.SetRandomCount();
+
+            if (_content.IsRandomizeCount)
+                _content.SetRandomCount();
 
             UpdateUIElements(_content);
         }

@@ -25,12 +25,15 @@ namespace WheelOfFortune.Items
         [SerializeField] private Sprite _spriteReward;
 
         [Header("Wheel Config")]
+        [SerializeField] private bool _isRandomizeCount = true;
+        [SerializeField] private int _count = 0;
         [SerializeField] private int _minCount = 1;
         [SerializeField] private int _maxCount;
 
-        private int _count = 0;
         public void SetRandomCount()
         {
+            if (!_isRandomizeCount) return;
+
             if (_type == ItemType.Reward)
                 _count = Random.Range(_minCount, _maxCount);
             else
@@ -44,6 +47,7 @@ namespace WheelOfFortune.Items
         public Sprite SpriteReward { get => _spriteReward; }
         public int Count { get => _count; }
         public bool IsGold { get => _isGold; }
+        public bool IsRandomizeCount { get => _isRandomizeCount; }
         #endregion
     }
 }

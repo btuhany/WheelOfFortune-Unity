@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace WheelOfFortune.Settings
 {
-    [CreateAssetMenu(menuName = "Wheel Of Fortune/Panels/Exit Panel Settings")]
+    [CreateAssetMenu(menuName = "Wheel Of Fortune/Panels/Bomb Panel Settings")]
     public class BombPanelSettings : ScriptableObject
     {
         [Header("Background Image Config")]

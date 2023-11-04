@@ -19,7 +19,7 @@ namespace WheelOfFortune.Panels
         [SerializeField] private RectTransform _prewZonesFilter;
 
         private List<TextMeshProUGUI> _zonesList = new List<TextMeshProUGUI>();
-        private enum ZoneType
+        public enum ZoneType
         {
             Normal,
             Safe,
@@ -29,6 +29,10 @@ namespace WheelOfFortune.Panels
         private Image _zoneBackgroundImg;
         private int _zoneCounter = 1;   
         private float _zoneRectWidth;
+
+        public event System.Action OnSafeZoneEvent;
+        public event System.Action OnSuperZoneEvent;
+        public event System.Action OnNormalZoneEvent;
         private void OnValidate()
         {
             if (_panelRect == null)
@@ -47,7 +51,6 @@ namespace WheelOfFortune.Panels
         private void InitializeScrollGrid()
         {
             _zoneRectWidth = _panelRect.rect.width / _settings.GroupMaxActiveSize;
-            Debug.Log(_zoneRectWidth);
             _zonesGridLayout.cellSize = new Vector2(_zoneRectWidth, _settings.GroupCellHeight);
             _zoneBackground.sizeDelta = new Vector2(_zoneRectWidth, _zoneBackground.sizeDelta.y);
             _zonesGridLayout.transform.localPosition = new Vector3(
@@ -138,6 +141,16 @@ namespace WheelOfFortune.Panels
             UpdateZoneTextColor();
 
             CurrentZoneBgChangeAnim();
+
+            ZoneType currentZoneType = GetZoneType(_zoneCounter);
+            if (currentZoneType == ZoneType.Safe)
+                OnSafeZoneEvent?.Invoke();
+            else if (currentZoneType == ZoneType.Super)
+                OnSuperZoneEvent?.Invoke();
+            else
+                OnNormalZoneEvent?.Invoke();
+                
+
         }
         public void ResetZones()
         {

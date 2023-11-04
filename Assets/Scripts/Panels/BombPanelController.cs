@@ -13,57 +13,57 @@ namespace WheelOfFortune.Panels
         [Header("Settings")]
         [SerializeField] private BombPanelSettings _settings;
         [Header("References")]
-        [SerializeField] private RectTransform _bombImgsHolder;
-        [SerializeField] private Image _flashImage;
-        [SerializeField] private Image _backgroundImage;
+        [SerializeField] private RectTransform _imgAnimsHolder;
+        [SerializeField] private Image _imgFlash;
+        [SerializeField] private Image _imgBackground;
         [SerializeField] private TextMeshProUGUI _textInfo;
-        [SerializeField] private TextMeshProUGUI _reviveGoldCostTxt;
+        [SerializeField] private TextMeshProUGUI _textReviveGold;
 
         //Give-up and revive buttons
         private Button[] _buttons = new Button[2];
         
         private RectTransform _rectTransform;
-        private Sequence _animBombHeartbeat;
+        private Sequence _animHeartbeat;
         private Tween _animFlashRotation;
 
-        public event System.Action OnGiveUpButtonClick;
-        public event System.Action OnReviveButtonClick;
-        public event System.Action OnEnter;
+        public event System.Action OnBtnClkGiveUp;
+        public event System.Action OnBtnClkRevive;
+        public event System.Action OnPanelEnter;
         private void OnValidate()
         {
             if (_rectTransform == null)
                 _rectTransform = GetComponent<RectTransform>();
-            if (_backgroundImage == null)
-                _backgroundImage = GetComponent<Image>();
+            if (_imgBackground == null)
+                _imgBackground = GetComponent<Image>();
             if (_buttons[0] == null || _buttons[1] == null)
                 _buttons = GetComponentsInChildren<Button>();
         }
         private void Awake()
         {
-            InitializeBombAnim();
-            InitializeFlashAnim();
-            SetUIElementsStart();
+            InitializeAnimHeartbeat();
+            InitializeAnimFlashRotation();
+            SetUIForAnimStart();
             _buttons[0].onClick.AddListener(HandleOnGiveUpBtnClk);
             _buttons[1].onClick.AddListener(HandleOnReviveBtnClk);
             this.gameObject.SetActive(false);
         }
-        private void InitializeBombAnim()
+        private void InitializeAnimHeartbeat()
         {
-            _animBombHeartbeat = DOTween.Sequence();
-            _animBombHeartbeat.Append(_bombImgsHolder.
+            _animHeartbeat = DOTween.Sequence();
+            _animHeartbeat.Append(_imgAnimsHolder.
                 DOPunchScale(_settings.BombAnimPunchScale, _settings.BombAnimTime))
                 .SetEase(_settings.BombAnimEase);
-            _animBombHeartbeat.AppendInterval(_settings.BombAnimPunchInterval);
-            _animBombHeartbeat.Append(_bombImgsHolder.
+            _animHeartbeat.AppendInterval(_settings.BombAnimPunchInterval);
+            _animHeartbeat.Append(_imgAnimsHolder.
                 DOPunchScale(_settings.BombAnimPunchScale, _settings.BombAnimTime))
                 .SetEase(_settings.BombAnimEase);
-            _animBombHeartbeat.AppendInterval(_settings.BombAnimLoopInterval);
-            _animBombHeartbeat.SetLoops(-1, LoopType.Restart);
-            _animBombHeartbeat.Pause();
+            _animHeartbeat.AppendInterval(_settings.BombAnimLoopInterval);
+            _animHeartbeat.SetLoops(-1, LoopType.Restart);
+            _animHeartbeat.Pause();
         }
-        private void InitializeFlashAnim()
+        private void InitializeAnimFlashRotation()
         {
-            _animFlashRotation = _flashImage.transform.DOLocalRotate(
+            _animFlashRotation = _imgFlash.transform.DOLocalRotate(
                 new Vector3(0f, 0f, -360f),
                 _settings.FlashRotationTimePeriod, RotateMode.FastBeyond360)
                 .SetRelative(true)
@@ -77,14 +77,14 @@ namespace WheelOfFortune.Panels
         }
         private void PlayHeartbeatAnim()
         {
-            _animBombHeartbeat.Play();
+            _animHeartbeat.Play();
         }
-        private void SetUIElementsStart()
+        private void SetUIForAnimStart()
         {
-            _backgroundImage.color = new Color(
-                _backgroundImage.color.r,
-                _backgroundImage.color.g,
-                _backgroundImage.color.b,
+            _imgBackground.color = new Color(
+                _imgBackground.color.r,
+                _imgBackground.color.g,
+                _imgBackground.color.b,
                 0.0f);
 
             _textInfo.color = new Color(
@@ -93,13 +93,13 @@ namespace WheelOfFortune.Panels
                 _textInfo.color.b,
                 0.0f);
 
-            _flashImage.color = new Color(
-                _flashImage.color.r,
-                _flashImage.color.g,
-                _flashImage.color.b,
+            _imgFlash.color = new Color(
+                _imgFlash.color.r,
+                _imgFlash.color.g,
+                _imgFlash.color.b,
                 0.0f);
 
-            _flashImage.transform.localScale = Vector3.zero;
+            _imgFlash.transform.localScale = Vector3.zero;
             
             foreach (Button button in _buttons)
                 button.transform.localScale = Vector3.zero;
@@ -107,44 +107,45 @@ namespace WheelOfFortune.Panels
         }
         private void HandleOnGiveUpBtnClk()
         {
-            OnGiveUpButtonClick?.Invoke();
+            OnBtnClkGiveUp?.Invoke();
         }
         private void HandleOnReviveBtnClk()
         {
-            OnReviveButtonClick?.Invoke();
+            OnBtnClkRevive?.Invoke();
         }
-        public async UniTask StartEnterAnim()
+        public async UniTask PlayEnter()
         {
-            OnEnter?.Invoke();
+            OnPanelEnter?.Invoke();
             this.gameObject.SetActive(true);
 
             List<UniTask> fadeAnims = new List<UniTask>();
 
             fadeAnims.Add(_textInfo.DOFade(1f, _settings.TextFadeTime).ToUniTask());
-            fadeAnims.Add(_backgroundImage.DOFade(1.0f, _settings.BackgroundFadeTime).ToUniTask());
-            fadeAnims.Add(_flashImage.DOFade(_settings.FlashImgAlphaVal, _settings.FlashImgFadeTime).ToUniTask());
-            fadeAnims.Add(_flashImage.transform
+            fadeAnims.Add(_imgBackground.DOFade(1.0f, _settings.BackgroundFadeTime).ToUniTask());
+            fadeAnims.Add(_imgFlash.DOFade(_settings.FlashImgAlphaVal, _settings.FlashImgFadeTime).ToUniTask());
+            fadeAnims.Add(_imgFlash.transform
                 .DOScale(Vector3.one, _settings.FlashImgScaleAnimTime)
                 .SetEase(_settings.FlashImgScaleAnimEase)
                 .OnComplete(PlayFlashAnim).ToUniTask());
 
             await UniTask.WhenAll(fadeAnims);
+
             PlayHeartbeatAnim();
+
             for (int i = 0; i < _buttons.Length; i++)
-            {
                 await _buttons[i].transform.DOScale(Vector3.one, _settings.ButtonAnimTime);
-            }
+            
         }
         public void ResetPanel()
         {
-            SetUIElementsStart();
+            SetUIForAnimStart();
             this.gameObject.SetActive(false);
         }
-        public void UpdateReviveBtn(bool isEnable, int goldCost)
+        public void SetButtonRevive(bool isEnable, int goldCost)
         {
             //Set revive button disabled.
             _buttons[1].gameObject.SetActive(isEnable);
-            _reviveGoldCostTxt.text = goldCost.ToString();
+            _textReviveGold.text = goldCost.ToString();
         }
     }
 }

@@ -1,5 +1,7 @@
 using DG.Tweening;
+using System.Runtime.CompilerServices;
 using UnityEngine;
+using WheelOfFortune.Items;
 
 namespace WheelOfFortune.Settings
 {
@@ -18,6 +20,8 @@ namespace WheelOfFortune.Settings
         [Header("Spin End Animation")]
         [SerializeField] private float _animSpinEndTime;
         [SerializeField] private Ease _animSpinEndEase;
+
+
 
         public float AnimSpinStartDegree { get => _animSpinStartDegree; }
         public float AnimSpinStartTime { get => _animSpinStartTime; }

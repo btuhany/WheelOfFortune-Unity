@@ -33,10 +33,15 @@ namespace WheelOfFortune.Settings
         [SerializeField] private Ease _spawnRePartScaleEase = Ease.OutElastic;
 
         [Header("Exit Button")]
-        [SerializeField] private float _exitBtnHideAnimTime = 0.2f;
-        [SerializeField] private float _exitBtnUnhideAnimTime = 0.2f;
-        [SerializeField] private Ease _exitBtnHideAnimEase = Ease.Flash;
-        [SerializeField] private Ease _exitBtnUnhideAnimEase = Ease.Flash;
+        [SerializeField] private float _btnExitHideAnimTime = 0.2f;
+        [SerializeField] private float _btnExitUnhideAnimTime = 0.2f;
+        [SerializeField] private Ease _btnExitHideAnimEase = Ease.Flash;
+        [SerializeField] private Ease _btnExitUnhideAnimEase = Ease.Flash;
+
+        [Header("At Exit")]
+        [SerializeField] private float _exitMoveAnimTime = 0.5f;
+        [SerializeField] private Ease _exitMoveAnimEase;
+
 
         public RewardController RewardsPanelContentPrefab { get => _rewardsPanelContentPrefab; }
         public Image RewardContentImage { get => _rewardContentImage; }
@@ -57,10 +62,12 @@ namespace WheelOfFortune.Settings
         public Vector2 SpawnMoveOffsetMinVector { get => _spawnMoveOffsetMinVector; }
         public Vector2 SpawnMoveOffsetMaxVector { get => _spawnMoveOffsetMaxVector; }
         public int GatherAnimStartDelay { get => _gatherAnimStartDelay; }
-        public float ExitBtnHideAnimTime { get => _exitBtnHideAnimTime; }
-        public float ExitBtnUnhideAnimTime { get => _exitBtnUnhideAnimTime; }
-        public Ease ExitBtnHideAnimEase { get => _exitBtnHideAnimEase; }
-        public Ease ExitBtnUnhideAnimEase { get => _exitBtnUnhideAnimEase; }
+        public float ExitBtnHideAnimTime { get => _btnExitHideAnimTime; }
+        public float ExitBtnUnhideAnimTime { get => _btnExitUnhideAnimTime; }
+        public Ease ExitBtnHideAnimEase { get => _btnExitHideAnimEase; }
+        public Ease ExitBtnUnhideAnimEase { get => _btnExitUnhideAnimEase; }
         public Vector3 CollectionTargetScale { get => _collectionTargetScale; }
+        public float ExitMoveAnimTime { get => _exitMoveAnimTime; }
+        public Ease ExitMoveAnimEase { get => _exitMoveAnimEase; }
     }
 }

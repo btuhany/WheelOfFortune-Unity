@@ -11,7 +11,9 @@ namespace WheelOfFortune.Wheel
         [SerializeField] private WheelSettings _settings;
 
         [Header("Wheel Slice Contents")]
-        [SerializeField] private WheelItem[] _sliceContents;
+        [SerializeField] private WheelItem[] _normalZoneSliceContents;
+        [SerializeField] private WheelItem[] _safeZoneSliceContents;
+        [SerializeField] private WheelItem[] _superZoneSliceContents;
 
         #region Component References
         private RectTransform _rectTransform;
@@ -23,7 +25,6 @@ namespace WheelOfFortune.Wheel
         #endregion
 
         private WheelSliceController[] _sliceControllers = new WheelSliceController[8];
-
 
         [ContextMenu("Update Contents")]
         private void UpdateSliceContents()
@@ -50,9 +51,16 @@ namespace WheelOfFortune.Wheel
             {
                 _sliceControllers[i].SetSliceIndex(i);
 
-                if (i < _sliceContents.Length && _sliceContents[i] != null)
-                    _sliceControllers[i].SetContent(_sliceContents[i]);
+                if (i < _normalZoneSliceContents.Length && _normalZoneSliceContents[i] != null)
+                    _sliceControllers[i].SetContent(_normalZoneSliceContents[i]);
             }
+        }
+        public void TryRandomizeItemsCounts()
+        {
+            for (int i = 0; i < _sliceControllers.Length; i++)
+            {
+                _sliceControllers[i].TryRandomizeContentCount();
+            }            
         }
         public WheelSliceController SelectRandomSlice()
         {
@@ -98,22 +106,5 @@ namespace WheelOfFortune.Wheel
             //    _wheelSpinPanelRect.DOScaleX(1, _settings.AnimContentInfoStartTime / 2).SetEase(Ease.Flash)
             //    );
         }
-        
-        //private void SetSlicePositions()
-        //{
-        //    float anglePerSlice = Mathf.Deg2Rad * _fullRotationDegree / _slices.Length ;
-        //    for (int i = 0; i < _slices.Length; i++)
-        //    {
-        //        Image uiSliceImage = Instantiate(_uiSliceImagePrefab, _rectTransform.position, _rectTransform.rotation, this.transform);
-        //        RectTransform uiSliceRectTransform = uiSliceImage.GetComponent<RectTransform>();
-        //        float x = _wheelRadius * Mathf.Sin(anglePerSlice * i);
-        //        float y = _wheelRadius * Mathf.Cos(anglePerSlice * i);
-        //        uiSliceRectTransform.anchoredPosition = new Vector2(x, y); 
-        //        uiSliceImage.transform.Rotate(new Vector3(0f, 0f, -i * anglePerSlice * Mathf.Rad2Deg));
-        //        _slices[i].WheelIndex = i;
-        //        _slices[i].SetSlice(uiSliceImage);
-        //        _sliceList.Add(uiSliceImage.gameObject);
-        //    }
-        //}
     }
 }
