@@ -24,10 +24,12 @@ namespace WheelOfFortune.Managers
         private void OnEnable()
         {
             _spinPanelController.OnButtonClickedSpin += HandleOnBtnClkSpin;
+            _zonesPanelController.OnZoneChangedEvent += _wheelController.HandleOnZoneChanged;
         }
         private void OnDisable()
         {
             _spinPanelController.OnButtonClickedSpin -= HandleOnBtnClkSpin;
+            _zonesPanelController.OnZoneChangedEvent -= _wheelController.HandleOnZoneChanged;
         }
 
         private void HandleOnBtnClkSpin()

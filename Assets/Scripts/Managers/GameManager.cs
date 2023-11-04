@@ -21,11 +21,8 @@ namespace WheelOfFortune.Managers
             _rewardsPanelController.OnButtonClickExit += HandleOnBtnClkExit;
             _exitPanelController.OnBtnClkExitYes += HandleOnExitYes;
             _exitPanelController.OnBtnClkExitNo += HandleOnExitNo;
-            _zonesPanelController.OnSafeZoneEvent += HandleOnSafeZone;
-            _zonesPanelController.OnSuperZoneEvent += HandleOnSuperZone;
-            _zonesPanelController.OnNormalZoneEvent += HandleOnNormalZone;
+            _zonesPanelController.OnZoneChangedEvent += HandleOnZoneChanged;
         }
-
         private void OnDisable()
         {
             _bombPanelController.OnBtnClkGiveUp -= HandleOnGiveUp;
@@ -34,9 +31,11 @@ namespace WheelOfFortune.Managers
             _rewardsPanelController.OnButtonClickExit -= HandleOnBtnClkExit;
             _exitPanelController.OnBtnClkExitYes -= HandleOnExitYes;
             _exitPanelController.OnBtnClkExitNo -= HandleOnExitNo;
-            _zonesPanelController.OnSafeZoneEvent -= HandleOnSafeZone;
-            _zonesPanelController.OnSuperZoneEvent -= HandleOnSuperZone;
-            _zonesPanelController.OnNormalZoneEvent -= HandleOnNormalZone;
+            _zonesPanelController.OnZoneChangedEvent -= HandleOnZoneChanged;
+        }
+        private void Start()
+        {
+            _zonesPanelController.InvokeZoneChangeEvent();
         }
         private void RestartGame()
         {
@@ -77,17 +76,9 @@ namespace WheelOfFortune.Managers
             Debug.Log("Quit!");
             Application.Quit();
         }
-        private void HandleOnSafeZone()
+        private void HandleOnZoneChanged(ZonesPanelController.ZoneType newZone)
         {
-            _spinPanelController.SetSprites(ZonesPanelController.ZoneType.Safe);
-        }
-        private void HandleOnSuperZone()
-        {
-            _spinPanelController.SetSprites(ZonesPanelController.ZoneType.Super);
-        }
-        private void HandleOnNormalZone()
-        {
-            _spinPanelController.SetSprites(ZonesPanelController.ZoneType.Normal);
+            _spinPanelController.SetSprites(newZone);
         }
     }
 }

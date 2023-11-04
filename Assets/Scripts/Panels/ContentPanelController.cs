@@ -18,7 +18,7 @@ namespace WheelOfFortune.Panels
         [SerializeField] private TextMeshProUGUI _contentHeaderText;
         [SerializeField] private TextMeshProUGUI _contentCountText;
 
-        private RectTransform _rectTransform;
+        [SerializeField] private RectTransform _rectTransform;
         private void Awake()
         {
             _rectTransform.localScale = new Vector3(0f, 1f, 1f);

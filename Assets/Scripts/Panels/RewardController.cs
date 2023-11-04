@@ -13,7 +13,7 @@ namespace WheelOfFortune.Panels
 
         public Image ItemImage { get => _itemImage; }
 
-        private void Awake()
+        private void OnValidate()
         {
             if (_itemImage == null)
                 _itemImage = GetComponentInChildren<Image>();

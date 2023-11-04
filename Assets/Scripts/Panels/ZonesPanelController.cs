@@ -26,13 +26,11 @@ namespace WheelOfFortune.Panels
             Super
         }
         private Vector3 _gridHolderInitialPos;
-        private Image _zoneBackgroundImg;
+        [SerializeField] private Image _zoneBackgroundImg;
         private int _zoneCounter = 1;   
         private float _zoneRectWidth;
 
-        public event System.Action OnSafeZoneEvent;
-        public event System.Action OnSuperZoneEvent;
-        public event System.Action OnNormalZoneEvent;
+        public event System.Action<ZoneType> OnZoneChangedEvent;
         private void OnValidate()
         {
             if (_panelRect == null)
@@ -130,6 +128,14 @@ namespace WheelOfFortune.Panels
             if (currentType == ZoneType.Normal)
                 _zonesList[_zoneCounter - 1].color = Color.black;
         }
+        private void InvokeCurrentZoneEvent()
+        {
+            ZoneType prewZoneType = GetZoneType(_zoneCounter - 1);
+            ZoneType currentZoneType = GetZoneType(_zoneCounter);
+
+            if (prewZoneType != currentZoneType)
+                OnZoneChangedEvent?.Invoke(currentZoneType);
+        }
         public void ScrollZones(int value)
         {
             _gridHolderRect.DOLocalMove(
@@ -142,15 +148,7 @@ namespace WheelOfFortune.Panels
 
             CurrentZoneBgChangeAnim();
 
-            ZoneType currentZoneType = GetZoneType(_zoneCounter);
-            if (currentZoneType == ZoneType.Safe)
-                OnSafeZoneEvent?.Invoke();
-            else if (currentZoneType == ZoneType.Super)
-                OnSuperZoneEvent?.Invoke();
-            else
-                OnNormalZoneEvent?.Invoke();
-                
-
+            InvokeCurrentZoneEvent();
         }
         public void ResetZones()
         {
@@ -162,6 +160,10 @@ namespace WheelOfFortune.Panels
             _zoneCounter = 1;
             AddZones(_settings.GroupMaxActiveSize * _settings.GroupsAtStart);
             _gridHolderRect.anchoredPosition = _gridHolderInitialPos;
+        }
+        public void InvokeZoneChangeEvent()
+        {
+            OnZoneChangedEvent?.Invoke(GetZoneType(_zoneCounter));
         }
     }
 }

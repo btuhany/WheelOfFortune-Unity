@@ -11,9 +11,9 @@ namespace WheelOfFortune.Wheel
         private WheelItem _content;
         private int _contentCount;
 
-        private Image _itemImage;
-        private RectTransform _itemImageRect;
-        private TextMeshProUGUI _itemCountText;
+        [SerializeField] private Image _itemImage;
+        [SerializeField] private RectTransform _itemImageRect;
+        [SerializeField] private TextMeshProUGUI _itemCountText;
 
         //For showing the bomb ui image properly.
         //Bomb ui image has an 512x512 image dimensions.

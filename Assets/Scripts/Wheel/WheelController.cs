@@ -2,6 +2,7 @@ using DG.Tweening;
 using UnityEngine;
 using WheelOfFortune.Items;
 using WheelOfFortune.Settings;
+using WheelOfFortune.Panels;
 
 namespace WheelOfFortune.Wheel
 {
@@ -16,7 +17,7 @@ namespace WheelOfFortune.Wheel
         [SerializeField] private WheelItem[] _superZoneSliceContents;
 
         #region Component References
-        private RectTransform _rectTransform;
+        [SerializeField] private RectTransform _rectTransform;
         #endregion
 
         #region Constants
@@ -26,11 +27,23 @@ namespace WheelOfFortune.Wheel
 
         private WheelSliceController[] _sliceControllers = new WheelSliceController[8];
 
-        [ContextMenu("Update Contents")]
-        private void UpdateSliceContents()
+        [ContextMenu("Update Slice Normal Zone Contents")]
+        private void UpdateSliceContentsNormalZone()
         {
             _sliceControllers = GetComponentsInChildren<WheelSliceController>();
-            SetWheelSliceContents();
+            SetWheelSliceContents(_normalZoneSliceContents);
+        }
+        [ContextMenu("Update Slice Safe Zone Contents")]
+        private void UpdateSliceContentsSafeZone()
+        {
+            _sliceControllers = GetComponentsInChildren<WheelSliceController>();
+            SetWheelSliceContents(_safeZoneSliceContents);
+        }
+        [ContextMenu("Update Slice Super Zone Contents")]
+        private void UpdateSliceContentsSuperZone()
+        {
+            _sliceControllers = GetComponentsInChildren<WheelSliceController>();
+            SetWheelSliceContents(_superZoneSliceContents);
         }
         private void OnValidate()
         {
@@ -43,9 +56,9 @@ namespace WheelOfFortune.Wheel
         }
         private void Start()
         {
-            SetWheelSliceContents();
+            //SetWheelSliceContents(_normalZoneSliceContents);
         }
-        private void SetWheelSliceContents()
+        private void SetWheelSliceContents(WheelItem[] items)
         {
             for (int i = 0; i < _sliceControllers.Length; i++)
             {
@@ -53,6 +66,24 @@ namespace WheelOfFortune.Wheel
 
                 if (i < _normalZoneSliceContents.Length && _normalZoneSliceContents[i] != null)
                     _sliceControllers[i].SetContent(_normalZoneSliceContents[i]);
+            }
+        }
+        public void HandleOnZoneChanged(ZonesPanelController.ZoneType zoneType)
+        {
+            WheelItem[] items;
+            if (zoneType == ZonesPanelController.ZoneType.Normal)
+                items = _normalZoneSliceContents;
+            else if (zoneType == ZonesPanelController.ZoneType.Safe)
+                items = _safeZoneSliceContents;
+            else
+                items = _superZoneSliceContents;
+
+            for (int i = 0; i < _sliceControllers.Length; i++)
+            {
+                _sliceControllers[i].SetSliceIndex(i);
+
+                if (i < items.Length && items[i] != null)
+                    _sliceControllers[i].SetContent(items[i]);
             }
         }
         public void TryRandomizeItemsCounts()

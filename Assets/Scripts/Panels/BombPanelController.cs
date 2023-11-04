@@ -20,9 +20,9 @@ namespace WheelOfFortune.Panels
         [SerializeField] private TextMeshProUGUI _textReviveGold;
 
         //Give-up and revive buttons
-        private Button[] _buttons = new Button[2];
+        [SerializeField] private Button[] _buttons = new Button[2];
         
-        private RectTransform _rectTransform;
+        [SerializeField] private RectTransform _rectTransform;
         private Sequence _animHeartbeat;
         private Tween _animFlashRotation;
 

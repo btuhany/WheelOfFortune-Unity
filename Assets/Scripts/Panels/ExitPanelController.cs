@@ -15,9 +15,9 @@ namespace WheelOfFortune.Panels
 
         [Header("References")]
         [SerializeField] private Image _backgroundImg;
-        private TextMeshProUGUI _textQuestion;
-        private Button[] _buttons = new Button[2];
-        private RectTransform _rectTransform;
+        [SerializeField] private TextMeshProUGUI _textQuestion;
+        [SerializeField] private Button[] _buttons = new Button[2];
+        [SerializeField] private RectTransform _rectTransform;
         
         public RectTransform RectTransform { get => _rectTransform; }
         public event System.Action OnBtnClkExitNo;

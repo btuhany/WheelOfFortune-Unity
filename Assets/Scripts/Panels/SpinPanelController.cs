@@ -17,8 +17,8 @@ namespace WheelOfFortune.Panels
         [SerializeField] private Image _imageWheelIndicator;
         [SerializeField] private TextMeshProUGUI _textHeaderSpin;
 
-        private RectTransform _rectTransform;
-        private Button _buttonSpin;
+        [SerializeField] private RectTransform _rectTransform;
+        [SerializeField] private Button _buttonSpin;
         public event System.Action OnButtonClickedSpin;
         private ZonesPanelController.ZoneType _currentZoneType;
         private void OnValidate()
@@ -30,6 +30,10 @@ namespace WheelOfFortune.Panels
         }
         private void Awake()
         {
+            if (_rectTransform == null)
+                _rectTransform = GetComponent<RectTransform>();
+            if (_buttonSpin == null)
+                _buttonSpin = GetComponentInChildren<Button>();
             _buttonSpin.onClick.AddListener(HandleOnButtonSpin);
         }
         private void HandleOnButtonSpin()
