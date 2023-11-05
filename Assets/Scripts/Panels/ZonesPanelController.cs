@@ -54,6 +54,9 @@ namespace WheelOfFortune.Panels
             _gridHolderInitialPos = _gridHolderRect.anchoredPosition;
             UpdateZoneTextColor();
         }
+
+        //It's better to control positions of ui elements via script,
+        //because max zone count in zone panel is a value.
         private void InitializeScrollGrid()
         {
             _zoneRectWidth = _panelRect.rect.width / _settings.GroupMaxActiveSize;
@@ -65,7 +68,7 @@ namespace WheelOfFortune.Panels
                 _zonesGridLayout.transform.localPosition.z);
             _prewZonesFilter.sizeDelta = new Vector2(
                 _zoneRectWidth * (_settings.GroupMaxActiveSize - 1) * 0.5f,
-                _settings.GroupCellHeight);
+                _prewZonesFilter.sizeDelta.y);
         }
         private void AddZones(int value)
         {

@@ -14,7 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: SMG
   _type: 0
+  _isGold: 0
   _spriteWheel: {fileID: 21300000, guid: 3b071ebac78aa4e47810a1f7453f60d5, type: 3}
   _spriteReward: {fileID: 21300000, guid: e032c925c28f4e84c98256f38dd29bcb, type: 3}
-  _minCount: 2
+  _doRandomizeCount: 1
+  _count: 9
+  _minCount: 1
   _maxCount: 10

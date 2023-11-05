@@ -25,10 +25,10 @@ namespace WheelOfFortune.Settings
         [SerializeField] private float _animIndicatorStartTime = 0.2f;
         [SerializeField] private float _animIndicatorRotateTimePerLoop = 0.1f;
         [SerializeField] private float _animIndicatorEndTime = 0.4f;
-        [SerializeField] private float _animIndicatorEndWaitTime = 0.5f;
         [SerializeField] private float _animIndicatorDegreeZ = 60f;
         [SerializeField] private float _animIndicatorEndDegreeZ = 30f;
         [SerializeField] private float _animIndicatorStartDegreeZ = 30f;
+        [SerializeField] private Ease _animIndicatorStopEase = Ease.OutElastic;
 
         public float AnimSpinStartDegree { get => _animSpinStartDegree; }
         public float AnimSpinStartTime { get => _animSpinStartTime; }
@@ -45,9 +45,9 @@ namespace WheelOfFortune.Settings
         public float AnimIndicatorStartTime { get => _animIndicatorStartTime; }
         public float AnimIndicatorRotateTimePerLoop { get => _animIndicatorRotateTimePerLoop; }
         public float AnimIndicatorEndTime { get => _animIndicatorEndTime; }
-        public float AnimIndicatorEndWaitTime { get => _animIndicatorEndWaitTime; }
         public float AnimIndicatorEndDegreeZ { get => _animIndicatorEndDegreeZ; }
         public float AnimIndicatorDegreeZ { get => _animIndicatorDegreeZ; }
         public float AnimIndicatorStartDegreeZ { get => _animIndicatorStartDegreeZ; }
+        public Ease AnimIndicatorStopEase { get => _animIndicatorStopEase; }
     }
 }

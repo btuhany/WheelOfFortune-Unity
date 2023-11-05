@@ -14,7 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Super Chest
   _type: 0
+  _isGold: 0
   _spriteWheel: {fileID: 21300000, guid: 98a5265296fdc154eb778675fd5c2938, type: 3}
   _spriteReward: {fileID: 21300000, guid: 98a5265296fdc154eb778675fd5c2938, type: 3}
+  _doRandomizeCount: 1
+  _count: 1
   _minCount: 1
   _maxCount: 5

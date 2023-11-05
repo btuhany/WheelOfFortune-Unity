@@ -13,6 +13,7 @@ namespace WheelOfFortune.Settings
         [Header("Hide Spin Panel Animation")]
         [SerializeField] private float _animHideSpinPanelTime = 1f;
         [SerializeField] private Ease _animHideSpinPanelEase = Ease.Linear;
+        [Tooltip("Milliseconds")][SerializeField] private int _delayHidePanel = 1000;
 
         [Header("Spin & Indicator Sprites")]
         [Header("Safe Zone")]
@@ -52,5 +53,6 @@ namespace WheelOfFortune.Settings
         public Color ColorTextSafeZone { get => _colorTextSafeZone; }
         public Color ColorTextSuperZone { get => _colorTextSuperZone; }
         public Color ColorTextNormalZone { get => _colorTextNormalZone; }
+        public int DelayHidePanel { get => _delayHidePanel; }
     }
 }

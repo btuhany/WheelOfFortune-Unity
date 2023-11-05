@@ -53,6 +53,7 @@ namespace WheelOfFortune.Panels
         }
         public async UniTask HideSpinPanelAnimation()
         {
+            await UniTask.Delay(_settings.DelayHidePanel);
             await _rectTransform.DOScaleX(
                 _settings.SpinPanelHidedScaleX,
                 _settings.AnimHideSpinPanelTime)

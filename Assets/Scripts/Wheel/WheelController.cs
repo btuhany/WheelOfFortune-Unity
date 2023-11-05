@@ -80,17 +80,16 @@ namespace WheelOfFortune.Wheel
         {
             Sequence indicatorSequence = DOTween.Sequence();
             float totalTime = _settings.AnimSpinTime * _settings.AnimSpinLoopCount;
-            int loop = (int)(totalTime / _settings.AnimIndicatorRotateTimePerLoop);
-            indicatorSequence.Append(_rectSpinIndicator.DOLocalRotate(new Vector3(0, 0, _settings.AnimIndicatorDegreeZ), _settings.AnimIndicatorRotateTimePerLoop).SetLoops(loop));
+            int loopCount = (int)(totalTime / _settings.AnimIndicatorRotateTimePerLoop);
+            indicatorSequence.Append(_rectSpinIndicator.DOLocalRotate(new Vector3(0, 0, _settings.AnimIndicatorDegreeZ), _settings.AnimIndicatorRotateTimePerLoop).SetLoops(loopCount));
         }
-        private void PlayIndicatorStopAnim(float stopTime)
+        private void PlayIndicatorStopAnim()
         {
             Sequence indicatorStartSequence = DOTween.Sequence();
-            int loop = (int)((stopTime - _settings.AnimIndicatorEndWaitTime) / _settings.AnimIndicatorEndTime);
             indicatorStartSequence.Append(_rectSpinIndicator.DOLocalRotate(new Vector3(0, 0, -_settings.AnimIndicatorEndDegreeZ), _settings.AnimIndicatorEndTime / 2));
             indicatorStartSequence.Append(_rectSpinIndicator.DOLocalRotate(new Vector3(0, 0, _settings.AnimIndicatorEndDegreeZ), _settings.AnimIndicatorEndTime / 2));
-            indicatorStartSequence.SetLoops(loop);
-            indicatorStartSequence.OnComplete(() => _rectSpinIndicator.DOLocalRotate(Vector3.zero, _settings.AnimIndicatorEndTime / 4));
+            indicatorStartSequence.Append(_rectSpinIndicator.DOLocalRotate(Vector3.zero, _settings.AnimIndicatorEndTime)
+                .SetEase(_settings.AnimIndicatorStopEase));
         }
         public void HandleOnZoneChanged(ZonesPanelController.ZoneType zoneType)
         {
@@ -150,7 +149,7 @@ namespace WheelOfFortune.Wheel
 
 
             float spinEndTime = _settings.AnimSpinEndTime * ((_fullRotationDegree - angleDifference) / _fullRotationDegree);
-            spinSequence.AppendCallback(() => PlayIndicatorStopAnim(spinEndTime));
+            spinSequence.AppendCallback(PlayIndicatorStopAnim);
 
             //Spin end animation append
             spinSequence.Append(

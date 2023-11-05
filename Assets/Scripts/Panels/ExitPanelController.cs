@@ -17,8 +17,11 @@ namespace WheelOfFortune.Panels
         [SerializeField] private TextMeshProUGUI _textQuestion;
         [SerializeField] private Button[] _buttons = new Button[2];
         [SerializeField] private RectTransform _rectTransform;
+        [SerializeField] private RectTransform _holderEndRewards;
         
         public RectTransform RectTransform { get => _rectTransform; }
+        public RectTransform HolderEndRewards { get => _holderEndRewards; }
+
         public event System.Action OnBtnClkExitNo;
         public event System.Action OnBtnClkExitYes;
 

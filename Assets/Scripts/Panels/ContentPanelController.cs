@@ -41,7 +41,7 @@ namespace WheelOfFortune.Panels
         private void SetContent(WheelItem item)
         {
             _contentImage.sprite = item.SpriteWheel;
-            _contentHeaderText.text = item.Name;
+            _contentHeaderText.text = item.ItemName;
             _contentCountText.text = "x" + item.Count.ToString();
         }
         public async UniTask ShowContentAnimation(WheelItem content)

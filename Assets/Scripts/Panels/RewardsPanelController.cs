@@ -22,8 +22,8 @@ namespace WheelOfFortune.Panels
         [SerializeField] private RectTransform _rectMask;
         [SerializeField] private GridLayoutGroup _gridLayout;
 
-        private Dictionary<WheelItem, RewardController> _rewardsDictionary 
-            = new Dictionary<WheelItem, RewardController>();      
+        private Dictionary<WheelItem, RewardController> _rewardsDictionary
+            = new Dictionary<WheelItem, RewardController>();
         private Tweener _tweenCollect;
         private Vector2 _rectMaskMaxOffset;
         private int _totalGold = 0;
@@ -31,6 +31,8 @@ namespace WheelOfFortune.Panels
         private float _initialRectSizeDeltaY;
         private float _initalRectAnchoredPosY;
         private Vector3 _initalRectAnchoredPos;
+        private Vector2 _initalAnchorMin;
+        private Vector2 _initalAnchorMax;
 
         public event System.Action OnButtonClickExit;
 
@@ -49,6 +51,8 @@ namespace WheelOfFortune.Panels
             _initialRectSizeDeltaY = _rectTransform.sizeDelta.y;
             _initalRectAnchoredPos = _rectTransform.anchoredPosition;
             _initalRectAnchoredPosY = _initalRectAnchoredPos.y;
+            _initalAnchorMin = _rectTransform.anchorMin;
+            _initalAnchorMax = _rectTransform.anchorMax;
         }
 
         //To use Tweeners in async methods, they should be called from sync methods.
@@ -110,7 +114,7 @@ namespace WheelOfFortune.Panels
             Sprite rewardSprite = item.SpriteReward;
             int rewardPartCount;
             int rewardAddCountPerPart;
-            
+
             if (item.Count > _settings.GatherMaxRewPart)
             {
                 rewardAddCountPerPart = item.Count;
@@ -171,6 +175,19 @@ namespace WheelOfFortune.Panels
             exitTasks.Add(_rectTransform.DOAnchorPosY(anchorPosY, 0.2f).ToUniTask());
             return exitTasks;
         }
+        private bool IsItemContained(WheelItem item, out RewardController tempReward)
+        {
+            tempReward = null;
+            foreach (RewardController reward in _rewardsDictionary.Values)
+            {
+                if (reward.ItemImage.sprite == item.SpriteReward)
+                {
+                    tempReward = reward;
+                    break;
+                }
+            }
+            return tempReward != null;
+        }
         public void HideExitButton(bool handleRewardsPos = false)
         {
             _buttonExit.enabled = false;
@@ -204,9 +221,9 @@ namespace WheelOfFortune.Panels
             RewardController rewardContent;
 
             //Check if item is already registered to the dictionary.
-            if (_rewardsDictionary.ContainsKey(item))
+            if (IsItemContained(item, out RewardController reward))
             {
-                rewardContent = _rewardsDictionary[item];
+                rewardContent = reward;
             }
             else
             {
@@ -250,11 +267,18 @@ namespace WheelOfFortune.Panels
         {
             HideExitButton(true);
             _gridLayout.constraintCount = 2;
-            await _rectTransform.DOAnchorPos(
-                Vector3.right * 0.5f * (targetRectTransfrom.rect.width - _rectTransform.sizeDelta.x),
+            List<UniTask> animTasksAnchor = new List<UniTask>();
+            animTasksAnchor.Add(_rectTransform.DOAnchorMax(
+               targetRectTransfrom.anchorMax,
                 _settings.ExitMoveAnimTime)
                 .SetEase(_settings.ExitMoveAnimEase)
-                .ToUniTask();
+                .ToUniTask());
+            animTasksAnchor.Add(_rectTransform.DOAnchorMin(
+              targetRectTransfrom.anchorMin,
+                _settings.ExitMoveAnimTime)
+                .SetEase(_settings.ExitMoveAnimEase)
+                .ToUniTask());
+            await UniTask.WhenAll(animTasksAnchor);
             await UniTask.WhenAll(ShowEndRewardsTasks(targetRectTransfrom.rect.height / 2, targetRectTransfrom.rect.height / 8));
         }
         public async UniTask UnshowEndRewards(RectTransform targetRectTransfrom)
@@ -262,15 +286,20 @@ namespace WheelOfFortune.Panels
             _gridLayout.constraintCount = 1;
             _rectMask.offsetMin = Vector2.zero;
             await UniTask.WhenAll(ShowEndRewardsTasks(_initialRectSizeDeltaY, _initalRectAnchoredPosY));
-            await _rectTransform.DOAnchorPos(
-                _initalRectAnchoredPos,
+            List<UniTask> animTasksAnchor = new List<UniTask>();
+            animTasksAnchor.Add(_rectTransform.DOAnchorMax(
+                _initalAnchorMax,
                 _settings.ExitMoveAnimTime)
                 .SetEase(_settings.ExitMoveAnimEase)
-                .ToUniTask();
+                .ToUniTask());
+            animTasksAnchor.Add(_rectTransform.DOAnchorMin(
+                _initalAnchorMin,
+                _settings.ExitMoveAnimTime)
+                .SetEase(_settings.ExitMoveAnimEase)
+                .ToUniTask());
+            await UniTask.WhenAll(animTasksAnchor);
             ShowExitButton(true);
         }
-
-
     }
 }
 

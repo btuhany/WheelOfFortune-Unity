@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50bb4c7a871fe314abc0c3a87e794d6d, type: 3}
   m_Name: GameSettings_Default
   m_EditorClassIdentifier: 
-  _reviveGoldCost: 25
+  _reviveGoldCost: 15

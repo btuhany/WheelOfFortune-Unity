@@ -50,7 +50,7 @@ namespace WheelOfFortune.Managers
         private async void HandleOnBtnClkExit()
         {
             await _exitPanelController.PlayEnterBackground();
-            await _rewardsPanelController.ShowEndRewards(_exitPanelController.RectTransform);
+            await _rewardsPanelController.ShowEndRewards(_exitPanelController.HolderEndRewards);
             await UniTask.WhenAll(_exitPanelController.PlayEnterQuestionButtons());
         }
         private void HandleOnPanelEnterBomb()
@@ -68,6 +68,9 @@ namespace WheelOfFortune.Managers
         {
             _bombPanelController.ResetPanel();
             _rewardsPanelController.HandleOnRevived(_settings.ReviveGoldCost);
+            _rewardsPanelController.ShowExitButton();
+            _zonesPanelController.ScrollZones(1);
+            _spinPanelController.WheelController.TryRandomizeItemsCounts();
         }
         private async void HandleOnExitNo()
         {

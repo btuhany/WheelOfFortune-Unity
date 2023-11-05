@@ -6,7 +6,7 @@ SpriteAtlas:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SpriteAtlasPanels
+  m_Name: SpriteAtlas_Panels
   m_EditorData:
     serializedVersion: 2
     textureSettings:
@@ -38,39 +38,33 @@ SpriteAtlas:
     - {fileID: 2800000, guid: 2492c9f5f3c374d4db4d059e3c495963, type: 3}
     - {fileID: 2800000, guid: bb81d2f4ff9d45b45a9bf844dd092695, type: 3}
     - {fileID: 2800000, guid: 200b9c77b4977f64090e5d398c5d5e9b, type: 3}
-    - {fileID: 2800000, guid: 0b8dd822b879ac04caa8b29afee2e2dc, type: 3}
-    - {fileID: 2800000, guid: 01599459c905a81439d4a3d8b12c0277, type: 3}
-    - {fileID: 2800000, guid: 2913fbfab0381524eac1c04f4fad9afe, type: 3}
     - {fileID: 2800000, guid: 6cf4d9e67966a5d47834efd7e07724f0, type: 3}
     - {fileID: 2800000, guid: 20992dfeefe4cf84884a8ab8ba46f324, type: 3}
+    - {fileID: 2800000, guid: 2913fbfab0381524eac1c04f4fad9afe, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
-  - {fileID: 21300000, guid: 0b8dd822b879ac04caa8b29afee2e2dc, type: 3}
   - {fileID: 21300000, guid: bb81d2f4ff9d45b45a9bf844dd092695, type: 3}
   - {fileID: 21300000, guid: 2492c9f5f3c374d4db4d059e3c495963, type: 3}
   - {fileID: 21300000, guid: 6cf4d9e67966a5d47834efd7e07724f0, type: 3}
   - {fileID: 21300000, guid: 200b9c77b4977f64090e5d398c5d5e9b, type: 3}
-  - {fileID: 21300000, guid: 01599459c905a81439d4a3d8b12c0277, type: 3}
   - {fileID: 21300000, guid: 2913fbfab0381524eac1c04f4fad9afe, type: 3}
   - {fileID: 21300000, guid: 2c72744ca4563784f94d904ff5a2303f, type: 3}
   - {fileID: 21300000, guid: c4bfabfce9adda042ac5cf34b3468737, type: 3}
   - {fileID: 21300000, guid: 4586196d5673eb3468515db1b3d25b06, type: 3}
   - {fileID: 21300000, guid: 20992dfeefe4cf84884a8ab8ba46f324, type: 3}
   m_PackedSpriteNamesToIndex:
-  - star_flash_alpha
   - ui_card_frame_gardient
   - ui_card_frame_12px_neutral
   - ui_card_panel_zone_super
   - ui_card_panel_zone_bg
-  - ui_card_icon_death
   - ui_card_panel_zone_super3
   - UI_button_grey_standard
   - UI_button_orange_standard
   - ui_card_frame_4px_zone
   - ui_card_panel_zone_white
   m_RenderDataMap: {}
-  m_Tag: SpriteAtlasPanels
+  m_Tag: SpriteAtlas_Panels
   m_IsVariant: 0
