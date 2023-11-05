@@ -10,12 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6fb5f6dc302210448f1c17bf89f54d5, type: 3}
-  m_Name: WheelItem_Bomb
+  m_Name: WheelItem_SMG_Tier_3_4
   m_EditorClassIdentifier: 
-  _name: Bomb
-  _type: 1
+  _name: SMG
+  _type: 0
   _isGold: 0
-  _spriteWheel: {fileID: 21300000, guid: 01599459c905a81439d4a3d8b12c0277, type: 3}
-  _spriteReward: {fileID: 21300000, guid: 01599459c905a81439d4a3d8b12c0277, type: 3}
-  _minCount: 0
-  _maxCount: 0
+  _spriteWheel: {fileID: 21300000, guid: 3b071ebac78aa4e47810a1f7453f60d5, type: 3}
+  _spriteReward: {fileID: 21300000, guid: e032c925c28f4e84c98256f38dd29bcb, type: 3}
+  _doRandomizeCount: 1
+  _count: 9
+  _minCount: 5
+  _maxCount: 10

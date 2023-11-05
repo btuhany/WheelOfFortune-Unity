@@ -10,14 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c49210660d4b21041a5c085b6f84c988, type: 3}
-  m_Name: ItemGroup_NormalZone
+  m_Name: ItemGroup_Tier1
   m_EditorClassIdentifier: 
   _items:
-  - {fileID: 11400000, guid: b2d4fa655bc20ef40a946a9e5d641f86, type: 2}
-  - {fileID: 11400000, guid: 1319cd4b43d319045b608e1066601ddf, type: 2}
-  - {fileID: 11400000, guid: c3c21e7803f55274caa142a6bc4666f8, type: 2}
-  - {fileID: 11400000, guid: ae0162d9a6f53e140af6238957116882, type: 2}
-  - {fileID: 11400000, guid: 7345a528fe82d644c95dde7df13a0aad, type: 2}
-  - {fileID: 11400000, guid: c3c21e7803f55274caa142a6bc4666f8, type: 2}
-  - {fileID: 11400000, guid: 2a1b44eff6badf9419b41c21256e0e88, type: 2}
   - {fileID: 11400000, guid: d6a5f70626f047847bdf20f75f236768, type: 2}
+  - {fileID: 11400000, guid: 7d473bafa0cbd854794eb3fc1457a9e6, type: 2}
+  - {fileID: 11400000, guid: 60307f965ba90644baab1eb76f55e5bb, type: 2}
+  - {fileID: 11400000, guid: 93b9fe334eaebd545b3afeb6ee08adb5, type: 2}
+  - {fileID: 11400000, guid: 1319cd4b43d319045b608e1066601ddf, type: 2}
+  - {fileID: 11400000, guid: aefb917ee19661c46b1a300e62c70939, type: 2}
+  - {fileID: 11400000, guid: 7d473bafa0cbd854794eb3fc1457a9e6, type: 2}
+  - {fileID: 11400000, guid: ae0162d9a6f53e140af6238957116882, type: 2}
+  - {fileID: 11400000, guid: b2d4fa655bc20ef40a946a9e5d641f86, type: 2}
+  - {fileID: 11400000, guid: 2a1b44eff6badf9419b41c21256e0e88, type: 2}
+  - {fileID: 11400000, guid: 7345a528fe82d644c95dde7df13a0aad, type: 2}

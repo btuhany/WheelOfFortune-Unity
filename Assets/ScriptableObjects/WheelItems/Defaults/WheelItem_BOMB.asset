@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6fb5f6dc302210448f1c17bf89f54d5, type: 3}
-  m_Name: WheelItem_Cash_Normal
+  m_Name: WheelItem_BOMB
   m_EditorClassIdentifier: 
-  _name: Cash
-  _type: 0
+  _name: BOMB
+  _type: 1
   _isGold: 0
-  _spriteWheel: {fileID: 21300000, guid: 4b056dff4a07612458f60849b702dcc7, type: 3}
-  _spriteReward: {fileID: 21300000, guid: 4b056dff4a07612458f60849b702dcc7, type: 3}
-  _doRandomizeCount: 1
-  _count: 168
-  _minCount: 50
-  _maxCount: 700
+  _spriteWheel: {fileID: 21300000, guid: 01599459c905a81439d4a3d8b12c0277, type: 3}
+  _spriteReward: {fileID: 21300000, guid: 01599459c905a81439d4a3d8b12c0277, type: 3}
+  _doRandomizeCount: 0
+  _count: 0
+  _minCount: 1
+  _maxCount: 0

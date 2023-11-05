@@ -10,12 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6fb5f6dc302210448f1c17bf89f54d5, type: 3}
-  m_Name: WheelItem_Gold_Normal
+  m_Name: Item_Bomb_Tier_3_4
   m_EditorClassIdentifier: 
-  _name: Gold
+  _name: Bomb
   _type: 0
-  _isGold: 1
-  _spriteWheel: {fileID: 21300000, guid: 3dd7a9093e161ed458bc8811efc9d55f, type: 3}
-  _spriteReward: {fileID: 21300000, guid: 3dd7a9093e161ed458bc8811efc9d55f, type: 3}
-  _minCount: 5
-  _maxCount: 25
+  _isGold: 0
+  _spriteWheel: {fileID: 21300000, guid: f28093cb194b43142851d9c0421bde0a, type: 3}
+  _spriteReward: {fileID: 21300000, guid: 32074fedf30993f4d97d94d523c5b346, type: 3}
+  _doRandomizeCount: 1
+  _count: 0
+  _minCount: 6
+  _maxCount: 10

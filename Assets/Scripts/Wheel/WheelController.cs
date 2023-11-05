@@ -19,6 +19,7 @@ namespace WheelOfFortune.Wheel
         [SerializeField] private WheelItemGroup _normalZoneSliceContents;
         [SerializeField] private WheelItemGroup _safeZoneSliceContents;
         [SerializeField] private WheelItemGroup _superZoneSliceContents;
+        [SerializeField] private WheelItemGroup _tierOneSliceContents;
 
         #region Component References
         [SerializeField] private RectTransform _rectTransform;
@@ -90,6 +91,14 @@ namespace WheelOfFortune.Wheel
             sequence.Append(_rectSpinIndicator.DOLocalRotate(new Vector3(0, 0, _settings.AnimIndicatorEndDegreeZ), _settings.AnimIndicatorEndTime / 2));
             sequence.Append(_rectSpinIndicator.DOLocalRotate(Vector3.zero, _settings.AnimIndicatorEndTime)
                 .SetEase(_settings.AnimIndicatorStopEase));
+        }
+        public void RandomizeSliceContents()
+        {
+            for (int i = 0; i < _sliceControllers.Length; i++)
+            {
+                WheelItem randomItem = _tierOneSliceContents.Items[Random.Range(0, _tierOneSliceContents.Items.Length)];
+                _sliceControllers[i].SetContent(randomItem);
+            }
         }
         public void HandleOnZoneChanged(ZonesPanelController.ZoneType zoneType)
         {

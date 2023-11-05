@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6fb5f6dc302210448f1c17bf89f54d5, type: 3}
-  m_Name: WheelItem_Armor
+  m_Name: WheelItem_Rifle_Tier_3_4
   m_EditorClassIdentifier: 
-  _name: Helmet Armor
+  _name: Rifle
   _type: 0
   _isGold: 0
-  _spriteWheel: {fileID: 21300000, guid: 8a122868aa0489d4b8af3f1d74e7addc, type: 3}
-  _spriteReward: {fileID: 21300000, guid: 0d3a09b9f76e87e448b6295cd7ccb3c7, type: 3}
+  _spriteWheel: {fileID: 21300000, guid: 93c56f8257fffa5429e9ac679ad19be1, type: 3}
+  _spriteReward: {fileID: 21300000, guid: 801170b804fe3594fbd8833ad203c42b, type: 3}
   _doRandomizeCount: 1
-  _count: 0
+  _count: 8
   _minCount: 1
   _maxCount: 10
