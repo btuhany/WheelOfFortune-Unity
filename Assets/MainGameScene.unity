@@ -401,6 +401,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5663219992479241112, guid: 6031df0f7b22d4c48a5a5b30ac982d22, type: 3}
+      propertyPath: m_Maskable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5663219992479241112, guid: 6031df0f7b22d4c48a5a5b30ac982d22, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5879581637214847008, guid: 6031df0f7b22d4c48a5a5b30ac982d22, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -489,6 +497,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: ui_canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 5879581638831323010, guid: 6031df0f7b22d4c48a5a5b30ac982d22, type: 3}
+      propertyPath: _settings
+      value: 
+      objectReference: {fileID: 11400000, guid: fe17d93de44ae8a468e8d8e9da717bd0, type: 2}
+    - target: {fileID: 5879581638831323010, guid: 6031df0f7b22d4c48a5a5b30ac982d22, type: 3}
+      propertyPath: _normalZoneSliceContents.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: b2d4fa655bc20ef40a946a9e5d641f86, type: 2}
+    - target: {fileID: 5879581638831323010, guid: 6031df0f7b22d4c48a5a5b30ac982d22, type: 3}
+      propertyPath: _normalZoneSliceContents.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: b2d4fa655bc20ef40a946a9e5d641f86, type: 2}
+    - target: {fileID: 5879581638831323010, guid: 6031df0f7b22d4c48a5a5b30ac982d22, type: 3}
+      propertyPath: _normalZoneSliceContents.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: b2d4fa655bc20ef40a946a9e5d641f86, type: 2}
+    - target: {fileID: 5879581638831323010, guid: 6031df0f7b22d4c48a5a5b30ac982d22, type: 3}
+      propertyPath: _normalZoneSliceContents.Array.data[6]
+      value: 
+      objectReference: {fileID: 11400000, guid: b2d4fa655bc20ef40a946a9e5d641f86, type: 2}
+    - target: {fileID: 5879581638831323010, guid: 6031df0f7b22d4c48a5a5b30ac982d22, type: 3}
+      propertyPath: _normalZoneSliceContents.Array.data[7]
+      value: 
+      objectReference: {fileID: 11400000, guid: b2d4fa655bc20ef40a946a9e5d641f86, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6031df0f7b22d4c48a5a5b30ac982d22, type: 3}
 --- !u!1001 &7161820887758983385
