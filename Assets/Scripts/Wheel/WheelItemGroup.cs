@@ -9,4 +9,11 @@ namespace WheelOfFortune.Items
 
         public WheelItem[] Items { get => _items; }
     }
+    public enum ItemTier
+    {
+        Zero,
+        One,
+        Two,
+        Three
+    }
 }

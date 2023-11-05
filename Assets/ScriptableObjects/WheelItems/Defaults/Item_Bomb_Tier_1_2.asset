@@ -16,8 +16,8 @@ MonoBehaviour:
   _type: 0
   _isGold: 0
   _spriteWheel: {fileID: 21300000, guid: 1ed2f0ddfc9a296408b96a97294d5cc2, type: 3}
-  _spriteReward: {fileID: 21300000, guid: 01599459c905a81439d4a3d8b12c0277, type: 3}
+  _spriteReward: {fileID: 21300000, guid: 32074fedf30993f4d97d94d523c5b346, type: 3}
   _doRandomizeCount: 1
-  _count: 0
+  _count: 1
   _minCount: 1
   _maxCount: 3

@@ -2,6 +2,9 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using WheelOfFortune.Panels;
 using WheelOfFortune.Settings;
+using static WheelOfFortune.Panels.ZonesPanelController;
+using WheelOfFortune.Wheel;
+using WheelOfFortune.Items;
 
 namespace WheelOfFortune.Managers
 {
@@ -70,7 +73,6 @@ namespace WheelOfFortune.Managers
             _rewardsPanelController.HandleOnRevived(_settings.ReviveGoldCost);
             _rewardsPanelController.ShowExitButton();
             _zonesPanelController.ScrollZones(1);
-            _spinPanelController.WheelController.RandomizeSliceContents();
             _spinPanelController.SpinButtonSet(true);
         }
         private async void HandleOnExitNo()
@@ -87,6 +89,19 @@ namespace WheelOfFortune.Managers
         private void HandleOnZoneChanged(ZonesPanelController.ZoneType newZone)
         {
             _spinPanelController.HandleOnZoneChanged(newZone);
+        }
+        public void UpdateItems()
+        {
+            if (_zonesPanelController.CurrentZone > 1 && _zonesPanelController.CurrentZoneType == ZoneType.Normal)
+            {
+                if (_zonesPanelController.CurrentZone > _settings.TierOneLimit)
+                    _spinPanelController.WheelController.RandomizeItemsWithTiers(ItemTier.One);
+                else if (_zonesPanelController.CurrentZone > _settings.TierTwoLimit)
+                    _spinPanelController.WheelController.RandomizeItemsWithTiers(ItemTier.Two);
+                else if (_zonesPanelController.CurrentZone > _settings.TierThreeLimit)
+                    _spinPanelController.WheelController.RandomizeItemsWithTiers(ItemTier.Three);
+
+            }
         }
     }
 }

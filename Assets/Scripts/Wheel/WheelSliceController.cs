@@ -60,15 +60,15 @@ namespace WheelOfFortune.Wheel
         }
         public void TryRandomizeContentCount()
         {
-            if (!_content.DoRandomizeCount) return;
+            if (!_content.IsRandomCount) return;
             _content.SetRandomCount();
             UpdateUIElements(_content);
         }
-        public void SetContent(WheelItem item)
+        public void SetContent(WheelItem item, bool isRandomCount = true)
         {
             _content = item;
 
-            if (_content.DoRandomizeCount)
+            if (_content.IsRandomCount && isRandomCount)
                 _content.SetRandomCount();
 
             UpdateUIElements(_content);

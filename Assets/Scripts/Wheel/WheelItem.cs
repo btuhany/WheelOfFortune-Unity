@@ -39,6 +39,10 @@ namespace WheelOfFortune.Items
             else
                 _count = -1;
         }
+        public void SetCount(int value)
+        {
+            _count = value;
+        }
 
         #region Properties
         public string ItemName { get => _name; }
@@ -47,7 +51,7 @@ namespace WheelOfFortune.Items
         public Sprite SpriteReward { get => _spriteReward; }
         public int Count { get => _count; }
         public bool IsGold { get => _isGold; }
-        public bool DoRandomizeCount { get => _doRandomizeCount; }
+        public bool IsRandomCount { get => _doRandomizeCount; }
         #endregion
     }
 }

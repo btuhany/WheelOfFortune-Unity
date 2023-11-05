@@ -4,6 +4,7 @@ using WheelOfFortune.Items;
 using WheelOfFortune.Settings;
 using WheelOfFortune.Panels;
 using UnityEngine.UI;
+using static WheelOfFortune.Panels.ZonesPanelController;
 
 namespace WheelOfFortune.Wheel
 {
@@ -20,6 +21,8 @@ namespace WheelOfFortune.Wheel
         [SerializeField] private WheelItemGroup _safeZoneSliceContents;
         [SerializeField] private WheelItemGroup _superZoneSliceContents;
         [SerializeField] private WheelItemGroup _tierOneSliceContents;
+        [SerializeField] private WheelItemGroup _tierTwoSliceContents;
+        [SerializeField] private WheelItemGroup _tierThreeSliceContents;
 
         #region Component References
         [SerializeField] private RectTransform _rectTransform;
@@ -66,7 +69,33 @@ namespace WheelOfFortune.Wheel
                 _sliceControllers[i].SetSliceIndex(i);
 
                 if (i < itemGroup.Items.Length && itemGroup.Items[i] != null)
+                {
                     _sliceControllers[i].SetContent(itemGroup.Items[i]);
+                    SetSameContentCountsEqual(itemGroup.Items[i]);
+                }
+            }
+        }
+        private void SetWheelSliceContents(WheelItem[] items)
+        {
+            for (int i = 0; i < _sliceControllers.Length; i++)
+            {
+                _sliceControllers[i].SetSliceIndex(i);
+
+                if (i < items.Length && items[i] != null)
+                {
+                    _sliceControllers[i].SetContent(items[i]);
+                    SetSameContentCountsEqual(items[i]);
+                }
+            }
+        }
+        private void SetSameContentCountsEqual(WheelItem item)
+        {
+            for (int j = 0; j < 8; j++)
+            {
+                if (item == _sliceControllers[j].Content)
+                {
+                    _sliceControllers[j].SetContent(item, false);
+                }
             }
         }
         private void PlayIndicatorStartAnim()
@@ -92,15 +121,6 @@ namespace WheelOfFortune.Wheel
             sequence.Append(_rectSpinIndicator.DOLocalRotate(Vector3.zero, _settings.AnimIndicatorEndTime)
                 .SetEase(_settings.AnimIndicatorStopEase));
         }
-        public void RandomizeSliceContents()
-        {
-            for (int i = 0; i < _sliceControllers.Length; i++)
-            {
-                WheelItem randomItem = _tierOneSliceContents.Items[Random.Range(0, _tierOneSliceContents.Items.Length)];
-                _sliceControllers[i].SetContent(randomItem);
-                _sliceControllers[i].TryRandomizeContentCount();
-            }
-        }
         public void HandleOnZoneChanged(ZonesPanelController.ZoneType zoneType)
         {
             WheelItemGroup itemGroup;
@@ -111,12 +131,41 @@ namespace WheelOfFortune.Wheel
             else
                 itemGroup = _superZoneSliceContents;
 
-            for (int i = 0; i < _sliceControllers.Length; i++)
+            SetWheelSliceContents(itemGroup);
+        }
+        public void RandomizeItemsWithTiers(ItemTier tier)
+        {
+            int bombCount = 0;
+            WheelItemGroup itemGroup;
+            if (tier == ItemTier.One)
             {
-                _sliceControllers[i].SetSliceIndex(i);
+                bombCount = Random.Range(_settings.BombCountTierOneMin, _settings.BombCountTierOneMax);
+                itemGroup = _tierOneSliceContents;
+            }
+            else if (tier == ItemTier.Two)
+            {
+                bombCount = Random.Range(_settings.BombCountTierTwoMin, _settings.BombCountTierTwoMax);
+                itemGroup = _tierTwoSliceContents;
+            }
+            else
+            {
+                bombCount = Random.Range(_settings.BombCountTierThreeMin, _settings.BombCountTierThreeMax);
+                itemGroup = _tierThreeSliceContents;
+            }
 
-                if (i < itemGroup.Items.Length && itemGroup.Items[i] != null)
-                    _sliceControllers[i].SetContent(itemGroup.Items[i]);
+
+            WheelItem[] randomItemGroup = new WheelItem[8];
+            for (int i = 0; i < 8; i++)
+            {
+                randomItemGroup[i] = itemGroup.Items[Random.Range(0, itemGroup.Items.Length)];
+            }
+            SetWheelSliceContents(randomItemGroup);
+
+            //Change with bombs
+            for (int i = 0; i < bombCount; i++)
+            {
+                WheelSliceController randomSlice = _sliceControllers[Random.Range(0, _sliceControllers.Length)];
+                randomSlice.SetContent(_settings.BombItem);
             }
         }
         public WheelSliceController SelectRandomSlice()

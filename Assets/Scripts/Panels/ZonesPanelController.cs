@@ -36,6 +36,8 @@ namespace WheelOfFortune.Panels
         }
         public int ZoneSafeValue => _settings.ZoneSafeValue;
         public int ZoneSuperValue => _settings.ZoneSuperValue;
+        public int CurrentZone => _counterZone;
+        public ZoneType CurrentZoneType => GetZoneType(_counterZone);
 
         public event System.Action<ZoneType> OnZoneChangedEvent;
 
@@ -143,7 +145,7 @@ namespace WheelOfFortune.Panels
             if (currentType == ZoneType.Normal)
                 _zonesList[_counterZone - 1].color = Color.black;
         }
-        private void InvokeCurrentZoneEvent()
+        private void CheckHandleZoneTypeChange()
         {
             ZoneType prewZoneType = GetZoneType(_counterZone - 1);
             ZoneType currentZoneType = GetZoneType(_counterZone);
@@ -179,7 +181,7 @@ namespace WheelOfFortune.Panels
 
             UpdateZoneTextColor();
             CurrentZoneBgChangeAnim();
-            InvokeCurrentZoneEvent();
+            CheckHandleZoneTypeChange();
         }
         public void ResetZones()
         {
@@ -191,7 +193,7 @@ namespace WheelOfFortune.Panels
             _counterZone = 1;
             AddZones(_settings.GroupMaxActiveSize * _settings.GroupsAtStart);
             _gridHolderRect.anchoredPosition = _gridHolderInitialPos;
-            InvokeZoneChangeEvent();
+            OnZoneChangedEvent?.Invoke(GetZoneType(_counterZone));
         }
         public void InvokeZoneChangeEvent()
         {

@@ -30,6 +30,16 @@ namespace WheelOfFortune.Settings
         [SerializeField] private float _animIndicatorStartDegreeZ = 30f;
         [SerializeField] private Ease _animIndicatorStopEase = Ease.OutElastic;
 
+        [Header("Tier Bombs Config (Max Exclusive)")]
+        [SerializeField] private int _bombCountTierOneMin = 1;
+        [SerializeField] private int _bombCountTierOneMax = 3;
+        [SerializeField] private int _bombCountTierTwoMin = 1;
+        [SerializeField] private int _bombCountTierTwoMax = 4;
+        [SerializeField] private int _bombCountTierThreeMin = 2;
+        [SerializeField] private int _bombCountTierThreeMax = 5;
+
+        [Header("Prefabs")]
+        [SerializeField] private WheelItem _bombItem;
         public float AnimSpinStartDegree { get => _animSpinStartDegree; }
         public float AnimSpinStartTime { get => _animSpinStartTime; }
         public Ease AnimSpinStartEase { get => _animSpinStartEase; }
@@ -49,5 +59,12 @@ namespace WheelOfFortune.Settings
         public float AnimIndicatorDegreeZ { get => _animIndicatorDegreeZ; }
         public float AnimIndicatorStartDegreeZ { get => _animIndicatorStartDegreeZ; }
         public Ease AnimIndicatorStopEase { get => _animIndicatorStopEase; }
+        public int BombCountTierOneMin { get => _bombCountTierOneMin; }
+        public int BombCountTierOneMax { get => _bombCountTierOneMax; }
+        public int BombCountTierTwoMin { get => _bombCountTierTwoMin; }
+        public int BombCountTierTwoMax { get => _bombCountTierTwoMax; }
+        public int BombCountTierThreeMin { get => _bombCountTierThreeMin; }
+        public int BombCountTierThreeMax { get => _bombCountTierThreeMax; }
+        public WheelItem BombItem { get => _bombItem; }
     }
 }
