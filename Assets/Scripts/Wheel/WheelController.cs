@@ -98,6 +98,7 @@ namespace WheelOfFortune.Wheel
             {
                 WheelItem randomItem = _tierOneSliceContents.Items[Random.Range(0, _tierOneSliceContents.Items.Length)];
                 _sliceControllers[i].SetContent(randomItem);
+                _sliceControllers[i].TryRandomizeContentCount();
             }
         }
         public void HandleOnZoneChanged(ZonesPanelController.ZoneType zoneType)
@@ -117,13 +118,6 @@ namespace WheelOfFortune.Wheel
                 if (i < itemGroup.Items.Length && itemGroup.Items[i] != null)
                     _sliceControllers[i].SetContent(itemGroup.Items[i]);
             }
-        }
-        public void TryRandomizeItemsCounts()
-        {
-            for (int i = 0; i < _sliceControllers.Length; i++)
-            {
-                _sliceControllers[i].TryRandomizeContentCount();
-            }            
         }
         public WheelSliceController SelectRandomSlice()
         {

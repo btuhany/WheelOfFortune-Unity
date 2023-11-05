@@ -67,7 +67,7 @@ namespace WheelOfFortune.Panels
                 .SetEase(_settings.AnimShowSpinPanelEase).ToUniTask();
             SpinButtonSet(true);
         }
-        public void SetSprites(ZonesPanelController.ZoneType zoneType)
+        public void HandleOnZoneChanged(ZonesPanelController.ZoneType zoneType)
         {
             if (_currentZoneType == zoneType) return;
             _currentZoneType = zoneType;

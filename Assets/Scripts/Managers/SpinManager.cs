@@ -57,7 +57,6 @@ namespace WheelOfFortune.Managers
             _rewardsPanelController.ShowExitButton();
             _zonesPanelController.ScrollZones(1);
 
-            _spinPanelController.WheelController.TryRandomizeItemsCounts();
             _spinPanelController.WheelController.RandomizeSliceContents();
 
             await _contentPanelController.HideContentAnimation();

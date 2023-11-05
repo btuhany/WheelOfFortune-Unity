@@ -70,7 +70,7 @@ namespace WheelOfFortune.Managers
             _rewardsPanelController.HandleOnRevived(_settings.ReviveGoldCost);
             _rewardsPanelController.ShowExitButton();
             _zonesPanelController.ScrollZones(1);
-            _spinPanelController.WheelController.TryRandomizeItemsCounts();
+            _spinPanelController.WheelController.RandomizeSliceContents();
             _spinPanelController.SpinButtonSet(true);
         }
         private async void HandleOnExitNo()
@@ -86,7 +86,7 @@ namespace WheelOfFortune.Managers
         }
         private void HandleOnZoneChanged(ZonesPanelController.ZoneType newZone)
         {
-            _spinPanelController.SetSprites(newZone);
+            _spinPanelController.HandleOnZoneChanged(newZone);
         }
     }
 }
