@@ -13,3 +13,6 @@ MonoBehaviour:
   m_Name: GameSettings_Default
   m_EditorClassIdentifier: 
   _reviveGoldCost: 15
+  _tierOneLimit: 2
+  _tierTwoLimit: 5
+  _tierThreeLimit: 10

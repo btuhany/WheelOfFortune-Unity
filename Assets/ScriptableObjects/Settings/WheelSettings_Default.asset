@@ -28,3 +28,10 @@ MonoBehaviour:
   _animIndicatorEndDegreeZ: 30
   _animIndicatorStartDegreeZ: 5
   _animIndicatorStopEase: 31
+  _bombCountTierOneMin: 1
+  _bombCountTierOneMax: 3
+  _bombCountTierTwoMin: 1
+  _bombCountTierTwoMax: 4
+  _bombCountTierThreeMin: 2
+  _bombCountTierThreeMax: 5
+  _bombItem: {fileID: 11400000, guid: c3c21e7803f55274caa142a6bc4666f8, type: 2}

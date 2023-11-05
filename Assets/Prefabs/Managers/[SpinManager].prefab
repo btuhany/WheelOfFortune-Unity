@@ -49,3 +49,4 @@ MonoBehaviour:
   _rewardsPanelController: {fileID: 0}
   _zonesPanelController: {fileID: 0}
   _bombPanelController: {fileID: 0}
+  _gameManager: {fileID: 0}
