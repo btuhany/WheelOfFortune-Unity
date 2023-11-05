@@ -45,7 +45,7 @@ namespace WheelOfFortune.Managers
         {
             _rewardsPanelController.ResetRewards();
             _zonesPanelController.ResetZones();
-            _spinPanelController.SetSpinButton(true);
+            _spinPanelController.SpinButtonSet(true);
         }
         private async void HandleOnBtnClkExit()
         {
@@ -71,6 +71,7 @@ namespace WheelOfFortune.Managers
             _rewardsPanelController.ShowExitButton();
             _zonesPanelController.ScrollZones(1);
             _spinPanelController.WheelController.TryRandomizeItemsCounts();
+            _spinPanelController.SpinButtonSet(true);
         }
         private async void HandleOnExitNo()
         {

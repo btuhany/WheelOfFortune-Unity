@@ -44,10 +44,10 @@ namespace WheelOfFortune.Panels
         }
         private void HandleOnButtonSpin()
         {
-            SetSpinButton(false);
+            SpinButtonSet(false);
             OnButtonClickedSpin?.Invoke();
         }
-        public void SetSpinButton(bool isActive)
+        public void SpinButtonSet(bool isActive)
         {
             _buttonSpin.gameObject.SetActive(isActive);
         }
@@ -65,7 +65,7 @@ namespace WheelOfFortune.Panels
                 _settings.SpinPanelDefaultScaleX,
                 _settings.AnimShowSpinPanelTime)
                 .SetEase(_settings.AnimShowSpinPanelEase).ToUniTask();
-            SetSpinButton(true);
+            SpinButtonSet(true);
         }
         public void SetSprites(ZonesPanelController.ZoneType zoneType)
         {
