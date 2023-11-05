@@ -16,10 +16,10 @@ MonoBehaviour:
   _animSpinStartTime: 1
   _animSpinStartEase: 26
   _animSpinDegree: -360
-  _animSpinTime: 0.25
+  _animSpinTime: 0.5
   _animSpinEase: 1
-  _animSpinLoopCount: 5
-  _animSpinEndTime: 1
+  _animSpinLoopCount: 3
+  _animSpinEndTime: 2
   _animSpinEndEase: 27
   _animIndicatorStartTime: 0.1
   _animIndicatorRotateTimePerLoop: 0.1
