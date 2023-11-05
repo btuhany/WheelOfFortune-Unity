@@ -23,8 +23,7 @@ namespace WheelOfFortune.Panels
         [SerializeField] private GridLayoutGroup _gridLayout;
 
         private Dictionary<WheelItem, RewardController> _rewardsDictionary 
-            = new Dictionary<WheelItem, RewardController>();
-        
+            = new Dictionary<WheelItem, RewardController>();      
         private Tweener _tweenCollect;
         private Vector2 _rectMaskMaxOffset;
         private int _totalGold = 0;
@@ -32,7 +31,9 @@ namespace WheelOfFortune.Panels
         private float _initialRectSizeDeltaY;
         private float _initalRectAnchoredPosY;
         private Vector3 _initalRectAnchoredPos;
+
         public event System.Action OnButtonClickExit;
+
         private void OnValidate()
         {
             if (_buttonExit == null)

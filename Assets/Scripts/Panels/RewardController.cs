@@ -7,8 +7,10 @@ namespace WheelOfFortune.Panels
 {
     public class RewardController : MonoBehaviour
     {
+        [Header("References")]
         [SerializeField] private Image _itemImage;
         [SerializeField] private TextMeshProUGUI _countText;
+        
         private int _count;
 
         public Image ItemImage { get => _itemImage; }

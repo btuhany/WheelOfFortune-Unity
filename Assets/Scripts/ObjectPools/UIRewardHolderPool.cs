@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using WheelOfFortune.Panels;
 using WheelOfFortune.Tools;
 

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1996181961758158758}
   - component: {fileID: 1996181961758158757}
   m_Layer: 5
-  m_Name: ui_image_safe_zone
+  m_Name: ui_image_bg_zone_safe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 1996181962002754740}
   - component: {fileID: 1996181962002754739}
   m_Layer: 5
-  m_Name: ui_text_super_zone_level
+  m_Name: ui_text_level_super_zone_value
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -227,7 +227,7 @@ GameObject:
   - component: {fileID: 1996181962308640307}
   - component: {fileID: 1996181962308640306}
   m_Layer: 5
-  m_Name: ui_image_safe_zone_chest
+  m_Name: ui_image_icon_safe_zone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -303,7 +303,7 @@ GameObject:
   - component: {fileID: 1996181962834536109}
   - component: {fileID: 1996181962834536108}
   m_Layer: 5
-  m_Name: ui_text_safe_zone_level
+  m_Name: ui_text_level_safe_zone_value
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -438,7 +438,7 @@ GameObject:
   - component: {fileID: 1996181962986070959}
   - component: {fileID: 1996181962986070958}
   m_Layer: 5
-  m_Name: ui_image_super_zone
+  m_Name: ui_image_bg_super_zone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -571,7 +571,7 @@ GameObject:
   - component: {fileID: 1996181963267193168}
   - component: {fileID: 1996181963267193183}
   m_Layer: 5
-  m_Name: ui_image_super_zone_frame
+  m_Name: ui_image_frame_super_zone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -647,7 +647,7 @@ GameObject:
   - component: {fileID: 1996181963487056165}
   - component: {fileID: 1996181963487056164}
   m_Layer: 5
-  m_Name: ui_text_super_zone_header
+  m_Name: ui_text_header_super_zone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -782,7 +782,7 @@ GameObject:
   - component: {fileID: 1996181963544979112}
   - component: {fileID: 1996181963544979127}
   m_Layer: 5
-  m_Name: ui_text_safe_zone_header
+  m_Name: ui_text_header_zone_safe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -917,7 +917,7 @@ GameObject:
   - component: {fileID: 1996181963656303064}
   - component: {fileID: 1996181963656303079}
   m_Layer: 5
-  m_Name: ui_image_safe_zone_frame
+  m_Name: ui_image_frame_zone_safe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -993,7 +993,7 @@ GameObject:
   - component: {fileID: 1996181963721006768}
   - component: {fileID: 1996181963721006783}
   m_Layer: 5
-  m_Name: ui_image_super_zone_weapon
+  m_Name: ui_image_icon_super_zone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

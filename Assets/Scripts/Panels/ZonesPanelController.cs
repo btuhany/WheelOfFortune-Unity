@@ -19,8 +19,14 @@ namespace WheelOfFortune.Panels
         [SerializeField] private GridLayoutGroup _zonesGridLayout;
         [SerializeField] private RectTransform _zoneBackground;
         [SerializeField] private RectTransform _prewZonesFilter;
+        [SerializeField] private Image _zoneBackgroundImg;
 
         private List<TextMeshProUGUI> _zonesList = new List<TextMeshProUGUI>();
+        private Vector3 _gridHolderInitialPos;
+        private int _counterZone = 1;
+        private int _counterZoneGroupRtrnPool = 0;
+        private float _zoneRectWidth;
+
         public enum ZoneType
         {
             None,
@@ -28,15 +34,11 @@ namespace WheelOfFortune.Panels
             Safe,
             Super
         }
-        private Vector3 _gridHolderInitialPos;
-        [SerializeField] private Image _zoneBackgroundImg;
-        private int _counterZone = 1;
-        private int _counterZoneGroupRtrnPool = 0;
-        private float _zoneRectWidth;
-
-        public event System.Action<ZoneType> OnZoneChangedEvent;
         public int ZoneSafeValue => _settings.ZoneSafeValue;
         public int ZoneSuperValue => _settings.ZoneSuperValue;
+
+        public event System.Action<ZoneType> OnZoneChangedEvent;
+
         private void OnValidate()
         {
             if (_panelRect == null)
@@ -121,6 +123,7 @@ namespace WheelOfFortune.Panels
             else
                 _zoneBackgroundImg.sprite = _settings.ZoneSpriteNormal;
         }
+
         //Zone counter starts from 1.
         //To reach the zones from the zoneList,
         //zone counter must decreased by 1.

@@ -18,17 +18,16 @@ namespace WheelOfFortune.Panels
         [SerializeField] private Image _imgBackground;
         [SerializeField] private TextMeshProUGUI _textInfo;
         [SerializeField] private TextMeshProUGUI _textReviveGold;
-
-        //Give-up and revive buttons
-        [SerializeField] private Button[] _buttons = new Button[2];
-        
         [SerializeField] private RectTransform _rectTransform;
+        [SerializeField] private Button[] _buttons = new Button[2];     //Give-up and revive buttons
+
         private Sequence _animHeartbeat;
         private Tween _animFlashRotation;
 
         public event System.Action OnBtnClkGiveUp;
         public event System.Action OnBtnClkRevive;
         public event System.Action OnPanelEnter;
+
         private void OnValidate()
         {
             if (_rectTransform == null)
@@ -133,11 +132,12 @@ namespace WheelOfFortune.Panels
             PlayHeartbeatAnim();
 
             for (int i = 0; i < _buttons.Length; i++)
-                await _buttons[i].transform.DOScale(Vector3.one, _settings.ButtonAnimTime);
-            
+                await _buttons[i].transform.DOScale(Vector3.one, _settings.ButtonAnimTime);           
         }
         public void ResetPanel()
         {
+            _animHeartbeat.Pause();
+            _animFlashRotation.Pause();
             SetUIForAnimStart();
             this.gameObject.SetActive(false);
         }

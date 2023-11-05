@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4393693134920336847}
   - component: {fileID: 4393693134920336846}
   m_Layer: 5
-  m_Name: ui_image_filter_prewzones
+  m_Name: ui_image_filter_zones_preview
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 4393693135076193395}
   - component: {fileID: 4393693135076193394}
   m_Layer: 5
-  m_Name: ui_image_zone_bg
+  m_Name: ui_image_bg_current_zone_value
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -214,6 +214,7 @@ MonoBehaviour:
   _zonesGridLayout: {fileID: 4393693135718869316}
   _zoneBackground: {fileID: 4393693135076193393}
   _prewZonesFilter: {fileID: 4393693134920336845}
+  _zoneBackgroundImg: {fileID: 4393693135076193394}
 --- !u!222 &4393693135292937064
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -265,7 +266,7 @@ GameObject:
   - component: {fileID: 4393693135448030203}
   - component: {fileID: 4393693135448030202}
   m_Layer: 5
-  m_Name: ui_mask_zones_panel
+  m_Name: ui_mask_panel_grid_group_zones
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -354,7 +355,7 @@ GameObject:
   - component: {fileID: 4393693135717644329}
   - component: {fileID: 4393693135717644330}
   m_Layer: 5
-  m_Name: ui_holder_zone_grid
+  m_Name: ui_holder_grid_group_zones
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -407,7 +408,7 @@ GameObject:
   - component: {fileID: 4393693135718869316}
   - component: {fileID: 4393693135718869339}
   m_Layer: 5
-  m_Name: ui_grid_group_content_zones
+  m_Name: ui_grid_group_zones
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -483,7 +484,7 @@ GameObject:
   - component: {fileID: 4393693135731015542}
   - component: {fileID: 4393693135731015541}
   m_Layer: 5
-  m_Name: ui_image_frame
+  m_Name: ui_image_frame_current_zone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -559,7 +560,7 @@ GameObject:
   - component: {fileID: 4393693136337919086}
   - component: {fileID: 4393693136337919085}
   m_Layer: 5
-  m_Name: ui_image_zones_frame
+  m_Name: ui_image_frame_panel_zones
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

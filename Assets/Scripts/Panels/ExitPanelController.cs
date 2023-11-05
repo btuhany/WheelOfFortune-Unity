@@ -12,7 +12,6 @@ namespace WheelOfFortune.Panels
     {
         [Header("Settings")]
         [SerializeField] private ExitPanelSettings _settings;
-
         [Header("References")]
         [SerializeField] private Image _backgroundImg;
         [SerializeField] private TextMeshProUGUI _textQuestion;

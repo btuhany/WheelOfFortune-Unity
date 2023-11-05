@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8942640506513623963}
   - component: {fileID: 7969458432464643737}
   m_Layer: 5
-  m_Name: ui_text_slice_content_base_value
+  m_Name: ui_text_slice_content_count_base_value
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -186,6 +186,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ac8a52c6a9caf7489f8314da28ce09b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _itemImage: {fileID: 882422962722361070}
+  _itemImageRect: {fileID: 7881064902663814845}
+  _itemCountText: {fileID: 7969458432464643737}
 --- !u!1 &7850148926467034747
 GameObject:
   m_ObjectHideFlags: 0

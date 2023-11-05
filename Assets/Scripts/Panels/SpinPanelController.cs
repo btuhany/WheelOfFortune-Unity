@@ -18,13 +18,14 @@ namespace WheelOfFortune.Panels
         [SerializeField] private Image _imageWheelIndicator;
         [SerializeField] private TextMeshProUGUI _textHeaderSpin;
         [SerializeField] private WheelController _wheelController;
-
         [SerializeField] private RectTransform _rectTransform;
         [SerializeField] private Button _buttonSpin;
-        public event System.Action OnButtonClickedSpin;
+
         private ZonesPanelController.ZoneType _currentZoneType;
 
         public WheelController WheelController { get => _wheelController; }
+
+        public event System.Action OnButtonClickedSpin;
 
         private void OnValidate()
         {
@@ -76,16 +77,19 @@ namespace WheelOfFortune.Panels
                     _imageWheelSpin.sprite = _settings.SpriteNormalZoneSpin;
                     _imageWheelIndicator.sprite = _settings.SpriteNormalZoneIndicator;
                     _textHeaderSpin.text = _settings.StringHeaderNormalZone;
+                    _textHeaderSpin.color = _settings.ColorTextNormalZone;
                     break;
                 case ZonesPanelController.ZoneType.Safe:
                     _imageWheelSpin.sprite = _settings.SpriteSafeZoneSpin;
                     _imageWheelIndicator.sprite = _settings.SpriteSafeZoneIndicator;
                     _textHeaderSpin.text = _settings.StringHeaderSafeZone;
+                    _textHeaderSpin.color = _settings.ColorTextSafeZone;
                     break;
                 case ZonesPanelController.ZoneType.Super:
                     _imageWheelSpin.sprite = _settings.SpriteSuperZoneSpin;
                     _imageWheelIndicator.sprite = _settings.SpriteSuperZoneIndicator;
                     _textHeaderSpin.text = _settings.StringHeaderSuperZone;
+                    _textHeaderSpin.color = _settings.ColorTextSuperZone;
                     break;
                 default:
                     break;

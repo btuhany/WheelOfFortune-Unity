@@ -17,8 +17,8 @@ namespace WheelOfFortune.Panels
         [SerializeField] private Image _contentImage;
         [SerializeField] private TextMeshProUGUI _contentHeaderText;
         [SerializeField] private TextMeshProUGUI _contentCountText;
-
         [SerializeField] private RectTransform _rectTransform;
+
         private void Awake()
         {
             _rectTransform.localScale = new Vector3(0f, 1f, 1f);
@@ -62,8 +62,6 @@ namespace WheelOfFortune.Panels
             
             HandleOnAnimEnd();
         }
-
-
     }
 }
 

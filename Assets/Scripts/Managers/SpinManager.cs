@@ -37,6 +37,7 @@ namespace WheelOfFortune.Managers
         private async void HandleSpinProcess()
         {
             _rewardsPanelController.HideExitButton();
+
             WheelSliceController randomSlice = _spinPanelController.WheelController.SelectRandomSlice();
             WheelItem randomItem = randomSlice.Content;
             await _spinPanelController.WheelController.SpinToTargetSlice(randomSlice.SliceIndex * _anglePerSlice);
