@@ -515,6 +515,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1996181963161164179}
+  - component: {fileID: 4090932205725438003}
   m_Layer: 5
   m_Name: ui_panel_info
   m_TagString: Untagged
@@ -544,6 +545,20 @@ RectTransform:
   m_AnchoredPosition: {x: -87, y: 269}
   m_SizeDelta: {x: 382.8, y: 229.075}
   m_Pivot: {x: 1, y: 0.5}
+--- !u!114 &4090932205725438003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1996181963161164178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c93d11fda4364904ea78b58a509ea885, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _textSafeZoneNum: {fileID: 1996181962834536108}
+  _textSuperZoneNum: {fileID: 1996181962002754739}
 --- !u!1 &1996181963267193181
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,11 +13,18 @@ MonoBehaviour:
   m_Name: WheelSettings_Debug
   m_EditorClassIdentifier: 
   _animSpinStartDegree: -360
-  _animSpinStartTime: 0.1
+  _animSpinStartTime: 2
   _animSpinStartEase: 1
   _animSpinDegree: -360
-  _animSpinTime: 0.1
+  _animSpinTime: 0.2
   _animSpinEase: 1
-  _animSpinLoopCount: 1
-  _animSpinEndTime: 0.1
+  _animSpinLoopCount: 5
+  _animSpinEndTime: 3
   _animSpinEndEase: 1
+  _animIndicatorStartTime: 0.2
+  _animIndicatorRotateTimePerLoop: 0.1
+  _animIndicatorEndTime: 0.4
+  _animIndicatorEndWaitTime: 0.5
+  _animIndicatorDegreeZ: 60
+  _animIndicatorEndDegreeZ: 30
+  _animIndicatorStartDegreeZ: 30

@@ -23,6 +23,7 @@ namespace WheelOfFortune.Panels
         private List<TextMeshProUGUI> _zonesList = new List<TextMeshProUGUI>();
         public enum ZoneType
         {
+            None,
             Normal,
             Safe,
             Super
@@ -34,6 +35,8 @@ namespace WheelOfFortune.Panels
         private float _zoneRectWidth;
 
         public event System.Action<ZoneType> OnZoneChangedEvent;
+        public int ZoneSafeValue => _settings.ZoneSafeValue;
+        public int ZoneSuperValue => _settings.ZoneSuperValue;
         private void OnValidate()
         {
             if (_panelRect == null)

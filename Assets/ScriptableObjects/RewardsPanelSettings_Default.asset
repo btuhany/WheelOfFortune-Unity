@@ -32,7 +32,9 @@ MonoBehaviour:
   _spawnRewPartScaleFactor: 1
   _spawnRewPartScaleTime: 0.4
   _spawnRePartScaleEase: 28
-  _exitBtnHideAnimTime: 0.2
-  _exitBtnUnhideAnimTime: 0.2
-  _exitBtnHideAnimEase: 32
-  _exitBtnUnhideAnimEase: 32
+  _btnExitHideAnimTime: 0.2
+  _btnExitUnhideAnimTime: 0.2
+  _btnExitHideAnimEase: 32
+  _btnExitUnhideAnimEase: 32
+  _exitMoveAnimTime: 0.5
+  _exitMoveAnimEase: 0

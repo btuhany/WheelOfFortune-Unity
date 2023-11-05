@@ -7,12 +7,15 @@ namespace WheelOfFortune.Managers
 {
     public class GameManager : MonoBehaviour
     {
+        [Header("Settings")]
         [SerializeField] private GameSettings _settings;
+        [Header("References")]
         [SerializeField] private BombPanelController _bombPanelController;
         [SerializeField] private RewardsPanelController _rewardsPanelController;
         [SerializeField] private ZonesPanelController _zonesPanelController;
         [SerializeField] private ExitPanelController _exitPanelController;
         [SerializeField] private SpinPanelController _spinPanelController;
+        [SerializeField] private ZonesInfoPanelController _zonesInfoPanelController;
         private void OnEnable()
         {
             _bombPanelController.OnBtnClkGiveUp += HandleOnGiveUp;
@@ -36,6 +39,7 @@ namespace WheelOfFortune.Managers
         private void Start()
         {
             _zonesPanelController.InvokeZoneChangeEvent();
+            _zonesInfoPanelController.UpdateZoneInfo(_zonesPanelController.ZoneSafeValue, _zonesPanelController.ZoneSuperValue);
         }
         private void RestartGame()
         {
