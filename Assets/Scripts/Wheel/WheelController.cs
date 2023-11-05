@@ -16,9 +16,9 @@ namespace WheelOfFortune.Wheel
         [SerializeField] private RectTransform _rectSpinIndicator;
 
         [Header("Wheel Slice Contents")]
-        [SerializeField] private WheelItem[] _normalZoneSliceContents;
-        [SerializeField] private WheelItem[] _safeZoneSliceContents;
-        [SerializeField] private WheelItem[] _superZoneSliceContents;
+        [SerializeField] private WheelItemGroup _normalZoneSliceContents;
+        [SerializeField] private WheelItemGroup _safeZoneSliceContents;
+        [SerializeField] private WheelItemGroup _superZoneSliceContents;
 
         #region Component References
         [SerializeField] private RectTransform _rectTransform;
@@ -58,55 +58,55 @@ namespace WheelOfFortune.Wheel
         {
             _sliceControllers = GetComponentsInChildren<WheelSliceController>();
         }
-        private void SetWheelSliceContents(WheelItem[] items)
+        private void SetWheelSliceContents(WheelItemGroup itemGroup)
         {
             for (int i = 0; i < _sliceControllers.Length; i++)
             {
                 _sliceControllers[i].SetSliceIndex(i);
 
-                if (i < _normalZoneSliceContents.Length && _normalZoneSliceContents[i] != null)
-                    _sliceControllers[i].SetContent(_normalZoneSliceContents[i]);
+                if (i < itemGroup.Items.Length && itemGroup.Items[i] != null)
+                    _sliceControllers[i].SetContent(itemGroup.Items[i]);
             }
         }
         private void PlayIndicatorStartAnim()
         {
-            Sequence indicatorStartSequence = DOTween.Sequence();
+            Sequence sequence = DOTween.Sequence();
             int loop = (int)(_settings.AnimSpinStartTime / _settings.AnimIndicatorStartTime);
-            indicatorStartSequence.Append(_rectSpinIndicator.DOLocalRotate(new Vector3(0, 0, -_settings.AnimIndicatorStartDegreeZ), _settings.AnimIndicatorStartTime / 2));
-            indicatorStartSequence.Append(_rectSpinIndicator.DOLocalRotate(new Vector3(0, 0, _settings.AnimIndicatorStartDegreeZ), _settings.AnimIndicatorStartTime / 2));
-            indicatorStartSequence.SetLoops(loop);
+            sequence.Append(_rectSpinIndicator.DOLocalRotate(new Vector3(0, 0, -_settings.AnimIndicatorStartDegreeZ), _settings.AnimIndicatorStartTime / 2));
+            sequence.Append(_rectSpinIndicator.DOLocalRotate(new Vector3(0, 0, _settings.AnimIndicatorStartDegreeZ), _settings.AnimIndicatorStartTime / 2));
+            sequence.SetLoops(loop);
         }
         private void PlayIndicatorAnim()
         {
-            Sequence indicatorSequence = DOTween.Sequence();
+            Sequence sequence = DOTween.Sequence();
             float totalTime = _settings.AnimSpinTime * _settings.AnimSpinLoopCount;
             int loopCount = (int)(totalTime / _settings.AnimIndicatorRotateTimePerLoop);
-            indicatorSequence.Append(_rectSpinIndicator.DOLocalRotate(new Vector3(0, 0, _settings.AnimIndicatorDegreeZ), _settings.AnimIndicatorRotateTimePerLoop).SetLoops(loopCount));
+            sequence.Append(_rectSpinIndicator.DOLocalRotate(new Vector3(0, 0, _settings.AnimIndicatorDegreeZ), _settings.AnimIndicatorRotateTimePerLoop).SetLoops(loopCount));
         }
         private void PlayIndicatorStopAnim()
         {
-            Sequence indicatorStartSequence = DOTween.Sequence();
-            indicatorStartSequence.Append(_rectSpinIndicator.DOLocalRotate(new Vector3(0, 0, -_settings.AnimIndicatorEndDegreeZ), _settings.AnimIndicatorEndTime / 2));
-            indicatorStartSequence.Append(_rectSpinIndicator.DOLocalRotate(new Vector3(0, 0, _settings.AnimIndicatorEndDegreeZ), _settings.AnimIndicatorEndTime / 2));
-            indicatorStartSequence.Append(_rectSpinIndicator.DOLocalRotate(Vector3.zero, _settings.AnimIndicatorEndTime)
+            Sequence sequence = DOTween.Sequence();
+            sequence.Append(_rectSpinIndicator.DOLocalRotate(new Vector3(0, 0, -_settings.AnimIndicatorEndDegreeZ), _settings.AnimIndicatorEndTime / 2));
+            sequence.Append(_rectSpinIndicator.DOLocalRotate(new Vector3(0, 0, _settings.AnimIndicatorEndDegreeZ), _settings.AnimIndicatorEndTime / 2));
+            sequence.Append(_rectSpinIndicator.DOLocalRotate(Vector3.zero, _settings.AnimIndicatorEndTime)
                 .SetEase(_settings.AnimIndicatorStopEase));
         }
         public void HandleOnZoneChanged(ZonesPanelController.ZoneType zoneType)
         {
-            WheelItem[] items;
+            WheelItemGroup itemGroup;
             if (zoneType == ZonesPanelController.ZoneType.Normal)
-                items = _normalZoneSliceContents;
+                itemGroup = _normalZoneSliceContents;
             else if (zoneType == ZonesPanelController.ZoneType.Safe)
-                items = _safeZoneSliceContents;
+                itemGroup = _safeZoneSliceContents;
             else
-                items = _superZoneSliceContents;
+                itemGroup = _superZoneSliceContents;
 
             for (int i = 0; i < _sliceControllers.Length; i++)
             {
                 _sliceControllers[i].SetSliceIndex(i);
 
-                if (i < items.Length && items[i] != null)
-                    _sliceControllers[i].SetContent(items[i]);
+                if (i < itemGroup.Items.Length && itemGroup.Items[i] != null)
+                    _sliceControllers[i].SetContent(itemGroup.Items[i]);
             }
         }
         public void TryRandomizeItemsCounts()

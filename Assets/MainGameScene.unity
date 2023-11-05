@@ -1613,6 +1613,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6174319149493266191, guid: a3cf89e35d3ba0a419047432fb80a310, type: 3}
+      propertyPath: _safeZoneSliceContents
+      value: 
+      objectReference: {fileID: 11400000, guid: 8d2b83f0671de3b4f82baddb3ac023d4, type: 2}
+    - target: {fileID: 6174319149493266191, guid: a3cf89e35d3ba0a419047432fb80a310, type: 3}
+      propertyPath: _superZoneSliceContents
+      value: 
+      objectReference: {fileID: 11400000, guid: bf5f73be74a2a71409ce9cd1c0f0d76e, type: 2}
+    - target: {fileID: 6174319149493266191, guid: a3cf89e35d3ba0a419047432fb80a310, type: 3}
+      propertyPath: _normalZoneSliceContents
+      value: 
+      objectReference: {fileID: 11400000, guid: a97e85b0ab9d8294aa2e7ddce303da3d, type: 2}
     - target: {fileID: 7886408088210913673, guid: a3cf89e35d3ba0a419047432fb80a310, type: 3}
       propertyPath: m_SizeDelta.x
       value: 65.7
