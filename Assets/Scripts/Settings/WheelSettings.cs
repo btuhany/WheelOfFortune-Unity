@@ -22,12 +22,12 @@ namespace WheelOfFortune.Settings
         [SerializeField] private Ease _animSpinEndEase;
 
         [Header("Indicator Animation")]
-        [SerializeField] private float _animIndicatorStartTime = 0.2f;
-        [SerializeField] private float _animIndicatorRotateTimePerLoop = 0.1f;
-        [SerializeField] private float _animIndicatorEndTime = 0.4f;
-        [SerializeField] private float _animIndicatorDegreeZ = 60f;
-        [SerializeField] private float _animIndicatorEndDegreeZ = 30f;
-        [SerializeField] private float _animIndicatorStartDegreeZ = 30f;
+        [SerializeField] private float _animIndicatorStartSwingTime = 0.2f;
+        [SerializeField] private float _animIndicatorSwingTimePerLoop = 0.1f;
+        [SerializeField] private float _animIndicatorEndSwingTime = 0.4f;
+        [SerializeField] private float _animIndicatorDegree = 60f;
+        [SerializeField] private float _animIndicatorEndSwingAngle = 30f;
+        [SerializeField] private float _animIndicatorStartSwingAngle = 30f;
         [SerializeField] private Ease _animIndicatorStopEase = Ease.OutElastic;
 
         [Header("Tier Bombs Config (Max Exclusive)")]
@@ -52,12 +52,12 @@ namespace WheelOfFortune.Settings
         public Ease AnimSpinEndEase { get => _animSpinEndEase; }
 
         public int AnimSpinLoopCount { get => _animSpinLoopCount; }
-        public float AnimIndicatorStartTime { get => _animIndicatorStartTime; }
-        public float AnimIndicatorRotateTimePerLoop { get => _animIndicatorRotateTimePerLoop; }
-        public float AnimIndicatorEndTime { get => _animIndicatorEndTime; }
-        public float AnimIndicatorEndDegreeZ { get => _animIndicatorEndDegreeZ; }
-        public float AnimIndicatorDegreeZ { get => _animIndicatorDegreeZ; }
-        public float AnimIndicatorStartDegreeZ { get => _animIndicatorStartDegreeZ; }
+        public float AnimIndicatorStartSwingTime { get => _animIndicatorStartSwingTime; }
+        public float AnimIndicatorSwingTimePerLoop { get => _animIndicatorSwingTimePerLoop; }
+        public float AnimIndicatorEndSwingTime { get => _animIndicatorEndSwingTime; }
+        public float AnimIndicatorEndSwingAngle { get => _animIndicatorEndSwingAngle; }
+        public float AnimIndicatorSwingAngle { get => _animIndicatorDegree; }
+        public float AnimIndicatorStartSwingAngle { get => _animIndicatorStartSwingAngle; }
         public Ease AnimIndicatorStopEase { get => _animIndicatorStopEase; }
         public int BombCountTierOneMin { get => _bombCountTierOneMin; }
         public int BombCountTierOneMax { get => _bombCountTierOneMax; }

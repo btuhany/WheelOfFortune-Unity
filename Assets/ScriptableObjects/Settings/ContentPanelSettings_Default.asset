@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb762fd64494ce140912cf4ebaa9c1d5, type: 3}
   m_Name: ContentPanelSettings_Default
   m_EditorClassIdentifier: 
-  _animShowSliceContentTime: 0.3
+  _animShowSliceContentTime: 0.2
   _animShowSliceEase: 1
-  _animHideSliceContentTime: 0.3
+  _animHideSliceContentTime: 0.2
   _animHideSliceContentEase: 1
-  _rewContentImgPrefab: {fileID: 0}

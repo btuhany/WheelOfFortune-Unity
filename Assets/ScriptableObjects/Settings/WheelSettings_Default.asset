@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WheelSettings_Default
   m_EditorClassIdentifier: 
   _animSpinStartDegree: -360
-  _animSpinStartTime: 1
+  _animSpinStartTime: 1.3
   _animSpinStartEase: 26
   _animSpinDegree: -360
   _animSpinTime: 0.5
@@ -21,13 +21,13 @@ MonoBehaviour:
   _animSpinLoopCount: 3
   _animSpinEndTime: 2
   _animSpinEndEase: 27
-  _animIndicatorStartTime: 0.1
-  _animIndicatorRotateTimePerLoop: 0.1
-  _animIndicatorEndTime: 0.2
-  _animIndicatorDegreeZ: 60
-  _animIndicatorEndDegreeZ: 30
-  _animIndicatorStartDegreeZ: 5
-  _animIndicatorStopEase: 31
+  _animIndicatorStartSwingTime: 0.15
+  _animIndicatorSwingTimePerLoop: 0.1
+  _animIndicatorEndSwingTime: 0.5
+  _animIndicatorDegree: 60
+  _animIndicatorEndSwingAngle: 15
+  _animIndicatorStartSwingAngle: 3
+  _animIndicatorStopEase: 28
   _bombCountTierOneMin: 1
   _bombCountTierOneMax: 3
   _bombCountTierTwoMin: 1

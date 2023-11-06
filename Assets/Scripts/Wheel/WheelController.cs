@@ -101,24 +101,23 @@ namespace WheelOfFortune.Wheel
         private void PlayIndicatorStartAnim()
         {
             Sequence sequence = DOTween.Sequence();
-            int loop = (int)(_settings.AnimSpinStartTime / _settings.AnimIndicatorStartTime);
-            sequence.Append(_rectSpinIndicator.DOLocalRotate(new Vector3(0, 0, -_settings.AnimIndicatorStartDegreeZ), _settings.AnimIndicatorStartTime / 2));
-            sequence.Append(_rectSpinIndicator.DOLocalRotate(new Vector3(0, 0, _settings.AnimIndicatorStartDegreeZ), _settings.AnimIndicatorStartTime / 2));
+            int loop = (int)(_settings.AnimSpinStartTime / (_settings.AnimIndicatorStartSwingTime * 2));
+            sequence.Append(_rectSpinIndicator.DOLocalRotate(new Vector3(0, 0, -_settings.AnimIndicatorStartSwingAngle), _settings.AnimIndicatorStartSwingTime));
+            sequence.Append(_rectSpinIndicator.DOLocalRotate(new Vector3(0, 0, _settings.AnimIndicatorStartSwingAngle), _settings.AnimIndicatorStartSwingTime));
             sequence.SetLoops(loop);
         }
         private void PlayIndicatorAnim()
         {
-            Sequence sequence = DOTween.Sequence();
             float totalTime = _settings.AnimSpinTime * _settings.AnimSpinLoopCount;
-            int loopCount = (int)(totalTime / _settings.AnimIndicatorRotateTimePerLoop);
-            sequence.Append(_rectSpinIndicator.DOLocalRotate(new Vector3(0, 0, _settings.AnimIndicatorDegreeZ), _settings.AnimIndicatorRotateTimePerLoop).SetLoops(loopCount));
+            int loopCount = (int)(totalTime / _settings.AnimIndicatorSwingTimePerLoop);
+            _rectSpinIndicator.DOLocalRotate(new Vector3(0, 0, _settings.AnimIndicatorSwingAngle), _settings.AnimIndicatorSwingTimePerLoop).SetLoops(loopCount);
         }
         private void PlayIndicatorStopAnim()
         {
             Sequence sequence = DOTween.Sequence();
-            sequence.Append(_rectSpinIndicator.DOLocalRotate(new Vector3(0, 0, -_settings.AnimIndicatorEndDegreeZ), _settings.AnimIndicatorEndTime / 2));
-            sequence.Append(_rectSpinIndicator.DOLocalRotate(new Vector3(0, 0, _settings.AnimIndicatorEndDegreeZ), _settings.AnimIndicatorEndTime / 2));
-            sequence.Append(_rectSpinIndicator.DOLocalRotate(Vector3.zero, _settings.AnimIndicatorEndTime)
+            sequence.Append(_rectSpinIndicator.DOLocalRotate(new Vector3(0, 0, -_settings.AnimIndicatorEndSwingAngle), _settings.AnimIndicatorEndSwingTime));
+            sequence.Append(_rectSpinIndicator.DOLocalRotate(new Vector3(0, 0, _settings.AnimIndicatorEndSwingAngle), _settings.AnimIndicatorEndSwingTime));
+            sequence.Append(_rectSpinIndicator.DOLocalRotate(Vector3.zero, _settings.AnimIndicatorEndSwingTime)
                 .SetEase(_settings.AnimIndicatorStopEase));
         }
         public void HandleOnZoneChanged(ZonesPanelController.ZoneType zoneType)

@@ -18,9 +18,9 @@ MonoBehaviour:
   _groupCellHeight: 60
   _scrollTime: 0.2
   _scrollEase: 26
-  _zoneSafeValue: 3
+  _zoneSafeValue: 5
   _zoneSafeColor: {r: 0.76470596, g: 1, b: 0.5411765, a: 1}
-  _zoneSuperValue: 7
+  _zoneSuperValue: 30
   _zoneSuperColor: {r: 1, g: 0.8470589, b: 0.5176471, a: 1}
   _zoneBgColorFadeAnim: {r: 0, g: 0, b: 0, a: 1}
   _zoneBgColorFadeAnimTime: 0.2
