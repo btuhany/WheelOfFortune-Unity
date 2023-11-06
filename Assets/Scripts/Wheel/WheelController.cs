@@ -160,7 +160,7 @@ namespace WheelOfFortune.Wheel
             }
             SetWheelSliceContents(randomItemGroup);
 
-            //Change with bombs
+            //Add&Change with bombs
             for (int i = 0; i < bombCount; i++)
             {
                 WheelSliceController randomSlice = _sliceControllers[Random.Range(0, _sliceControllers.Length)];

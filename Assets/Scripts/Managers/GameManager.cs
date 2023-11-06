@@ -49,7 +49,6 @@ namespace WheelOfFortune.Managers
             _rewardsPanelController.ResetRewards();
             _zonesPanelController.ResetZones();
             _spinPanelController.SpinButtonSet(true);
-            Debug.Log("Reset");
         }
         private async void HandleOnBtnClkExit()
         {
@@ -106,7 +105,6 @@ namespace WheelOfFortune.Managers
                     _spinPanelController.WheelController.RandomizeItemsWithTiers(ItemTier.Two);
                 else if (_zonesPanelController.CurrentZone > _settings.TierThreeLimit)
                     _spinPanelController.WheelController.RandomizeItemsWithTiers(ItemTier.Three);
-
             }
         }
     }

@@ -1,5 +1,4 @@
 using Cysharp.Threading.Tasks;
-using System;
 using UnityEngine;
 using WheelOfFortune.Items;
 using WheelOfFortune.Panels;
@@ -40,7 +39,7 @@ namespace WheelOfFortune.Managers
 
             WheelSliceController randomSlice = _spinPanelController.WheelController.SelectRandomSlice();
             WheelItem randomItem = randomSlice.Content;
-            await _spinPanelController.WheelController.SpinToTargetSlice(randomSlice.SliceIndex * _anglePerSlice);
+            await _spinPanelController.WheelController.SpinToTargetSlice(randomSlice.SliceIndex * _anglePerSlice).ToUniTask();
 
             if (randomItem.Type == WheelItem.ItemType.Reward)
                 await HandleAtReward(randomItem);
@@ -58,7 +57,9 @@ namespace WheelOfFortune.Managers
             _zonesPanelController.ScrollZones(1);
 
             await _contentPanelController.HideContentAnimation();
+
             _gameManager.UpdateItems();
+            
             await _spinPanelController.ShowSpinPanelAnimation();
         }
         private async UniTask HandleAtBomb()

@@ -173,7 +173,7 @@ namespace WheelOfFortune.Panels
             _counterZone += value;
             _counterZoneGroupRtrnPool++;
 
-            if (_counterZoneGroupRtrnPool > _settings.GroupMaxActiveSize - 1)
+            if (_counterZoneGroupRtrnPool > _settings.GroupMaxActiveSize * 5)
             {
                 HandleScrollOnZonesReturnPool();
                 _counterZoneGroupRtrnPool = 0;
@@ -195,7 +195,6 @@ namespace WheelOfFortune.Panels
             AddZones(_settings.GroupMaxActiveSize * _settings.GroupsAtStart);
             _gridHolderRect.anchoredPosition = _gridHolderInitialPos;
             OnZoneChangedEvent?.Invoke(GetZoneType(_counterZone));
-            Debug.Log("Reset Zone");
         }
         public void InvokeZoneChangeEvent()
         {
