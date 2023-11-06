@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 010075de5a35d7f4f989799d566c45b5, type: 3}
   m_Name: SpinPanelSettings_Default
   m_EditorClassIdentifier: 
-  _animShowSpinPanelTime: 0.2
-  _animShowSpinPanelEase: 1
-  _animHideSpinPanelTime: 0.2
-  _animHideSpinPanelEase: 1
-  _delayHidePanel: 500
+  _animShowSpinPanelTime: 0.23
+  _animShowSpinPanelEase: 6
+  _animHideSpinPanelTime: 0.23
+  _animHideSpinPanelEase: 5
+  _delayHidePanel: 550
   _spriteSafeZoneSpin: {fileID: 21300000, guid: cee757358c800fd488364fd2d40039dc, type: 3}
   _spriteSafeZoneIndicator: {fileID: 21300000, guid: 98f2eb22bc3a63846adc0657211d1ccf, type: 3}
   _stringHeaderSafeZone: SILVER SPIN

@@ -187,13 +187,15 @@ namespace WheelOfFortune.Panels
         {
             foreach (TextMeshProUGUI text in _zonesList)
             {
-                Destroy(text.gameObject);
+                if (text.gameObject != null)
+                    Destroy(text.gameObject);
             }
             _zonesList.Clear();
             _counterZone = 1;
             AddZones(_settings.GroupMaxActiveSize * _settings.GroupsAtStart);
             _gridHolderRect.anchoredPosition = _gridHolderInitialPos;
             OnZoneChangedEvent?.Invoke(GetZoneType(_counterZone));
+            Debug.Log("Reset Zone");
         }
         public void InvokeZoneChangeEvent()
         {

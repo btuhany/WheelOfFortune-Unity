@@ -49,6 +49,7 @@ namespace WheelOfFortune.Managers
             _rewardsPanelController.ResetRewards();
             _zonesPanelController.ResetZones();
             _spinPanelController.SpinButtonSet(true);
+            Debug.Log("Reset");
         }
         private async void HandleOnBtnClkExit()
         {
@@ -89,6 +90,11 @@ namespace WheelOfFortune.Managers
         private void HandleOnZoneChanged(ZonesPanelController.ZoneType newZone)
         {
             _spinPanelController.HandleOnZoneChanged(newZone);
+            if (_zonesPanelController.CurrentZone == 1)
+            {
+                _rewardsPanelController.HideExitButton();
+                _spinPanelController.WheelController.HandleOnZoneChanged(newZone);
+            }
         }
         public void UpdateItems()
         {

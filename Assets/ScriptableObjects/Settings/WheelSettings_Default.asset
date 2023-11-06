@@ -21,12 +21,12 @@ MonoBehaviour:
   _animSpinLoopCount: 3
   _animSpinEndTime: 2
   _animSpinEndEase: 27
-  _animIndicatorStartSwingTime: 0.15
+  _animIndicatorStartSwingTime: 0.1
   _animIndicatorSwingTimePerLoop: 0.1
-  _animIndicatorEndSwingTime: 0.5
+  _animIndicatorEndSwingTime: 0.35
   _animIndicatorDegree: 60
   _animIndicatorEndSwingAngle: 15
-  _animIndicatorStartSwingAngle: 3
+  _animIndicatorStartSwingAngle: 5
   _animIndicatorStopEase: 28
   _bombCountTierOneMin: 1
   _bombCountTierOneMax: 3
