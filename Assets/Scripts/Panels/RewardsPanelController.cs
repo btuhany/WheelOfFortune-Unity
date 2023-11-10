@@ -150,7 +150,7 @@ namespace WheelOfFortune.Panels
             List<UniTask> rewardPartTasks = new List<UniTask>();
             for (int i = 0; i < rewardPartCount; i++)
             {
-                int milliSecondsDelay = (int)Random.Range(_settings.MoveRewPartsMinDelay, _settings.MoveRewPartsMaxDelay);
+                int milliSecondsDelay = (int)Random.Range(_settings.MoveRewPartsMillisecondMinDelay, _settings.MoveRewPartsMillisecondMaxDelay);
                 await UniTask.Delay(milliSecondsDelay);
                 rewardPartTasks.Add(MoveAddRewardPart(rewardsImgList[i], targetRewardContent, rewardAddCountPerPart));
             }
@@ -233,7 +233,7 @@ namespace WheelOfFortune.Panels
                 rewardContent.SetReward(item);
                 _rewardsDictionary.Add(item, rewardContent);
             }
-            await UniTask.Delay(_settings.GatherAnimStartDelay);
+            await UniTask.Delay(_settings.GatherAnimStartMillisecondDelay);
             await GatherRewardPartsAnim(item, animImgSpawnPoint, rewardContent);
 
             CheckItemIsGold(item, rewardContent);
