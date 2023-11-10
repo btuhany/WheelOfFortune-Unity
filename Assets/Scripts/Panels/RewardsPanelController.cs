@@ -171,8 +171,8 @@ namespace WheelOfFortune.Panels
         private List<UniTask> ShowEndRewardsTasks(float sizeDeltaY, float anchorPosY)
         {
             List<UniTask> exitTasks = new List<UniTask>();
-            exitTasks.Add(_rectTransform.DOSizeDelta(new Vector2(_rectTransform.sizeDelta.x, sizeDeltaY), 0.2f).ToUniTask());
-            exitTasks.Add(_rectTransform.DOAnchorPosY(anchorPosY, 0.2f).ToUniTask());
+            exitTasks.Add(_rectTransform.DOSizeDelta(new Vector2(_rectTransform.sizeDelta.x, sizeDeltaY), _settings.ExitShowRewsSizeDelta).ToUniTask());
+            exitTasks.Add(_rectTransform.DOAnchorPosY(anchorPosY, _settings.ExitShowRewsSizeDelta).ToUniTask());
             return exitTasks;
         }
         private bool IsItemContained(WheelItem item, out RewardController tempReward)
@@ -266,7 +266,7 @@ namespace WheelOfFortune.Panels
         public async UniTask ShowEndRewards(RectTransform targetRectTransfrom)
         {
             HideExitButton(true);
-            _gridLayout.constraintCount = 2;
+            _gridLayout.constraintCount = _settings.ExitShowRewsGridConstraint;
             List<UniTask> animTasksAnchor = new List<UniTask>();
             animTasksAnchor.Add(_rectTransform.DOAnchorMax(
                targetRectTransfrom.anchorMax,
@@ -279,7 +279,7 @@ namespace WheelOfFortune.Panels
                 .SetEase(_settings.ExitMoveAnimEase)
                 .ToUniTask());
             await UniTask.WhenAll(animTasksAnchor);
-            await UniTask.WhenAll(ShowEndRewardsTasks(targetRectTransfrom.rect.height / 2, targetRectTransfrom.rect.height / 8));
+            await UniTask.WhenAll(ShowEndRewardsTasks(targetRectTransfrom.rect.height * _settings.HeightDividerSizeDeltaY, targetRectTransfrom.rect.height * _settings.HeightDividerAnchorPosY));
         }
         public async UniTask UnshowEndRewards(RectTransform targetRectTransfrom)
         {

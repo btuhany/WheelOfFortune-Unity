@@ -41,6 +41,11 @@ namespace WheelOfFortune.Settings
         [Header("At Exit")]
         [SerializeField] private float _exitMoveAnimTime = 0.5f;
         [SerializeField] private Ease _exitMoveAnimEase;
+        [SerializeField] private float _exitShowRewsSizeDelta = 0.2f;
+        [SerializeField] private int _exitShowRewsGridConstraint = 2;
+        [SerializeField] private int _exitUnshowRewsGridConstraint = 1;
+        [SerializeField] private float _heightFactorSizeDeltaY = 0.5f;
+        [SerializeField] private float _heightFactorAnchorPosY = 0.125f;
 
 
         public RewardController RewardsPanelContentPrefab { get => _rewardsPanelContentPrefab; }
@@ -69,5 +74,10 @@ namespace WheelOfFortune.Settings
         public Vector3 CollectionTargetScale { get => _collectionTargetScale; }
         public float ExitMoveAnimTime { get => _exitMoveAnimTime; }
         public Ease ExitMoveAnimEase { get => _exitMoveAnimEase; }
+        public float ExitShowRewsSizeDelta { get => _exitShowRewsSizeDelta; }
+        public int ExitShowRewsGridConstraint { get => _exitShowRewsGridConstraint; }
+        public float HeightDividerSizeDeltaY { get => _heightFactorSizeDeltaY; }
+        public float HeightDividerAnchorPosY { get => _heightFactorAnchorPosY; }
+        public int ExitUnshowRewsGridConstraint { get => _exitUnshowRewsGridConstraint; }
     }
 }
