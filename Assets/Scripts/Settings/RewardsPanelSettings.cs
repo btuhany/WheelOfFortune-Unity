@@ -8,9 +8,10 @@ namespace WheelOfFortune.Settings
     [CreateAssetMenu(menuName = "Wheel Of Fortune/Panels/Rewards Panel Settings")]
     public class RewardsPanelSettings : ScriptableObject
     {
-        [Header("Rewards Panel")]
+        [Header("Rewards Panel Config")]
         [SerializeField] private RewardController _rewardsPanelContentPrefab;
         [SerializeField] private Image _rewardContentImage;  //Used in animation.
+        [SerializeField] private int _rewPartCountMaxPartLimit = 1;
 
         [Header("Reward Part Gather Animation")]
         [Tooltip("Milliseconds")][SerializeField] private int _gatherAnimStartMillisecondDelay = 200; 
@@ -79,5 +80,6 @@ namespace WheelOfFortune.Settings
         public float HeightDividerSizeDeltaY { get => _heightFactorSizeDeltaY; }
         public float HeightDividerAnchorPosY { get => _heightFactorAnchorPosY; }
         public int ExitUnshowRewsGridConstraint { get => _exitUnshowRewsGridConstraint; }
+        public int RewPartCountMaxPartLimit { get => _rewPartCountMaxPartLimit; }
     }
 }

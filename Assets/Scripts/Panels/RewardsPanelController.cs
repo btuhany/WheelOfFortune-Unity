@@ -117,8 +117,8 @@ namespace WheelOfFortune.Panels
 
             if (item.Count > _settings.GatherMaxRewPart)
             {
-                rewardAddCountPerPart = item.Count;
-                rewardPartCount = 1;
+                rewardPartCount = _settings.RewPartCountMaxPartLimit;
+                rewardAddCountPerPart = item.Count / rewardPartCount;
             }
             else
             {
