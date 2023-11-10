@@ -30,7 +30,6 @@ namespace WheelOfFortune.Wheel
 
         #region Constants
         private const int _fullRotationDegree = 360;
-        private const float _wheelRadius = 140f;
         #endregion
 
         private WheelSliceController[] _sliceControllers = new WheelSliceController[8];
@@ -172,8 +171,9 @@ namespace WheelOfFortune.Wheel
             WheelSliceController randomSlice = _sliceControllers[Random.Range(0, _sliceControllers.Length)];
             return randomSlice;
         }
-        public Sequence SpinToTargetSlice(int targetAngle)
+        public Sequence SpinToTargetSlice(int targetSliceIndex)
         {
+            float targetAngle = targetSliceIndex * _settings.AnglePerSlice;
             float angleDifference = targetAngle - _rectTransform.rotation.eulerAngles.z;
             Sequence spinSequence = DOTween.Sequence();
 

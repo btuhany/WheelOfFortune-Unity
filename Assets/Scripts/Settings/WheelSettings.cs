@@ -40,6 +40,9 @@ namespace WheelOfFortune.Settings
 
         [Header("Prefabs")]
         [SerializeField] private WheelItem _bombItem;
+
+        [Header("Config")]
+        [SerializeField] private float _anglePerSlice = 45f;
         public float AnimSpinStartDegree { get => _animSpinStartDegree; }
         public float AnimSpinStartTime { get => _animSpinStartTime; }
         public Ease AnimSpinStartEase { get => _animSpinStartEase; }
@@ -66,5 +69,6 @@ namespace WheelOfFortune.Settings
         public int BombCountTierThreeMin { get => _bombCountTierThreeMin; }
         public int BombCountTierThreeMax { get => _bombCountTierThreeMax; }
         public WheelItem BombItem { get => _bombItem; }
+        public float AnglePerSlice { get => _anglePerSlice; }
     }
 }
