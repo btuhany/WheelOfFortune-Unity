@@ -15,7 +15,8 @@ namespace WheelOfFortune.Panels
         [Header("References")]
         [SerializeField] private Image _backgroundImg;
         [SerializeField] private TextMeshProUGUI _textQuestion;
-        [SerializeField] private Button[] _buttons = new Button[2];
+        [SerializeField] private Button _yesButton;
+        [SerializeField] private Button _noButton;
         [SerializeField] private RectTransform _rectTransform;
         [SerializeField] private RectTransform _holderEndRewards;
         
@@ -31,23 +32,25 @@ namespace WheelOfFortune.Panels
                 _rectTransform = GetComponent<RectTransform>();
             if (_backgroundImg == null)
                 _backgroundImg = GetComponent<Image>();
-            if (_buttons[0] == null || _buttons[1] == null)
-                _buttons = GetComponentsInChildren<Button>();
+            if (_yesButton == null || _noButton == null)
+            {
+                Button[] buttons = new Button[2];
+                buttons = GetComponentsInChildren<Button>();
+                if (_yesButton == null)
+                    _yesButton = buttons[0];
+                if (_noButton == null)
+                    _noButton = buttons[1];
+            }
             if (_textQuestion == null)
                 _textQuestion = GetComponentInChildren<TextMeshProUGUI>();
         }
         private void Awake()
         {
-            _buttons[0].onClick.AddListener(HandleOnYesBtnClk);
-            _buttons[1].onClick.AddListener(HandleOnNoBtnClk);
+            _yesButton.onClick.AddListener(HandleOnYesBtnClk);
+            _noButton.onClick.AddListener(HandleOnNoBtnClk);
 
-            foreach (Button button in _buttons)
-            {
-                button.interactable = false;
-                button.enabled = false;
-                button.transform.localScale = Vector3.zero;
-            }
-
+            SetButtons(false, true, _yesButton, _noButton);
+            
             Color startColor = _backgroundImg.color;
             _backgroundImg.color = new Color(startColor.r, startColor.g, startColor.b, 0.0f);
 
@@ -56,26 +59,41 @@ namespace WheelOfFortune.Panels
                 
             this.gameObject.SetActive(false);
         }
+        private void HandleOnYesBtnClk()
+        {
+            OnBtnClkExitYes?.Invoke();
+        }
+        private void HandleOnNoBtnClk()
+        {
+            SetButtons(false, false, _yesButton, _noButton);
+            OnBtnClkExitNo?.Invoke();
+        }
+        private void SetButtons(bool active, bool resetScale, params Button[] buttons)
+        {
+            foreach (Button button in buttons)
+            {
+                button.enabled = active;
+                button.interactable = active;
+                if (resetScale)
+                    button.transform.localScale = Vector3.zero;
+            }
+        }
         public async UniTask PlayEnterBackground()
         {
             this.gameObject.SetActive(true);
             await _backgroundImg.DOFade(
                 _settings.BackgroundColorAlpha, _settings.BackgroundFadeAnimTime)
                 .SetEase(_settings.BackgroundFadeAnimEase).ToUniTask();
-            foreach (Button button in _buttons)
-            {
-                button.interactable = true;
-                button.enabled = true;
-            }
+            SetButtons(true, false, _yesButton, _noButton);
         }
         public List<UniTask> PlayEnterQuestionButtons()
         {
             List<UniTask> fadeAnims = new List<UniTask>();
             fadeAnims.Add(_textQuestion.DOFade(1.0f, _settings.TextFadeAnimTime)
                 .SetEase(_settings.SpawnAnimEase).ToUniTask());
-            fadeAnims.Add(_buttons[0].transform.DOScale(1.0f, _settings.ButtonsScaleAnimTime)
+            fadeAnims.Add(_yesButton.transform.DOScale(1.0f, _settings.ButtonsScaleAnimTime)
                 .SetEase(_settings.SpawnAnimEase).ToUniTask());
-            fadeAnims.Add(_buttons[1].transform.DOScale(1.0f, _settings.ButtonsScaleAnimTime)
+            fadeAnims.Add(_noButton.transform.DOScale(1.0f, _settings.ButtonsScaleAnimTime)
                 .SetEase(_settings.SpawnAnimEase).ToUniTask());
             return fadeAnims;
         }
@@ -85,9 +103,9 @@ namespace WheelOfFortune.Panels
             fadeAnims.Add(_textQuestion.DOFade(0.0f, _settings.TextFadeAnimTime)
                 .SetEase(_settings.SpawnAnimEase)
                 .ToUniTask());
-            fadeAnims.Add(_buttons[0].transform.DOScale(0.0f, _settings.ButtonsScaleAnimTime)
+            fadeAnims.Add(_yesButton.transform.DOScale(0.0f, _settings.ButtonsScaleAnimTime)
                 .SetEase(_settings.SpawnAnimEase).ToUniTask());
-            fadeAnims.Add(_buttons[1].transform.DOScale(0.0f, _settings.ButtonsScaleAnimTime)
+            fadeAnims.Add(_noButton.transform.DOScale(0.0f, _settings.ButtonsScaleAnimTime)
                 .SetEase(_settings.SpawnAnimEase).ToUniTask());
 
             await UniTask.WhenAll(fadeAnims);
@@ -99,18 +117,6 @@ namespace WheelOfFortune.Panels
                 .SetEase(_settings.BackgroundFadeAnimEase).ToUniTask();
             this.gameObject.SetActive(false);
         }
-        private void HandleOnYesBtnClk()
-        {
-            OnBtnClkExitYes?.Invoke();
-        }
-        private void HandleOnNoBtnClk()
-        {
-            foreach (Button button in _buttons)
-            {
-                button.interactable = false;
-                button.enabled = false;
-            }
-            OnBtnClkExitNo?.Invoke();
-        }
+
     }
 }
