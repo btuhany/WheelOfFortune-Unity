@@ -65,11 +65,11 @@ namespace WheelOfFortune.Panels
             _zonesGridLayout.cellSize = new Vector2(_zoneRectWidth, _settings.GroupCellHeight);
             _zoneBackground.sizeDelta = new Vector2(_zoneRectWidth, _zoneBackground.sizeDelta.y);
             _zonesGridLayout.transform.localPosition = new Vector3(
-                -_zonesGridLayout.cellSize.x / 2,
+                -_zonesGridLayout.cellSize.x * _settings.StartLocalPosFactor,
                 _zonesGridLayout.transform.localPosition.y,
                 _zonesGridLayout.transform.localPosition.z);
             _prewZonesFilter.sizeDelta = new Vector2(
-                _zoneRectWidth * (_settings.GroupMaxActiveSize - 1) * 0.5f,
+                _zoneRectWidth * (_settings.GroupMaxActiveSize - _settings.PrewFilterMaxGroupSizeDif) * _settings.StartLocalPosFactor,
                 _prewZonesFilter.sizeDelta.y);
         }
         private void AddZones(int value)
@@ -155,12 +155,12 @@ namespace WheelOfFortune.Panels
         }
         private void HandleScrollOnZonesReturnPool()
         {
-            int returnObjectCount = _settings.GroupMaxActiveSize / 2;
+            int returnObjectCount = _settings.GroupMaxActiveSize / _settings.ReturnObjectsCountMaxCountDivider;
             for (int i = 0; i < returnObjectCount; i++)
                 UITextZonePool.Instance.ReturnObject(_zonesList[_counterZone - returnObjectCount - i]);
             _gridHolderRect.DOLocalMove(
             _gridHolderRect.localPosition - _settings.GroupSlideDir * _zoneRectWidth * returnObjectCount,
-            _settings.ScrollTime / 3f)
+            _settings.ScrollTime * _settings.GridHolderRectTimeFactor)
             .SetEase(Ease.Linear).ToUniTask();
         }
         public async void ScrollZones(int value)
@@ -173,7 +173,7 @@ namespace WheelOfFortune.Panels
             _counterZone += value;
             _counterZoneGroupRtrnPool++;
 
-            if (_counterZoneGroupRtrnPool > _settings.GroupMaxActiveSize * 5)
+            if (_counterZoneGroupRtrnPool > _settings.GroupMaxActiveSize * _settings.ReturnPoolMinZoneCountFactor)
             {
                 HandleScrollOnZonesReturnPool();
                 _counterZoneGroupRtrnPool = 0;

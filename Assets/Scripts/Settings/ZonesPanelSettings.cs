@@ -13,6 +13,7 @@ namespace WheelOfFortune.Settings
         [SerializeField] private int _groupMaxActiveSize = 13;
         [SerializeField] private Vector3 _groupSlideDir = Vector2.left;
         [SerializeField] private float _groupCellHeight = 60f;
+        [SerializeField] private float _startLocalPosFactor = 0.5f;
         [Header("Scroll")]
         [SerializeField] private float _scrollTime = 1f;
         [SerializeField] private Ease _scrollEase = Ease.Linear;
@@ -46,6 +47,7 @@ namespace WheelOfFortune.Settings
         public Sprite ZoneSpriteNormal { get => _zoneSpriteNormal; }
         public Sprite ZoneSpriteSafe { get => _zoneSpriteSafe; }
         public Sprite ZoneSpriteSuper { get => _zoneSpriteSuper; }
+        public float StartLocalPosFactor { get => _startLocalPosFactor; }
     }
 }
 
