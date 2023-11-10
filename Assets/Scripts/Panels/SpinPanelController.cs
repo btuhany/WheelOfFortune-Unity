@@ -47,6 +47,13 @@ namespace WheelOfFortune.Panels
             SpinButtonSet(false);
             OnButtonClickedSpin?.Invoke();
         }
+        private void SetWheelPanelZoneType(Sprite spinSprite, Sprite indicatorSprite, string zoneHeader, Color zoneHeaderCol)
+        {
+            _imageWheelSpin.sprite = spinSprite;
+            _imageWheelIndicator.sprite = indicatorSprite;
+            _textHeaderSpin.text = zoneHeader;
+            _textHeaderSpin.color = zoneHeaderCol;
+        }
         public void SpinButtonSet(bool isActive)
         {
             _buttonSpin.gameObject.SetActive(isActive);
@@ -75,22 +82,16 @@ namespace WheelOfFortune.Panels
             switch (zoneType)
             {
                 case ZonesPanelController.ZoneType.Normal:
-                    _imageWheelSpin.sprite = _settings.SpriteNormalZoneSpin;
-                    _imageWheelIndicator.sprite = _settings.SpriteNormalZoneIndicator;
-                    _textHeaderSpin.text = _settings.StringHeaderNormalZone;
-                    _textHeaderSpin.color = _settings.ColorTextNormalZone;
+                    SetWheelPanelZoneType(_settings.SpriteNormalZoneSpin, _settings.SpriteNormalZoneIndicator,
+                        _settings.StringHeaderNormalZone, _settings.ColorTextNormalZone);
                     break;
                 case ZonesPanelController.ZoneType.Safe:
-                    _imageWheelSpin.sprite = _settings.SpriteSafeZoneSpin;
-                    _imageWheelIndicator.sprite = _settings.SpriteSafeZoneIndicator;
-                    _textHeaderSpin.text = _settings.StringHeaderSafeZone;
-                    _textHeaderSpin.color = _settings.ColorTextSafeZone;
+                    SetWheelPanelZoneType(_settings.SpriteSafeZoneSpin, _settings.SpriteSafeZoneIndicator,
+                        _settings.StringHeaderSafeZone, _settings.ColorTextSafeZone);
                     break;
                 case ZonesPanelController.ZoneType.Super:
-                    _imageWheelSpin.sprite = _settings.SpriteSuperZoneSpin;
-                    _imageWheelIndicator.sprite = _settings.SpriteSuperZoneIndicator;
-                    _textHeaderSpin.text = _settings.StringHeaderSuperZone;
-                    _textHeaderSpin.color = _settings.ColorTextSuperZone;
+                    SetWheelPanelZoneType(_settings.SpriteSuperZoneSpin, _settings.SpriteSuperZoneIndicator,
+                        _settings.StringHeaderSuperZone, _settings.ColorTextSuperZone);
                     break;
                 default:
                     break;
