@@ -13,15 +13,21 @@ MonoBehaviour:
   m_Name: BombPanelSettings_Default
   m_EditorClassIdentifier: 
   _backgroundFadeTime: 0.2
-  _bombAnimPunchScale: {x: 0.03, y: 0.03, z: 0.03}
-  _bombAnimTime: 0.2
-  _bombAnimEase: 32
+  _bombHeartbeatScaleAnim:
+    value: {x: 0.03, y: 0.03, z: 0.03}
+    time: 0.2
+    ease: 32
   _bombAnimLoopInterval: 1
   _bombAnimPunchInterval: 0.1
-  _flashRotationTimePeriod: 100
+  _flashRotateAnim:
+    value: {x: 0, y: 0, z: -360}
+    time: 100
+    ease: 1
+  _flashStartScaleAnim:
+    value: {x: 1, y: 1, z: 1}
+    time: 0.3
+    ease: 27
   _flashImgFadeTime: 0.7
-  _flashImgScaleAnimTime: 0.3
-  _flashImgScaleAnimEase: 27
   _flashImgAlphaVal: 0.65
   _textFadeTime: 0.7
   _buttonAnimTime: 0.3

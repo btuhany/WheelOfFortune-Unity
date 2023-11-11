@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using UnityEngine;
 
 namespace WheelOfFortune.Settings
@@ -6,53 +7,32 @@ namespace WheelOfFortune.Settings
     [CreateAssetMenu(menuName = "Wheel Of Fortune/Panels/Spin Panel Settings")]
     public class SpinPanelSettings : ScriptableObject
     {
-        [Header("Show Spin Panel Animation")]
-        [SerializeField] private float _animShowSpinPanelTime = 1f;
-        [SerializeField] private Ease _animShowSpinPanelEase = Ease.Linear;
+        [Serializable]
+        public struct SpinPanelAppearance
+        {
+            public Sprite spriteSpin;
+            public Sprite spriteIndicator;
+            public string textHeader;
+            public Color textHeaderColor;
+        }
 
-        [Header("Hide Spin Panel Animation")]
-        [SerializeField] private float _animHideSpinPanelTime = 1f;
-        [SerializeField] private Ease _animHideSpinPanelEase = Ease.Linear;
-        [Tooltip("Milliseconds")][SerializeField] private int _delayHidePanel = 1000;
+        [Header("Show Panel Config")]
+        [SerializeField] private TweenFloat _showPanelAnim;
 
-        [Header("Spin & Indicator Sprites")]
-        [Header("Safe Zone")]
-        [SerializeField] private Sprite _spriteSafeZoneSpin;
-        [SerializeField] private Sprite _spriteSafeZoneIndicator;
-        [SerializeField] private string _stringHeaderSafeZone = "SILVER SPIN";
-        [SerializeField] private Color _colorTextSafeZone;
-        [Header("Super Zone")]
-        [SerializeField] private Sprite _spriteSuperZoneIndicator;
-        [SerializeField] private Sprite _spriteSuperZoneSpin;
-        [SerializeField] private string _stringHeaderSuperZone = "GOLDEN SPIN";
-        [SerializeField] private Color _colorTextSuperZone;
-        [Header("Normal Zone")]
-        [SerializeField] private Sprite _spriteNormalZoneSpin;
-        [SerializeField] private Sprite _spriteNormalZoneIndicator;
-        [SerializeField] private string _stringHeaderNormalZone = "BRONZE SPIN";
-        [SerializeField] private Color _colorTextNormalZone;
+        [Header("Hide Panel Config")]
+        [SerializeField] private TweenFloat _hidePanelAnim;
+        [Tooltip("Milliseconds")][SerializeField] private int _hidePanelMillisecondsDelay = 1000;
 
-        private readonly int _spinPanelDefaultScaleX = 1;
-        private readonly int _spinPanelHidedScaleX = 0;
+        [Header("Spin Panel Appearance")]
+        [SerializeField] private SpinPanelAppearance _safeZoneAppear;
+        [SerializeField] private SpinPanelAppearance _superZoneAppear;
+        [SerializeField] private SpinPanelAppearance _normalZoneAppear;
 
-        public int SpinPanelDefaultScaleX => _spinPanelDefaultScaleX;
-        public int SpinPanelHidedScaleX => _spinPanelHidedScaleX;
-        public float AnimShowSpinPanelTime { get => _animShowSpinPanelTime; }
-        public Ease AnimShowSpinPanelEase { get => _animShowSpinPanelEase; }
-        public float AnimHideSpinPanelTime { get => _animHideSpinPanelTime; }
-        public Ease AnimHideSpinPanelEase { get => _animHideSpinPanelEase; }
-        public Sprite SpriteNormalZoneSpin { get => _spriteNormalZoneSpin; }
-        public Sprite SpriteSafeZoneSpin { get => _spriteSafeZoneSpin; }
-        public Sprite SpriteSuperZoneSpin { get => _spriteSuperZoneSpin; }
-        public Sprite SpriteNormalZoneIndicator { get => _spriteNormalZoneIndicator; }
-        public Sprite SpriteSafeZoneIndicator { get => _spriteSafeZoneIndicator; }
-        public Sprite SpriteSuperZoneIndicator { get => _spriteSuperZoneIndicator; }
-        public string StringHeaderSafeZone { get => _stringHeaderSafeZone; }
-        public string StringHeaderSuperZone { get => _stringHeaderSuperZone; }
-        public string StringHeaderNormalZone { get => _stringHeaderNormalZone; }
-        public Color ColorTextSafeZone { get => _colorTextSafeZone; }
-        public Color ColorTextSuperZone { get => _colorTextSuperZone; }
-        public Color ColorTextNormalZone { get => _colorTextNormalZone; }
-        public int DelayHidePanel { get => _delayHidePanel; }
+        public int HidePanelMillisecondsDelay { get => _hidePanelMillisecondsDelay; }
+        public TweenFloat ShowPanelAnim { get => _showPanelAnim; }
+        public TweenFloat HidePanelAnim { get => _hidePanelAnim; }
+        public SpinPanelAppearance NormalZoneAppear { get => _normalZoneAppear; }
+        public SpinPanelAppearance SuperZoneAppear { get => _superZoneAppear; }
+        public SpinPanelAppearance SafeZoneAppear { get => _safeZoneAppear; }
     }
 }

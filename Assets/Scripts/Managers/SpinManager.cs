@@ -15,9 +15,6 @@ namespace WheelOfFortune.Managers
         [SerializeField] private ZonesPanelController _zonesPanelController;
         [SerializeField] private BombPanelController _bombPanelController;
         [SerializeField] private GameManager _gameManager;
-        #region Constants
-        private const int _anglePerSlice = 45;
-        #endregion
 
         private void OnEnable()
         {
@@ -39,7 +36,7 @@ namespace WheelOfFortune.Managers
 
             WheelSliceController randomSlice = _spinPanelController.WheelController.SelectRandomSlice();
             WheelItem randomItem = randomSlice.Content;
-            await _spinPanelController.WheelController.SpinToTargetSlice(randomSlice.SliceIndex * _anglePerSlice).ToUniTask();
+            await _spinPanelController.WheelController.SpinToTargetSlice(randomSlice.SliceIndex).ToUniTask();
 
             if (randomItem.Type == WheelItem.ItemType.Reward)
                 await HandleAtReward(randomItem);

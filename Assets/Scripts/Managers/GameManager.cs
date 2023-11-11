@@ -19,6 +19,7 @@ namespace WheelOfFortune.Managers
         [SerializeField] private ExitPanelController _exitPanelController;
         [SerializeField] private SpinPanelController _spinPanelController;
         [SerializeField] private ZonesInfoPanelController _zonesInfoPanelController;
+
         private void OnEnable()
         {
             _bombPanelController.OnBtnClkGiveUp += HandleOnGiveUp;
@@ -99,12 +100,12 @@ namespace WheelOfFortune.Managers
         {
             if (_zonesPanelController.CurrentZone > 1 && _zonesPanelController.CurrentZoneType == ZoneType.Normal)
             {
-                if (_zonesPanelController.CurrentZone > _settings.TierOneLimit)
-                    _spinPanelController.WheelController.RandomizeItemsWithTiers(ItemTier.One);
+                if (_zonesPanelController.CurrentZone > _settings.TierThreeLimit)
+                    _spinPanelController.WheelController.RandomizeItemsWithTiers(ItemTier.Three);
                 else if (_zonesPanelController.CurrentZone > _settings.TierTwoLimit)
                     _spinPanelController.WheelController.RandomizeItemsWithTiers(ItemTier.Two);
-                else if (_zonesPanelController.CurrentZone > _settings.TierThreeLimit)
-                    _spinPanelController.WheelController.RandomizeItemsWithTiers(ItemTier.Three);
+                else if (_zonesPanelController.CurrentZone > _settings.TierOneLimit)
+                    _spinPanelController.WheelController.RandomizeItemsWithTiers(ItemTier.One);
             }
         }
     }

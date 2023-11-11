@@ -10,7 +10,6 @@ namespace WheelOfFortune.Tools
         [SerializeField] protected T _prefab;
         [SerializeField] private int _size;
         [SerializeField] private int _expandingSize;
-        private bool _isReady = false;
 
         private Queue<T> _pooledObjects;
         protected Transform _transform;
@@ -18,7 +17,7 @@ namespace WheelOfFortune.Tools
         {
             base.Awake();
             _transform = GetComponent<Transform>();
-            PoolObjects();
+            InitializePool();
         }
         private void ExpandPool(int size)
         {
@@ -29,21 +28,17 @@ namespace WheelOfFortune.Tools
                 _pooledObjects.Enqueue(newObj);
             }
         }
-        protected void PoolObjects()
+        private void InitializePool()
         {
             _pooledObjects = new Queue<T>();
-            for (int i = 0; i < _size; i++)
-            {
-                T newObj = Instantiate(_prefab, _transform);
-                newObj.gameObject.SetActive(false);
-                _pooledObjects.Enqueue(newObj);
-            }
-            _isReady = true;
+            ExpandPool(_size);
         }
         public T GetObject(bool active = true)
         {
-            if (!_isReady)
-                PoolObjects();
+            if (!gameObject.activeSelf)
+                Debug.LogError("Pool object is not enabled!");
+            else if (_pooledObjects == null)
+                InitializePool();
 
             if (_pooledObjects.Count <= 0)
                 ExpandPool(_expandingSize);
@@ -55,6 +50,9 @@ namespace WheelOfFortune.Tools
         }
         public virtual void ReturnObject(T obj)
         {
+            if (!gameObject.activeSelf)
+                Debug.LogError("Pool object is not enabled!");
+
             obj.gameObject.SetActive(false);
             obj.gameObject.transform.SetParent(_transform);
             _pooledObjects.Enqueue(obj);

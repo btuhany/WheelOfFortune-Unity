@@ -30,10 +30,9 @@ namespace WheelOfFortune.Wheel
 
         #region Constants
         private const int _fullRotationDegree = 360;
-        private const float _wheelRadius = 140f;
         #endregion
 
-        private WheelSliceController[] _sliceControllers = new WheelSliceController[8];
+        private WheelSliceController[] _sliceControllers;
 
         [ContextMenu("Update Slice Normal Zone Contents")]
         private void UpdateSliceContentsNormalZone()
@@ -90,7 +89,7 @@ namespace WheelOfFortune.Wheel
         }
         private void SetSameContentCountsEqual(WheelItem item)
         {
-            for (int j = 0; j < 8; j++)
+            for (int j = 0; j < _settings.SliceCount; j++)
             {
                 if (item == _sliceControllers[j].Content)
                 {
@@ -100,25 +99,30 @@ namespace WheelOfFortune.Wheel
         }
         private void PlayIndicatorStartAnim()
         {
+            TweenVector3 indicatorStartAnim = _settings.indicatorStartRotationAnim;
             Sequence sequence = DOTween.Sequence();
-            int loop = (int)(_settings.AnimSpinStartTime / (_settings.AnimIndicatorStartSwingTime * 2));
-            sequence.Append(_rectSpinIndicator.DOLocalRotate(new Vector3(0, 0, -_settings.AnimIndicatorStartSwingAngle), _settings.AnimIndicatorStartSwingTime));
-            sequence.Append(_rectSpinIndicator.DOLocalRotate(new Vector3(0, 0, _settings.AnimIndicatorStartSwingAngle), _settings.AnimIndicatorStartSwingTime));
+            sequence.Append(_rectSpinIndicator.DOLocalRotate(new Vector3(indicatorStartAnim.value.x, indicatorStartAnim.value.y, -indicatorStartAnim.value.z), indicatorStartAnim.time));
+            sequence.Append(_rectSpinIndicator.DOLocalRotate(indicatorStartAnim.value, indicatorStartAnim.time));
+            sequence.SetEase(indicatorStartAnim.ease);
+            int loop = (int)(_settings.spinStartRotationAnim.time / (indicatorStartAnim.time * 2));
             sequence.SetLoops(loop);
         }
         private void PlayIndicatorAnim()
         {
-            float totalTime = _settings.AnimSpinTime * _settings.AnimSpinLoopCount;
-            int loopCount = (int)(totalTime / _settings.AnimIndicatorSwingTimePerLoop);
-            _rectSpinIndicator.DOLocalRotate(new Vector3(0, 0, _settings.AnimIndicatorSwingAngle), _settings.AnimIndicatorSwingTimePerLoop).SetLoops(loopCount);
+            float totalTime = _settings.spinLoopRotationAnim.time * _settings.SpinAnimLoop;
+            int loopCount = (int)(totalTime / _settings.IndicatorAnimTimePerLoop);
+            _rectSpinIndicator.DOLocalRotate(_settings.indicatorLoopRotationAnim.value,
+                _settings.indicatorLoopRotationAnim.time)
+                .SetEase(_settings.indicatorLoopRotationAnim.ease).SetLoops(loopCount);
         }
         private void PlayIndicatorStopAnim()
         {
+            TweenVector3 indicatorAnim = _settings.indicatorEndRotationAnim;
             Sequence sequence = DOTween.Sequence();
-            sequence.Append(_rectSpinIndicator.DOLocalRotate(new Vector3(0, 0, -_settings.AnimIndicatorEndSwingAngle), _settings.AnimIndicatorEndSwingTime));
-            sequence.Append(_rectSpinIndicator.DOLocalRotate(new Vector3(0, 0, _settings.AnimIndicatorEndSwingAngle), _settings.AnimIndicatorEndSwingTime));
-            sequence.Append(_rectSpinIndicator.DOLocalRotate(Vector3.zero, _settings.AnimIndicatorEndSwingTime)
-                .SetEase(_settings.AnimIndicatorStopEase));
+            sequence.Append(_rectSpinIndicator.DOLocalRotate(new Vector3(indicatorAnim.value.x, indicatorAnim.value.y, -indicatorAnim.value.z), indicatorAnim.time));
+            sequence.Append(_rectSpinIndicator.DOLocalRotate(indicatorAnim.value, indicatorAnim.time));
+            sequence.Append(_rectSpinIndicator.DOLocalRotate(Vector3.zero, indicatorAnim.time)
+                .SetEase(indicatorAnim.ease));
         }
         public void HandleOnZoneChanged(ZonesPanelController.ZoneType zoneType)
         {
@@ -151,10 +155,10 @@ namespace WheelOfFortune.Wheel
                 bombCount = Random.Range(_settings.BombCountTierThreeMin, _settings.BombCountTierThreeMax);
                 itemGroup = _tierThreeSliceContents;
             }
+            bombCount = Mathf.Min(bombCount, _settings.SliceCount);
 
-
-            WheelItem[] randomItemGroup = new WheelItem[8];
-            for (int i = 0; i < 8; i++)
+            WheelItem[] randomItemGroup = new WheelItem[_settings.SliceCount];
+            for (int i = 0; i < _settings.SliceCount; i++)
             {
                 randomItemGroup[i] = itemGroup.Items[Random.Range(0, itemGroup.Items.Length)];
             }
@@ -163,7 +167,22 @@ namespace WheelOfFortune.Wheel
             //Add&Change with bombs
             for (int i = 0; i < bombCount; i++)
             {
-                WheelSliceController randomSlice = _sliceControllers[Random.Range(0, _sliceControllers.Length)];
+                int randomIndex = Random.Range(0, _sliceControllers.Length);
+                WheelSliceController randomSlice = _sliceControllers[randomIndex];
+
+                int counter = 0;
+                while (randomSlice.Content.Type == WheelItem.ItemType.Bomb)
+                {
+                    counter++;
+                    if (counter >= _settings.SliceCount)
+                        break;
+
+                    randomIndex++;
+                    if (randomIndex == _settings.SliceCount)
+                        randomIndex = 0;
+
+                    randomSlice = _sliceControllers[randomIndex];
+                }
                 randomSlice.SetContent(_settings.BombItem);
             }
         }
@@ -172,43 +191,45 @@ namespace WheelOfFortune.Wheel
             WheelSliceController randomSlice = _sliceControllers[Random.Range(0, _sliceControllers.Length)];
             return randomSlice;
         }
-        public Sequence SpinToTargetSlice(int targetAngle)
+        public Sequence SpinToTargetSlice(int targetSliceIndex)
         {
+            float targetAngle = targetSliceIndex * _settings.AnglePerSlice;
             float angleDifference = targetAngle - _rectTransform.rotation.eulerAngles.z;
             Sequence spinSequence = DOTween.Sequence();
 
             spinSequence.AppendCallback(PlayIndicatorStartAnim);
 
+            TweenVector3 startSpin = _settings.spinStartRotationAnim;
+            TweenVector3 loopSpin = _settings.spinLoopRotationAnim;
+            TweenVector3 endSpin = _settings.spinEndRotationAnim;
+
             //Spin start animation append
             spinSequence.Append(
-            _rectTransform.DOLocalRotate
-            (new Vector3(0f, 0f, _settings.AnimSpinStartDegree),
-            _settings.AnimSpinStartTime, RotateMode.FastBeyond360)
+            _rectTransform.DOLocalRotate(startSpin.value,
+            startSpin.time, RotateMode.FastBeyond360)
             .SetRelative(true)
-            .SetEase(_settings.AnimSpinStartEase));
+            .SetEase(startSpin.ease));
 
             spinSequence.AppendCallback(PlayIndicatorAnim);
 
             //Spin animation append
             spinSequence.Append(
-            _rectTransform.DOLocalRotate
-            (new Vector3(0f, 0f, _settings.AnimSpinDegree),
-            _settings.AnimSpinTime, RotateMode.FastBeyond360)
+            _rectTransform.DOLocalRotate(loopSpin.value,
+            loopSpin.time, RotateMode.FastBeyond360)
             .SetRelative(true)
-            .SetEase(_settings.AnimSpinEase)
-            .SetLoops(_settings.AnimSpinLoopCount));
+            .SetEase(loopSpin.ease)
+            .SetLoops(_settings.SpinAnimLoop));
 
 
-            float spinEndTime = _settings.AnimSpinEndTime * ((_fullRotationDegree - angleDifference) / _fullRotationDegree);
+            float spinEndTime = endSpin.time * ((_fullRotationDegree - angleDifference) / _fullRotationDegree);
             spinSequence.AppendCallback(PlayIndicatorStopAnim);
 
             //Spin end animation append
             spinSequence.Append(
-            _rectTransform.DOLocalRotate
-            (new Vector3(0f, 0f, targetAngle - _fullRotationDegree),
+            _rectTransform.DOLocalRotate(new Vector3(0f, 0f, targetAngle - _fullRotationDegree),
             spinEndTime, RotateMode.FastBeyond360)
             .SetRelative(false)
-            .SetEase(_settings.AnimSpinEndEase));
+            .SetEase(endSpin.ease));
 
             return spinSequence;
         }

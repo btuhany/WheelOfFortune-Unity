@@ -14,18 +14,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _groupsAtStart: 4
   _groupMaxActiveSize: 13
-  _groupSlideDir: {x: -1, y: 0, z: 0}
   _groupCellHeight: 60
-  _scrollTime: 0.2
-  _scrollEase: 26
+  _startLocalPosFactor: 0.5
+  _prewFilterMaxGroupSizeDif: 1
+  scrollAnim:
+    value: {x: -1, y: 0, z: 0}
+    time: 0.2
+    ease: 26
+  _zoneBgClrFadeAnim:
+    color: {r: 0, g: 0, b: 0, a: 1}
+    time: 0.2
+    ease: 32
   _zoneSafeValue: 5
   _zoneSafeColor: {r: 0.76470596, g: 1, b: 0.5411765, a: 1}
   _zoneSuperValue: 30
   _zoneSuperColor: {r: 1, g: 0.8470589, b: 0.5176471, a: 1}
-  _zoneBgColorFadeAnim: {r: 0, g: 0, b: 0, a: 1}
-  _zoneBgColorFadeAnimTime: 0.2
-  _zoneBgClrFadeStartEase: 33
-  _zoneBgClrFadeEndEase: 34
   _zoneSpriteNormal: {fileID: 21300000, guid: 20992dfeefe4cf84884a8ab8ba46f324, type: 3}
   _zoneSpriteSafe: {fileID: 21300000, guid: 6cf4d9e67966a5d47834efd7e07724f0, type: 3}
   _zoneSpriteSuper: {fileID: 21300000, guid: 2913fbfab0381524eac1c04f4fad9afe, type: 3}
+  _gridHolderRectTimeFactor: 0.3
+  _returnPoolMinZoneCountFactor: 5
+  _returnObjectsCountMaxCountDivider: 2

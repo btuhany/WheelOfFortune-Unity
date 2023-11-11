@@ -47,24 +47,31 @@ namespace WheelOfFortune.Panels
             SpinButtonSet(false);
             OnButtonClickedSpin?.Invoke();
         }
+        private void SetWheelPanelZoneType(SpinPanelSettings.SpinPanelAppearance spinPanel)
+        {
+            _imageWheelSpin.sprite = spinPanel.spriteSpin;
+            _imageWheelIndicator.sprite = spinPanel.spriteIndicator;
+            _textHeaderSpin.text = spinPanel.textHeader;
+            _textHeaderSpin.color = spinPanel.textHeaderColor;
+        }
         public void SpinButtonSet(bool isActive)
         {
             _buttonSpin.gameObject.SetActive(isActive);
         }
         public async UniTask HideSpinPanelAnimation()
         {
-            await UniTask.Delay(_settings.DelayHidePanel);
+            await UniTask.Delay(_settings.HidePanelMillisecondsDelay);
             await _rectTransform.DOScaleX(
-                _settings.SpinPanelHidedScaleX,
-                _settings.AnimHideSpinPanelTime)
-                .SetEase(_settings.AnimHideSpinPanelEase).ToUniTask();
+                _settings.HidePanelAnim.value,
+                _settings.HidePanelAnim.time)
+                .SetEase(_settings.HidePanelAnim.ease).ToUniTask();
         }
         public async UniTask ShowSpinPanelAnimation()
         {
             await _rectTransform.DOScaleX(
-                _settings.SpinPanelDefaultScaleX,
-                _settings.AnimShowSpinPanelTime)
-                .SetEase(_settings.AnimShowSpinPanelEase).ToUniTask();
+                _settings.ShowPanelAnim.value,
+                _settings.ShowPanelAnim.time)
+                .SetEase(_settings.ShowPanelAnim.ease).ToUniTask();
             SpinButtonSet(true);
         }
         public void HandleOnZoneChanged(ZonesPanelController.ZoneType zoneType)
@@ -75,22 +82,13 @@ namespace WheelOfFortune.Panels
             switch (zoneType)
             {
                 case ZonesPanelController.ZoneType.Normal:
-                    _imageWheelSpin.sprite = _settings.SpriteNormalZoneSpin;
-                    _imageWheelIndicator.sprite = _settings.SpriteNormalZoneIndicator;
-                    _textHeaderSpin.text = _settings.StringHeaderNormalZone;
-                    _textHeaderSpin.color = _settings.ColorTextNormalZone;
+                    SetWheelPanelZoneType(_settings.NormalZoneAppear);
                     break;
                 case ZonesPanelController.ZoneType.Safe:
-                    _imageWheelSpin.sprite = _settings.SpriteSafeZoneSpin;
-                    _imageWheelIndicator.sprite = _settings.SpriteSafeZoneIndicator;
-                    _textHeaderSpin.text = _settings.StringHeaderSafeZone;
-                    _textHeaderSpin.color = _settings.ColorTextSafeZone;
+                    SetWheelPanelZoneType(_settings.SafeZoneAppear);
                     break;
                 case ZonesPanelController.ZoneType.Super:
-                    _imageWheelSpin.sprite = _settings.SpriteSuperZoneSpin;
-                    _imageWheelIndicator.sprite = _settings.SpriteSuperZoneIndicator;
-                    _textHeaderSpin.text = _settings.StringHeaderSuperZone;
-                    _textHeaderSpin.color = _settings.ColorTextSuperZone;
+                    SetWheelPanelZoneType(_settings.SuperZoneAppear);
                     break;
                 default:
                     break;

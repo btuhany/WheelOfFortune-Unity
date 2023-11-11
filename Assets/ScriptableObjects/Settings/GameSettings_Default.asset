@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _reviveGoldCost: 10
   _tierOneLimit: 5
-  _tierTwoLimit: 15
+  _tierTwoLimit: 10
   _tierThreeLimit: 20

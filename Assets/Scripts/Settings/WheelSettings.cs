@@ -1,34 +1,48 @@
 using DG.Tweening;
+using System;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using WheelOfFortune.Items;
 
 namespace WheelOfFortune.Settings
 {
+    [Serializable] 
+    public struct TweenVector3
+    {
+        public Vector3 value;
+        public float time;
+        public Ease ease;
+    }
+
+    [Serializable]
+    public struct TweenFloat
+    {
+        public float value;
+        public float time;
+        public Ease ease;
+    }
+    [Serializable]
+    public struct TweenColor
+    {
+        public Color color;
+        public float time;
+        public Ease ease;
+    }
+
     [CreateAssetMenu(menuName = "Wheel Of Fortune/Wheel/Wheel Settings")]
     public class WheelSettings : ScriptableObject
     {
-        [Header("Spin Start Animation")]
-        [SerializeField] private float _animSpinStartDegree;
-        [SerializeField] private float _animSpinStartTime;
-        [SerializeField] private Ease _animSpinStartEase;
-        [Header("Spin Animation")]
-        [SerializeField] private float _animSpinDegree;
-        [SerializeField] private float _animSpinTime;
-        [SerializeField] private Ease _animSpinEase;
-        [SerializeField] private int _animSpinLoopCount;
-        [Header("Spin End Animation")]
-        [SerializeField] private float _animSpinEndTime;
-        [SerializeField] private Ease _animSpinEndEase;
+        [Header("Spin Animations")]
+        public TweenVector3 spinStartRotationAnim;
+        public TweenVector3 spinLoopRotationAnim;
+        public TweenVector3 spinEndRotationAnim;
+        [SerializeField] private int _spinAnimLoop = 3;
 
-        [Header("Indicator Animation")]
-        [SerializeField] private float _animIndicatorStartSwingTime = 0.2f;
-        [SerializeField] private float _animIndicatorSwingTimePerLoop = 0.1f;
-        [SerializeField] private float _animIndicatorEndSwingTime = 0.4f;
-        [SerializeField] private float _animIndicatorDegree = 60f;
-        [SerializeField] private float _animIndicatorEndSwingAngle = 30f;
-        [SerializeField] private float _animIndicatorStartSwingAngle = 30f;
-        [SerializeField] private Ease _animIndicatorStopEase = Ease.OutElastic;
+        [Header("Indicator Animations")]
+        public TweenVector3 indicatorStartRotationAnim;
+        public TweenVector3 indicatorLoopRotationAnim;
+        public TweenVector3 indicatorEndRotationAnim;
+        [SerializeField] private float _indicatorAnimTimePerLoop = 0.1f;
 
         [Header("Tier Bombs Config (Max Exclusive)")]
         [SerializeField] private int _bombCountTierOneMin = 1;
@@ -40,25 +54,11 @@ namespace WheelOfFortune.Settings
 
         [Header("Prefabs")]
         [SerializeField] private WheelItem _bombItem;
-        public float AnimSpinStartDegree { get => _animSpinStartDegree; }
-        public float AnimSpinStartTime { get => _animSpinStartTime; }
-        public Ease AnimSpinStartEase { get => _animSpinStartEase; }
 
-        public float AnimSpinDegree { get => _animSpinDegree; }
-        public float AnimSpinTime { get => _animSpinTime; }
-        public Ease AnimSpinEase { get => _animSpinEase; }
+        [Header("Config")]
+        [SerializeField] private int _sliceCount = 8;
+        [SerializeField] private float _anglePerSlice = 45f;
 
-        public float AnimSpinEndTime { get => _animSpinEndTime; }
-        public Ease AnimSpinEndEase { get => _animSpinEndEase; }
-
-        public int AnimSpinLoopCount { get => _animSpinLoopCount; }
-        public float AnimIndicatorStartSwingTime { get => _animIndicatorStartSwingTime; }
-        public float AnimIndicatorSwingTimePerLoop { get => _animIndicatorSwingTimePerLoop; }
-        public float AnimIndicatorEndSwingTime { get => _animIndicatorEndSwingTime; }
-        public float AnimIndicatorEndSwingAngle { get => _animIndicatorEndSwingAngle; }
-        public float AnimIndicatorSwingAngle { get => _animIndicatorDegree; }
-        public float AnimIndicatorStartSwingAngle { get => _animIndicatorStartSwingAngle; }
-        public Ease AnimIndicatorStopEase { get => _animIndicatorStopEase; }
         public int BombCountTierOneMin { get => _bombCountTierOneMin; }
         public int BombCountTierOneMax { get => _bombCountTierOneMax; }
         public int BombCountTierTwoMin { get => _bombCountTierTwoMin; }
@@ -66,5 +66,9 @@ namespace WheelOfFortune.Settings
         public int BombCountTierThreeMin { get => _bombCountTierThreeMin; }
         public int BombCountTierThreeMax { get => _bombCountTierThreeMax; }
         public WheelItem BombItem { get => _bombItem; }
+        public float AnglePerSlice { get => _anglePerSlice; }
+        public float IndicatorAnimTimePerLoop { get => _indicatorAnimTimePerLoop; }
+        public int SpinAnimLoop { get => _spinAnimLoop; }
+        public int SliceCount { get => _sliceCount; }
     }
 }

@@ -12,6 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d491bc3c23d6b1840852a26c99dba866, type: 3}
   m_Name: ExitPanelSettings_Deafult
   m_EditorClassIdentifier: 
-  _backgroundColorAlpha: 0.8
-  _backgroundFadeAnimTime: 0.2
-  _backgroundFadeAnimEase: 32
+  _backgroundShowFadeAnim:
+    value: 0.8
+    time: 0.2
+    ease: 32
+  _backgroundHideFadeAnim:
+    value: 0
+    time: 0.15
+    ease: 32
+  _textHideFadeAnim:
+    value: 0
+    time: 0.3
+    ease: 1
+  _textShowFadeAnim:
+    value: 1
+    time: 0.3
+    ease: 32
+  _buttonHideScaleAnim:
+    value: {x: 0, y: 0, z: 0}
+    time: 0.3
+    ease: 32
+  _buttonShowScaleAnim:
+    value: {x: 1, y: 1, z: 1}
+    time: 0.3
+    ease: 32

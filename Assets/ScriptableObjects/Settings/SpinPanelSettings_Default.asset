@@ -12,20 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 010075de5a35d7f4f989799d566c45b5, type: 3}
   m_Name: SpinPanelSettings_Default
   m_EditorClassIdentifier: 
-  _animShowSpinPanelTime: 0.23
-  _animShowSpinPanelEase: 6
-  _animHideSpinPanelTime: 0.23
-  _animHideSpinPanelEase: 5
-  _delayHidePanel: 550
-  _spriteSafeZoneSpin: {fileID: 21300000, guid: cee757358c800fd488364fd2d40039dc, type: 3}
-  _spriteSafeZoneIndicator: {fileID: 21300000, guid: 98f2eb22bc3a63846adc0657211d1ccf, type: 3}
-  _stringHeaderSafeZone: SILVER SPIN
-  _colorTextSafeZone: {r: 0.9433962, g: 0.9433962, b: 0.9433962, a: 1}
-  _spriteSuperZoneIndicator: {fileID: 21300000, guid: 412756615176e17419868756002a099b, type: 3}
-  _spriteSuperZoneSpin: {fileID: 21300000, guid: 999537d76a27d3244ba8397e3ec667c8, type: 3}
-  _stringHeaderSuperZone: GOLDEN SPIN
-  _colorTextSuperZone: {r: 0.8396226, g: 0.73114717, b: 0.11485406, a: 1}
-  _spriteNormalZoneSpin: {fileID: 21300000, guid: f4a7b2951bc276e47a3b0f7868b1501f, type: 3}
-  _spriteNormalZoneIndicator: {fileID: 21300000, guid: 825a4ab3dc9e29f4cb568e07ca9afcf5, type: 3}
-  _stringHeaderNormalZone: BRONZE SPIN
-  _colorTextNormalZone: {r: 0.9150943, g: 0.6412869, b: 0.22014059, a: 1}
+  _showPanelAnim:
+    value: 1
+    time: 0.23
+    ease: 6
+  _hidePanelAnim:
+    value: 0
+    time: 0.23
+    ease: 5
+  _hidePanelMillisecondsDelay: 400
+  _safeZoneAppear:
+    spriteSpin: {fileID: 21300000, guid: cee757358c800fd488364fd2d40039dc, type: 3}
+    spriteIndicator: {fileID: 21300000, guid: 98f2eb22bc3a63846adc0657211d1ccf, type: 3}
+    textHeader: SILVER SPIN
+    textHeaderColor: {r: 0.9245283, g: 0.9245283, b: 0.9245283, a: 1}
+  _superZoneAppear:
+    spriteSpin: {fileID: 21300000, guid: 999537d76a27d3244ba8397e3ec667c8, type: 3}
+    spriteIndicator: {fileID: 21300000, guid: 412756615176e17419868756002a099b, type: 3}
+    textHeader: GOLDEN SPIN
+    textHeaderColor: {r: 0.8392157, g: 0.7294118, b: 0.11372549, a: 1}
+  _normalZoneAppear:
+    spriteSpin: {fileID: 21300000, guid: f4a7b2951bc276e47a3b0f7868b1501f, type: 3}
+    spriteIndicator: {fileID: 21300000, guid: 825a4ab3dc9e29f4cb568e07ca9afcf5, type: 3}
+    textHeader: BRONZE SPIN
+    textHeaderColor: {r: 0.9137255, g: 0.6431373, b: 0.21960784, a: 1}
