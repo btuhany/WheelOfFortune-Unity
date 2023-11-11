@@ -7,8 +7,24 @@ using WheelOfFortune.Items;
 namespace WheelOfFortune.Settings
 {
     [Serializable] 
-    public struct Tween
+    public struct TweenVector3
     {
+        public Vector3 value;
+        public float time;
+        public Ease ease;
+    }
+
+    [Serializable]
+    public struct TweenFloat
+    {
+        public float value;
+        public float time;
+        public Ease ease;
+    }
+    [Serializable]
+    public struct TweenColor
+    {
+        public Color color;
         public float time;
         public Ease ease;
     }
@@ -16,23 +32,16 @@ namespace WheelOfFortune.Settings
     [CreateAssetMenu(menuName = "Wheel Of Fortune/Wheel/Wheel Settings")]
     public class WheelSettings : ScriptableObject
     {
-        [Serializable]
-        public struct RotateAnim
-        {
-            public Tween tween;
-            public float angle;
-        }
-
         [Header("Spin Animations")]
-        public RotateAnim spinStartAnim;
-        public RotateAnim spinLoopAnim;
-        public RotateAnim spinEndAnim;
+        public TweenVector3 spinStartRotationAnim;
+        public TweenVector3 spinLoopRotationAnim;
+        public TweenVector3 spinEndRotationAnim;
         [SerializeField] private int _spinAnimLoop = 3;
 
         [Header("Indicator Animations")]
-        public RotateAnim indicatorStartAnim;
-        public RotateAnim indicatorLoopAnim;
-        public RotateAnim indicatorEndAnim;
+        public TweenVector3 indicatorStartRotationAnim;
+        public TweenVector3 indicatorLoopRotationAnim;
+        public TweenVector3 indicatorEndRotationAnim;
         [SerializeField] private float _indicatorAnimTimePerLoop = 0.1f;
 
         [Header("Tier Bombs Config (Max Exclusive)")]

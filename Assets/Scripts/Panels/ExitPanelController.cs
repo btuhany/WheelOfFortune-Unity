@@ -82,39 +82,39 @@ namespace WheelOfFortune.Panels
         {
             this.gameObject.SetActive(true);
             await _backgroundImg.DOFade(
-                _settings.BackgroundColorAlpha, _settings.BackgroundFadeAnimTime)
-                .SetEase(_settings.BackgroundFadeAnimEase).ToUniTask();
+                _settings.BackgroundFadeAnim.value, _settings.BackgroundFadeAnim.time)
+                .SetEase(_settings.BackgroundFadeAnim.ease).ToUniTask();
             SetButtons(true, false, _yesButton, _noButton);
         }
         public List<UniTask> PlayEnterQuestionButtons()
         {
             List<UniTask> fadeAnims = new List<UniTask>();
-            fadeAnims.Add(_textQuestion.DOFade(1.0f, _settings.TextFadeAnimTime)
-                .SetEase(_settings.SpawnAnimEase).ToUniTask());
-            fadeAnims.Add(_yesButton.transform.DOScale(1.0f, _settings.ButtonsScaleAnimTime)
-                .SetEase(_settings.SpawnAnimEase).ToUniTask());
-            fadeAnims.Add(_noButton.transform.DOScale(1.0f, _settings.ButtonsScaleAnimTime)
-                .SetEase(_settings.SpawnAnimEase).ToUniTask());
+            fadeAnims.Add(_textQuestion.DOFade(_settings.TextShowFadeAnim.value, _settings.TextShowFadeAnim.time)
+                .SetEase(_settings.TextShowFadeAnim.ease).ToUniTask());
+            fadeAnims.Add(_yesButton.transform.DOScale(_settings.ButtonShowScaleAnim.value, _settings.ButtonShowScaleAnim.time)
+                .SetEase(_settings.ButtonShowScaleAnim.ease).ToUniTask());
+            fadeAnims.Add(_noButton.transform.DOScale(_settings.ButtonShowScaleAnim.value, _settings.ButtonShowScaleAnim.time)
+                .SetEase(_settings.ButtonShowScaleAnim.ease).ToUniTask());
             return fadeAnims;
         }
         public async UniTask ResetQuestionButtons()
         {
             List<UniTask> fadeAnims = new List<UniTask>();
-            fadeAnims.Add(_textQuestion.DOFade(0.0f, _settings.TextFadeAnimTime)
-                .SetEase(_settings.SpawnAnimEase)
+            fadeAnims.Add(_textQuestion.DOFade(_settings.TextHideFadeAnim.value, _settings.TextHideFadeAnim.time)
+                .SetEase(_settings.TextHideFadeAnim.ease)
                 .ToUniTask());
-            fadeAnims.Add(_yesButton.transform.DOScale(0.0f, _settings.ButtonsScaleAnimTime)
-                .SetEase(_settings.SpawnAnimEase).ToUniTask());
-            fadeAnims.Add(_noButton.transform.DOScale(0.0f, _settings.ButtonsScaleAnimTime)
-                .SetEase(_settings.SpawnAnimEase).ToUniTask());
+            fadeAnims.Add(_yesButton.transform.DOScale(_settings.ButtonHideScaleAnim.value, _settings.ButtonHideScaleAnim.time)
+                .SetEase(_settings.ButtonHideScaleAnim.ease).ToUniTask());
+            fadeAnims.Add(_noButton.transform.DOScale(_settings.ButtonHideScaleAnim.value, _settings.ButtonHideScaleAnim.time)
+                .SetEase(_settings.ButtonHideScaleAnim.ease).ToUniTask());
 
             await UniTask.WhenAll(fadeAnims);
         }
         public async UniTask ResetBackground()
         {
             await _backgroundImg.DOFade(
-                0.0f, _settings.BackgroundFadeAnimTime)
-                .SetEase(_settings.BackgroundFadeAnimEase).ToUniTask();
+                _settings.BackgroundHideFadeAnim.value, _settings.BackgroundHideFadeAnim.time)
+                .SetEase(_settings.BackgroundHideFadeAnim.ease).ToUniTask();
             this.gameObject.SetActive(false);
         }
 

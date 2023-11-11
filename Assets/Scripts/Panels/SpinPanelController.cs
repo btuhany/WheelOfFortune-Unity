@@ -47,12 +47,12 @@ namespace WheelOfFortune.Panels
             SpinButtonSet(false);
             OnButtonClickedSpin?.Invoke();
         }
-        private void SetWheelPanelZoneType(Sprite spinSprite, Sprite indicatorSprite, string zoneHeader, Color zoneHeaderCol)
+        private void SetWheelPanelZoneType(SpinPanelSettings.SpinPanelAppearance spinPanel)
         {
-            _imageWheelSpin.sprite = spinSprite;
-            _imageWheelIndicator.sprite = indicatorSprite;
-            _textHeaderSpin.text = zoneHeader;
-            _textHeaderSpin.color = zoneHeaderCol;
+            _imageWheelSpin.sprite = spinPanel.spriteSpin;
+            _imageWheelIndicator.sprite = spinPanel.spriteIndicator;
+            _textHeaderSpin.text = spinPanel.textHeader;
+            _textHeaderSpin.color = spinPanel.textHeaderColor;
         }
         public void SpinButtonSet(bool isActive)
         {
@@ -60,18 +60,18 @@ namespace WheelOfFortune.Panels
         }
         public async UniTask HideSpinPanelAnimation()
         {
-            await UniTask.Delay(_settings.DelayHidePanel);
+            await UniTask.Delay(_settings.HidePanelMillisecondsDelay);
             await _rectTransform.DOScaleX(
-                _settings.SpinPanelHidedScaleX,
-                _settings.AnimHideSpinPanelTime)
-                .SetEase(_settings.AnimHideSpinPanelEase).ToUniTask();
+                _settings.HidePanelAnim.value,
+                _settings.HidePanelAnim.time)
+                .SetEase(_settings.HidePanelAnim.ease).ToUniTask();
         }
         public async UniTask ShowSpinPanelAnimation()
         {
             await _rectTransform.DOScaleX(
-                _settings.SpinPanelDefaultScaleX,
-                _settings.AnimShowSpinPanelTime)
-                .SetEase(_settings.AnimShowSpinPanelEase).ToUniTask();
+                _settings.ShowPanelAnim.value,
+                _settings.ShowPanelAnim.time)
+                .SetEase(_settings.ShowPanelAnim.ease).ToUniTask();
             SpinButtonSet(true);
         }
         public void HandleOnZoneChanged(ZonesPanelController.ZoneType zoneType)
@@ -82,16 +82,13 @@ namespace WheelOfFortune.Panels
             switch (zoneType)
             {
                 case ZonesPanelController.ZoneType.Normal:
-                    SetWheelPanelZoneType(_settings.SpriteNormalZoneSpin, _settings.SpriteNormalZoneIndicator,
-                        _settings.StringHeaderNormalZone, _settings.ColorTextNormalZone);
+                    SetWheelPanelZoneType(_settings.NormalZoneAppear);
                     break;
                 case ZonesPanelController.ZoneType.Safe:
-                    SetWheelPanelZoneType(_settings.SpriteSafeZoneSpin, _settings.SpriteSafeZoneIndicator,
-                        _settings.StringHeaderSafeZone, _settings.ColorTextSafeZone);
+                    SetWheelPanelZoneType(_settings.SafeZoneAppear);
                     break;
                 case ZonesPanelController.ZoneType.Super:
-                    SetWheelPanelZoneType(_settings.SpriteSuperZoneSpin, _settings.SpriteSuperZoneIndicator,
-                        _settings.StringHeaderSuperZone, _settings.ColorTextSuperZone);
+                    SetWheelPanelZoneType(_settings.SuperZoneAppear);
                     break;
                 default:
                     break;

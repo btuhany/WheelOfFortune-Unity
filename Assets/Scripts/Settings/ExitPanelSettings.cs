@@ -7,20 +7,19 @@ namespace WheelOfFortune.Settings
     public class ExitPanelSettings : ScriptableObject
     {
         [Header("Background")]
-        [SerializeField] private float _backgroundColorAlpha = 0.8f;
-        [SerializeField] private float _backgroundFadeAnimTime = 0.3f;
-        [SerializeField] private Ease _backgroundFadeAnimEase;
-        [Header("Text")]
-        [SerializeField] private float _textFadeAnimTime = 0.3f;
+        [SerializeField] private TweenFloat _backgroundShowFadeAnim;
+        [SerializeField] private TweenFloat _backgroundHideFadeAnim;
+        [Header("Question Text")]
+        [SerializeField] private TweenFloat _textHideFadeAnim;
+        [SerializeField] private TweenFloat _textShowFadeAnim;
         [Header("Buttons")]
-        [SerializeField] private float _buttonsScaleAnimTime = 0.3f;
-        [Header("Text & Button")]
-        [SerializeField] private Ease _spawnAnimEase = Ease.Flash;
-        public float BackgroundColorAlpha { get => _backgroundColorAlpha; }
-        public float BackgroundFadeAnimTime { get => _backgroundFadeAnimTime; }
-        public Ease BackgroundFadeAnimEase { get => _backgroundFadeAnimEase; }
-        public float TextFadeAnimTime { get => _textFadeAnimTime; }
-        public float ButtonsScaleAnimTime { get => _buttonsScaleAnimTime; }
-        public Ease SpawnAnimEase { get => _spawnAnimEase; }
+        [SerializeField] private TweenVector3 _buttonHideScaleAnim;
+        [SerializeField] private TweenVector3 _buttonShowScaleAnim;
+        public TweenFloat BackgroundFadeAnim { get => _backgroundShowFadeAnim; }
+        public TweenFloat TextHideFadeAnim { get => _textHideFadeAnim; }
+        public TweenFloat TextShowFadeAnim { get => _textShowFadeAnim; }
+        public TweenVector3 ButtonHideScaleAnim { get => _buttonHideScaleAnim; }
+        public TweenVector3 ButtonShowScaleAnim { get => _buttonShowScaleAnim; }
+        public TweenFloat BackgroundHideFadeAnim { get => _backgroundHideFadeAnim; }
     }
 }

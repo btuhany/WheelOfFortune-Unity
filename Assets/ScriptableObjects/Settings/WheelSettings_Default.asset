@@ -12,26 +12,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d20ce5d3c56e5c14fa5ac2d399979376, type: 3}
   m_Name: WheelSettings_Default
   m_EditorClassIdentifier: 
-  _animSpinStartDegree: -360
-  _animSpinStartTime: 1.55
-  _animSpinStartEase: 26
-  _animSpinDegree: -360
-  _animSpinTime: 0.6
-  _animSpinEase: 1
-  _animSpinLoopCount: 3
-  _animSpinEndTime: 2
-  _animSpinEndEase: 27
-  _animIndicatorStartSwingTime: 0.1
-  _animIndicatorSwingTimePerLoop: 0.1
-  _animIndicatorEndSwingTime: 0.35
-  _animIndicatorDegree: 60
-  _animIndicatorEndSwingAngle: 15
-  _animIndicatorStartSwingAngle: 5
-  _animIndicatorStopEase: 28
-  _bombCountTierOneMin: 1
-  _bombCountTierOneMax: 3
+  spinStartRotationAnim:
+    value: {x: 0, y: 0, z: -360}
+    time: 1.55
+    ease: 26
+  spinLoopRotationAnim:
+    value: {x: 0, y: 0, z: -360}
+    time: 0.6
+    ease: 1
+  spinEndRotationAnim:
+    value: {x: 0, y: 0, z: 0}
+    time: 2
+    ease: 27
+  _spinAnimLoop: 3
+  indicatorStartRotationAnim:
+    value: {x: 0, y: 0, z: 5}
+    time: 0.1
+    ease: 1
+  indicatorLoopRotationAnim:
+    value: {x: 0, y: 0, z: 60}
+    time: 0.1
+    ease: 1
+  indicatorEndRotationAnim:
+    value: {x: 0, y: 0, z: 15}
+    time: 0.35
+    ease: 28
+  _indicatorAnimTimePerLoop: 0.1
+  _bombCountTierOneMin: 8
+  _bombCountTierOneMax: 9
   _bombCountTierTwoMin: 1
   _bombCountTierTwoMax: 4
   _bombCountTierThreeMin: 2
-  _bombCountTierThreeMax: 5
+  _bombCountTierThreeMax: 4
   _bombItem: {fileID: 11400000, guid: c3c21e7803f55274caa142a6bc4666f8, type: 2}
+  _anglePerSlice: 45

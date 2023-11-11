@@ -5,6 +5,12 @@ using WheelOfFortune.Panels;
 
 namespace WheelOfFortune.Settings
 {
+    [System.Serializable]
+    public struct Tween
+    {
+        public float time;
+        public Ease ease;
+    }
     [CreateAssetMenu(menuName = "Wheel Of Fortune/Panels/Rewards Panel Settings")]
     public class RewardsPanelSettings : ScriptableObject
     {
@@ -13,73 +19,57 @@ namespace WheelOfFortune.Settings
         [SerializeField] private Image _rewardContentImage;  //Used in animation.
         [SerializeField] private int _rewPartCountMaxPartLimit = 1;
 
-        [Header("Reward Part Gather Animation")]
-        [Tooltip("Milliseconds")][SerializeField] private int _gatherAnimStartMillisecondDelay = 200; 
+        [Header("Reward Config")]
+        [SerializeField] private TweenVector3 _rewardCollectReactionAnim;
+
+        [Header("Reward Parts Config")]
         [SerializeField] private int _gatherMaxRewPart = 10;
         [SerializeField] private int _gatherRewPartsDelayFrame = 1;
-        [Tooltip("Milliseconds")][SerializeField] private int _moveRewPartsMinMillisecondDelay = 10;
-        [Tooltip("Milliseconds")][SerializeField] private int _moveRewPartsMaxMillisecondDelay = 400;
-        [SerializeField] private float _moveRewPartTime = 1.0f;
-        [SerializeField] private Ease _moveRewPartEase = Ease.InOutBounce;
-        [SerializeField] private Vector3 _collectionTargetScale;
-        [SerializeField] private float _collectionReactTime = 0.2f;
-        [SerializeField] private float _collectionReactScaleFactor = 1.2f;
-        [SerializeField] private Ease _collectionReactEase = Ease.InOutElastic;
-        [SerializeField] private Vector2 _spawnMoveOffsetMinVector;
-        [SerializeField] private Vector2 _spawnMoveOffsetMaxVector;
-        [SerializeField] private float _spawnMoveOffsetTime = 1f;
-        [SerializeField] private Ease _spawnMoveOffsetEase = Ease.InElastic;
-        [SerializeField] private float _spawnRewPartScaleFactor = 1.2f;
-        [SerializeField] private float _spawnRewPartScaleTime = 0.3f;
-        [SerializeField] private Ease _spawnRePartScaleEase = Ease.OutElastic;
+        [Tooltip("Milliseconds")][SerializeField] private int _spawnRewPartsMillisecondsDelay = 200; 
+        [SerializeField] private int _moveRewPartsMinMillisecondsDelay;
+        [SerializeField] private int _moveRewPartsMaxMillisecondsDelay;
+        [SerializeField] private Tween _rewPartMoveAnim;
+        [SerializeField] private TweenVector3 _rewPartCollectScaleAnim;
+        [SerializeField] private Vector3 _rewPartsMoveOffsetMinVector;
+        [SerializeField] private Vector3 _rewPartsMoveOffsetMaxVector;
+        [SerializeField] private Tween _rewPartsMoveOffsetAnim;
+        [SerializeField] private TweenVector3 _rewPartSpawnScaleAnim;
 
         [Header("Exit Button")]
-        [SerializeField] private float _btnExitHideAnimTime = 0.2f;
-        [SerializeField] private float _btnExitUnhideAnimTime = 0.2f;
-        [SerializeField] private Ease _btnExitHideAnimEase = Ease.Flash;
-        [SerializeField] private Ease _btnExitUnhideAnimEase = Ease.Flash;
+        [SerializeField] private TweenVector3 _btnExitHideAnim;
+        [SerializeField] private TweenVector3 _btnExitUnhideAnim;
 
         [Header("At Exit")]
-        [SerializeField] private float _exitMoveAnimTime = 0.5f;
-        [SerializeField] private Ease _exitMoveAnimEase;
+        [SerializeField] private Tween _exitPanelMoveAnim;
         [SerializeField] private float _exitShowRewsSizeDelta = 0.2f;
         [SerializeField] private int _exitShowRewsGridConstraint = 2;
         [SerializeField] private int _exitUnshowRewsGridConstraint = 1;
         [SerializeField] private float _heightFactorSizeDeltaY = 0.5f;
         [SerializeField] private float _heightFactorAnchorPosY = 0.125f;
 
-
+        public int MoveRewPartsRandomMillisecondsDelay => Random.Range(_moveRewPartsMinMillisecondsDelay, _moveRewPartsMaxMillisecondsDelay);
+        public Vector3 RewPartsRandomOffsetMove => new Vector3(
+            Random.Range(_rewPartsMoveOffsetMinVector.x, _rewPartsMoveOffsetMaxVector.x),
+            Random.Range(_rewPartsMoveOffsetMinVector.y, _rewPartsMoveOffsetMaxVector.y),
+            Random.Range(_rewPartsMoveOffsetMinVector.z, _rewPartsMoveOffsetMaxVector.z));
         public RewardController RewardsPanelContentPrefab { get => _rewardsPanelContentPrefab; }
         public Image RewardContentImage { get => _rewardContentImage; }
         public int GatherMaxRewPart { get => _gatherMaxRewPart; }
         public int GatherRewPartsDelayFrame { get => _gatherRewPartsDelayFrame; }
-        public float MoveRewPartsMillisecondMinDelay { get => _moveRewPartsMinMillisecondDelay; }
-        public float MoveRewPartsMillisecondMaxDelay { get => _moveRewPartsMaxMillisecondDelay; }
-        public float MoveRewPartTime { get => _moveRewPartTime; }
-        public float CollectionReactScaleFactor { get => _collectionReactScaleFactor; }
-        public float CollectionReactTime { get => _collectionReactTime; }
-        public Ease CollectionReactEase { get => _collectionReactEase; }
-        public Ease MoveRewPartEase { get => _moveRewPartEase; }
-        public float SpawnRewPartScaleFactor { get => _spawnRewPartScaleFactor; }
-        public float SpawnRewPartScaleTime { get => _spawnRewPartScaleTime; }
-        public Ease SpawnRewPartScaleEase { get => _spawnRePartScaleEase; }
-        public float SpawnMoveOffsetTime { get => _spawnMoveOffsetTime; }
-        public Ease SpawnMoveOffsetEase { get => _spawnMoveOffsetEase; }
-        public Vector2 SpawnMoveOffsetMinVector { get => _spawnMoveOffsetMinVector; }
-        public Vector2 SpawnMoveOffsetMaxVector { get => _spawnMoveOffsetMaxVector; }
-        public int GatherAnimStartMillisecondDelay { get => _gatherAnimStartMillisecondDelay; }
-        public float ExitBtnHideAnimTime { get => _btnExitHideAnimTime; }
-        public float ExitBtnUnhideAnimTime { get => _btnExitUnhideAnimTime; }
-        public Ease ExitBtnHideAnimEase { get => _btnExitHideAnimEase; }
-        public Ease ExitBtnUnhideAnimEase { get => _btnExitUnhideAnimEase; }
-        public Vector3 CollectionTargetScale { get => _collectionTargetScale; }
-        public float ExitMoveAnimTime { get => _exitMoveAnimTime; }
-        public Ease ExitMoveAnimEase { get => _exitMoveAnimEase; }
+        public int SpawnRewPartsMillisecondsDelay { get => _spawnRewPartsMillisecondsDelay; }
         public float ExitShowRewsSizeDelta { get => _exitShowRewsSizeDelta; }
         public int ExitShowRewsGridConstraint { get => _exitShowRewsGridConstraint; }
         public float HeightDividerSizeDeltaY { get => _heightFactorSizeDeltaY; }
         public float HeightDividerAnchorPosY { get => _heightFactorAnchorPosY; }
         public int ExitUnshowRewsGridConstraint { get => _exitUnshowRewsGridConstraint; }
         public int RewPartCountMaxPartLimit { get => _rewPartCountMaxPartLimit; }
+        public TweenVector3 RewardCollectReactionAnim { get => _rewardCollectReactionAnim; }
+        public TweenVector3 RewPartSpawnScaleAnim { get => _rewPartSpawnScaleAnim; }
+        public Tween RewPartMoveAnim { get => _rewPartMoveAnim; }
+        public TweenVector3 RewPartCollectScaleAnim { get => _rewPartCollectScaleAnim; }
+        public Tween RewPartsMoveOffsetAnim { get => _rewPartsMoveOffsetAnim; }
+        public Tween ExitPanelMoveAnim { get => _exitPanelMoveAnim; }
+        public TweenVector3 BtnExitHideAnim { get => _btnExitHideAnim; }
+        public TweenVector3 BtnExitUnhideAnim { get => _btnExitUnhideAnim; }
     }
 }

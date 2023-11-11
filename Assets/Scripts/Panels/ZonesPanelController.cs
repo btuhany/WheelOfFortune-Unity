@@ -97,9 +97,9 @@ namespace WheelOfFortune.Panels
 
             colorSequence.Append(
                 _zoneBackgroundImg.DOColor(
-                    _settings.ZoneBgColorFadeAnim,
-                    _settings.ZoneBgColorFadeAnimTime)
-                .SetEase(_settings.ZoneBgClrFadeStartEase));
+                    _settings.ZoneBgClrFadeAnim.color,
+                    _settings.ZoneBgClrFadeAnim.time)
+                .SetEase(_settings.ZoneBgClrFadeAnim.ease));
 
             colorSequence.AppendCallback(
                 () => ChangeZoneBgImg(GetZoneType(_counterZone)));
@@ -107,8 +107,8 @@ namespace WheelOfFortune.Panels
             colorSequence.Append(
                 _zoneBackgroundImg.DOColor(
                     Color.white,
-                    _settings.ZoneBgColorFadeAnimTime)
-                .SetEase(_settings.ZoneBgClrFadeEndEase));
+                    _settings.ZoneBgClrFadeAnim.time)
+                .SetEase(_settings.ZoneBgClrFadeAnim.ease));
         }
         private ZoneType GetZoneType(int zoneValue)
         {
@@ -159,16 +159,16 @@ namespace WheelOfFortune.Panels
             for (int i = 0; i < returnObjectCount; i++)
                 UITextZonePool.Instance.ReturnObject(_zonesList[_counterZone - returnObjectCount - i]);
             _gridHolderRect.DOLocalMove(
-            _gridHolderRect.localPosition - _settings.GroupSlideDir * _zoneRectWidth * returnObjectCount,
-            _settings.ScrollTime * _settings.GridHolderRectTimeFactor)
-            .SetEase(Ease.Linear).ToUniTask();
+            _gridHolderRect.localPosition - _settings.ScrollAnim.value * _zoneRectWidth * returnObjectCount,
+            _settings.ScrollAnim.time * _settings.GridHolderRectTimeFactor)
+            .SetEase(_settings.ScrollAnim.ease).ToUniTask();
         }
         public async void ScrollZones(int value)
         {
             await _gridHolderRect.DOLocalMove(
-                _gridHolderRect.localPosition + _settings.GroupSlideDir * _zoneRectWidth * value,
-                _settings.ScrollTime)
-                .SetEase(_settings.ScrollEase).ToUniTask();
+                _gridHolderRect.localPosition + _settings.ScrollAnim.value * _zoneRectWidth * value,
+                _settings.ScrollAnim.time)
+                .SetEase(_settings.ScrollAnim.ease).ToUniTask();
 
             _counterZone += value;
             _counterZoneGroupRtrnPool++;

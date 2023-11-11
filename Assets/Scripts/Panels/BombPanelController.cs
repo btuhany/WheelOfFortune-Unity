@@ -22,7 +22,7 @@ namespace WheelOfFortune.Panels
         [SerializeField] private Button _reviveButton;
         [SerializeField] private Button _giveUpButton;
         private Sequence _animHeartbeat;
-        private Tween _animFlashRotation;
+        private DG.Tweening.Tween _animFlashRotation;
 
         public event System.Action OnBtnClkGiveUp;
         public event System.Action OnBtnClkRevive;
@@ -55,14 +55,15 @@ namespace WheelOfFortune.Panels
         }
         private void InitializeAnimHeartbeat()
         {
+            TweenVector3 heartbeatAnim = _settings.BombHeartbeatScaleAnim;
             _animHeartbeat = DOTween.Sequence();
             _animHeartbeat.Append(_imgAnimsHolder.
-                DOPunchScale(_settings.BombAnimPunchScale, _settings.BombAnimTime))
-                .SetEase(_settings.BombAnimEase);
+                DOPunchScale(heartbeatAnim.value, heartbeatAnim.time))
+                .SetEase(heartbeatAnim.ease);
             _animHeartbeat.AppendInterval(_settings.BombAnimPunchInterval);
             _animHeartbeat.Append(_imgAnimsHolder.
-                DOPunchScale(_settings.BombAnimPunchScale, _settings.BombAnimTime))
-                .SetEase(_settings.BombAnimEase);
+                DOPunchScale(heartbeatAnim.value, heartbeatAnim.time))
+                .SetEase(heartbeatAnim.ease);
             _animHeartbeat.AppendInterval(_settings.BombAnimLoopInterval);
             _animHeartbeat.SetLoops(-1, LoopType.Restart);
             _animHeartbeat.Pause();
@@ -70,10 +71,10 @@ namespace WheelOfFortune.Panels
         private void InitializeAnimFlashRotation()
         {
             _animFlashRotation = _imgFlash.transform.DOLocalRotate(
-                new Vector3(0f, 0f, -360f),
-                _settings.FlashRotationTimePeriod, RotateMode.FastBeyond360)
+                _settings.FlashRotateAnim.value,
+                _settings.FlashRotateAnim.time, RotateMode.FastBeyond360)
                 .SetRelative(true)
-                .SetEase(Ease.Linear)
+                .SetEase(_settings.FlashRotateAnim.ease)
                 .SetLoops(-1, LoopType.Incremental);
             _animFlashRotation.Pause();
         }
@@ -123,8 +124,8 @@ namespace WheelOfFortune.Panels
             fadeAnims.Add(_imgBackground.DOFade(1.0f, _settings.BackgroundFadeTime).ToUniTask());
             fadeAnims.Add(_imgFlash.DOFade(_settings.FlashImgAlphaVal, _settings.FlashImgFadeTime).ToUniTask());
             fadeAnims.Add(_imgFlash.transform
-                .DOScale(Vector3.one, _settings.FlashImgScaleAnimTime)
-                .SetEase(_settings.FlashImgScaleAnimEase)
+                .DOScale(_settings.FlashStartScaleAnim.value, _settings.FlashStartScaleAnim.time)
+                .SetEase(_settings.FlashStartScaleAnim.ease)
                 .OnComplete(PlayFlashAnim).ToUniTask());
 
             await UniTask.WhenAll(fadeAnims);

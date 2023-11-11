@@ -100,11 +100,11 @@ namespace WheelOfFortune.Managers
             if (_zonesPanelController.CurrentZone > 1 && _zonesPanelController.CurrentZoneType == ZoneType.Normal)
             {
                 if (_zonesPanelController.CurrentZone > _settings.TierThreeLimit)
-                    _spinPanelController.WheelController.RandomizeItemsWithTiers(ItemTier.One);
+                    _spinPanelController.WheelController.RandomizeItemsWithTiers(ItemTier.Three);
                 else if (_zonesPanelController.CurrentZone > _settings.TierTwoLimit)
                     _spinPanelController.WheelController.RandomizeItemsWithTiers(ItemTier.Two);
                 else if (_zonesPanelController.CurrentZone > _settings.TierOneLimit)
-                    _spinPanelController.WheelController.RandomizeItemsWithTiers(ItemTier.Three);
+                    _spinPanelController.WheelController.RandomizeItemsWithTiers(ItemTier.One);
             }
         }
     }

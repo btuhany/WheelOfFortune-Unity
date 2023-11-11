@@ -1305,6 +1305,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: ui_panel_spin
       objectReference: {fileID: 0}
+    - target: {fileID: 6174319149493266191, guid: a3cf89e35d3ba0a419047432fb80a310, type: 3}
+      propertyPath: _tierOneSliceContents
+      value: 
+      objectReference: {fileID: 11400000, guid: b0165f7e844013a40b083e2bc1cf6b3b, type: 2}
+    - target: {fileID: 6174319149493266191, guid: a3cf89e35d3ba0a419047432fb80a310, type: 3}
+      propertyPath: _normalZoneSliceContents
+      value: 
+      objectReference: {fileID: 11400000, guid: a97e85b0ab9d8294aa2e7ddce303da3d, type: 2}
     - target: {fileID: 7886408088210913673, guid: a3cf89e35d3ba0a419047432fb80a310, type: 3}
       propertyPath: m_SizeDelta.x
       value: 75.8
@@ -1325,6 +1333,10 @@ PrefabInstance:
     - target: {fileID: 4466259264804433608, guid: 927c757d01b738e41acbd1a784a489f1, type: 3}
       propertyPath: m_Name
       value: '[UIRewardHolderPool]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4466259264804433608, guid: 927c757d01b738e41acbd1a784a489f1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4937531052648037035, guid: 927c757d01b738e41acbd1a784a489f1, type: 3}
       propertyPath: m_Pivot.x

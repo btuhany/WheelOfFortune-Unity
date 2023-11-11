@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using WheelOfFortune.Items;
 using WheelOfFortune.Settings;
-using WheelOfFortune.Wheel;
 
 namespace WheelOfFortune.Panels
 {
@@ -49,16 +48,16 @@ namespace WheelOfFortune.Panels
             HandleOnAnimStart(content);
 
             await _rectTransform.DOScaleX(
-                _settings.ContentPanelDefaultScaleX,
-                _settings.AnimShowSliceContentTime)
-                .SetEase(_settings.AnimShowSliceEase).ToUniTask();
+                _settings.ShowContentPanelAnim.value,
+                _settings.ShowContentPanelAnim.time)
+                .SetEase(_settings.ShowContentPanelAnim.ease).ToUniTask();
         }
         public async UniTask HideContentAnimation()
         {
             await _rectTransform.DOScaleX(
-                _settings.ContentPanelHidedScaleX,
-                _settings.AnimHideSliceContentTime)
-                .SetEase(_settings.AnimHideSliceContentEase).ToUniTask();
+                _settings.HideContentPanelAnim.value,
+                _settings.HideContentPanelAnim.time)
+                .SetEase(_settings.HideContentPanelAnim.ease).ToUniTask();
             
             HandleOnAnimEnd();
         }
