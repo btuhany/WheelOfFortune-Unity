@@ -56,6 +56,7 @@ namespace WheelOfFortune.Settings
         [SerializeField] private WheelItem _bombItem;
 
         [Header("Config")]
+        [SerializeField] private int _sliceCount = 8;
         [SerializeField] private float _anglePerSlice = 45f;
 
         public int BombCountTierOneMin { get => _bombCountTierOneMin; }
@@ -68,5 +69,6 @@ namespace WheelOfFortune.Settings
         public float AnglePerSlice { get => _anglePerSlice; }
         public float IndicatorAnimTimePerLoop { get => _indicatorAnimTimePerLoop; }
         public int SpinAnimLoop { get => _spinAnimLoop; }
+        public int SliceCount { get => _sliceCount; }
     }
 }

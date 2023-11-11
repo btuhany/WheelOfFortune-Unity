@@ -282,7 +282,7 @@ namespace WheelOfFortune.Panels
         }
         public async UniTask UnshowEndRewards(RectTransform targetRectTransfrom)
         {
-            _gridLayout.constraintCount = 1;
+            _gridLayout.constraintCount = _settings.ExitUnshowRewsGridConstraint;
             _rectMask.offsetMin = Vector2.zero;
             await UniTask.WhenAll(ShowEndRewardsTasks(_initialRectSizeDeltaY, _initalRectAnchoredPosY));
             List<UniTask> animTasksAnchor = new List<UniTask>();

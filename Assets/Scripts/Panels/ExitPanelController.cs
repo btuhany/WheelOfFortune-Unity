@@ -52,10 +52,12 @@ namespace WheelOfFortune.Panels
             SetButtons(false, true, _yesButton, _noButton);
             
             Color startColor = _backgroundImg.color;
-            _backgroundImg.color = new Color(startColor.r, startColor.g, startColor.b, 0.0f);
+            startColor.a = 0f;
+            _backgroundImg.color = startColor;
 
             startColor = _textQuestion.color;
-            _textQuestion.color = new Color(startColor.r, startColor.g, startColor.b, 0.0f);
+            startColor.a = 0f;
+            _textQuestion.color = startColor;
                 
             this.gameObject.SetActive(false);
         }

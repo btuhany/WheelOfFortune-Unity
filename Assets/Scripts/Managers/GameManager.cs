@@ -19,6 +19,7 @@ namespace WheelOfFortune.Managers
         [SerializeField] private ExitPanelController _exitPanelController;
         [SerializeField] private SpinPanelController _spinPanelController;
         [SerializeField] private ZonesInfoPanelController _zonesInfoPanelController;
+
         private void OnEnable()
         {
             _bombPanelController.OnBtnClkGiveUp += HandleOnGiveUp;

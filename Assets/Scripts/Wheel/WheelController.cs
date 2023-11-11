@@ -32,7 +32,7 @@ namespace WheelOfFortune.Wheel
         private const int _fullRotationDegree = 360;
         #endregion
 
-        private WheelSliceController[] _sliceControllers = new WheelSliceController[8];
+        private WheelSliceController[] _sliceControllers;
 
         [ContextMenu("Update Slice Normal Zone Contents")]
         private void UpdateSliceContentsNormalZone()
@@ -89,7 +89,7 @@ namespace WheelOfFortune.Wheel
         }
         private void SetSameContentCountsEqual(WheelItem item)
         {
-            for (int j = 0; j < 8; j++)
+            for (int j = 0; j < _settings.SliceCount; j++)
             {
                 if (item == _sliceControllers[j].Content)
                 {
@@ -99,12 +99,12 @@ namespace WheelOfFortune.Wheel
         }
         private void PlayIndicatorStartAnim()
         {
-            TweenVector3 indicatorAnim = _settings.indicatorStartRotationAnim;
+            TweenVector3 indicatorStartAnim = _settings.indicatorStartRotationAnim;
             Sequence sequence = DOTween.Sequence();
-            sequence.Append(_rectSpinIndicator.DOLocalRotate(new Vector3(indicatorAnim.value.x, indicatorAnim.value.y, -indicatorAnim.value.z), indicatorAnim.time));
-            sequence.Append(_rectSpinIndicator.DOLocalRotate(indicatorAnim.value, indicatorAnim.time));
-            sequence.SetEase(indicatorAnim.ease);
-            int loop = (int)(_settings.spinStartRotationAnim.time / (indicatorAnim.time * 2));
+            sequence.Append(_rectSpinIndicator.DOLocalRotate(new Vector3(indicatorStartAnim.value.x, indicatorStartAnim.value.y, -indicatorStartAnim.value.z), indicatorStartAnim.time));
+            sequence.Append(_rectSpinIndicator.DOLocalRotate(indicatorStartAnim.value, indicatorStartAnim.time));
+            sequence.SetEase(indicatorStartAnim.ease);
+            int loop = (int)(_settings.spinStartRotationAnim.time / (indicatorStartAnim.time * 2));
             sequence.SetLoops(loop);
         }
         private void PlayIndicatorAnim()
@@ -155,10 +155,10 @@ namespace WheelOfFortune.Wheel
                 bombCount = Random.Range(_settings.BombCountTierThreeMin, _settings.BombCountTierThreeMax);
                 itemGroup = _tierThreeSliceContents;
             }
+            bombCount = Mathf.Min(bombCount, _settings.SliceCount);
 
-
-            WheelItem[] randomItemGroup = new WheelItem[8];
-            for (int i = 0; i < 8; i++)
+            WheelItem[] randomItemGroup = new WheelItem[_settings.SliceCount];
+            for (int i = 0; i < _settings.SliceCount; i++)
             {
                 randomItemGroup[i] = itemGroup.Items[Random.Range(0, itemGroup.Items.Length)];
             }
@@ -167,21 +167,18 @@ namespace WheelOfFortune.Wheel
             //Add&Change with bombs
             for (int i = 0; i < bombCount; i++)
             {
-                if (i > 7 && bombCount > 8)
-                    break;
-
                 int randomIndex = Random.Range(0, _sliceControllers.Length);
                 WheelSliceController randomSlice = _sliceControllers[randomIndex];
 
-                int bombCounter = 0;
+                int counter = 0;
                 while (randomSlice.Content.Type == WheelItem.ItemType.Bomb)
                 {
-                    bombCounter++;
-                    if (bombCounter > 8)
+                    counter++;
+                    if (counter >= _settings.SliceCount)
                         break;
 
                     randomIndex++;
-                    if (randomIndex > 7)
+                    if (randomIndex == _settings.SliceCount)
                         randomIndex = 0;
 
                     randomSlice = _sliceControllers[randomIndex];

@@ -36,11 +36,8 @@ namespace WheelOfFortune.Tools
         public T GetObject(bool active = true)
         {
             if (!gameObject.activeSelf)
-            {
                 Debug.LogError("Pool object is not enabled!");
-            }
-
-            if (_pooledObjects == null)
+            else if (_pooledObjects == null)
                 InitializePool();
 
             if (_pooledObjects.Count <= 0)
