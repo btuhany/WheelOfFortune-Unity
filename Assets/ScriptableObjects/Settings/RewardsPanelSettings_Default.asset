@@ -34,12 +34,12 @@ MonoBehaviour:
   _rewPartsMoveOffsetMinVector: {x: -200, y: -200, z: 0}
   _rewPartsMoveOffsetMaxVector: {x: 200, y: 200, z: 0}
   _rewPartsMoveOffsetAnim:
-    time: 0.5
+    time: 0.4
     ease: 26
   _rewPartSpawnScaleAnim:
-    value: {x: 1.25, y: 1.25, z: 1.25}
+    value: {x: 1.15, y: 1.15, z: 1.15}
     time: 0.4
-    ease: 20
+    ease: 1
   _btnExitHideAnim:
     value: {x: 0, y: 0, z: 0}
     time: 0.1
