@@ -14,27 +14,45 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rewardsPanelContentPrefab: {fileID: -4314525041144641986, guid: ecff8276a55b55043ba15df094e1bdbc, type: 3}
   _rewardContentImage: {fileID: 3563871557339872935, guid: f91e76d9f6d3ba14789ef2d6d2b56f04, type: 3}
-  _gatherAnimStartDelay: 10
+  _rewPartCountMaxPartLimit: 1
+  _rewardCollectReactionAnim:
+    value: {x: 1, y: 1, z: 1}
+    time: 0.1
+    ease: 0
   _gatherMaxRewPart: 10
   _gatherRewPartsDelayFrame: 1
-  _moveRewPartsMinDelay: 10
-  _moveRewPartsMaxDelay: 100
-  _moveRewPartTime: 0.1
-  _moveRewPartEase: 31
-  _collectionTargetScale: {x: 0, y: 0, z: 0}
-  _collectionReactTime: 0.2
-  _collectionReactScaleFactor: 1.2
-  _collectionReactEase: 25
-  _spawnMoveOffsetMinVector: {x: 0, y: 0}
-  _spawnMoveOffsetMaxVector: {x: 0, y: 0}
-  _spawnMoveOffsetTime: 0.1
-  _spawnMoveOffsetEase: 23
-  _spawnRewPartScaleFactor: 1.2
-  _spawnRewPartScaleTime: 0.3
-  _spawnRePartScaleEase: 24
-  _btnExitHideAnimTime: 0.2
-  _btnExitUnhideAnimTime: 0.2
-  _btnExitHideAnimEase: 32
-  _btnExitUnhideAnimEase: 32
-  _exitMoveAnimTime: 0.1
-  _exitMoveAnimEase: 0
+  _spawnRewPartsMillisecondsDelay: 200
+  _moveRewPartsMinMillisecondsDelay: 0
+  _moveRewPartsMaxMillisecondsDelay: 0
+  _rewPartMoveAnim:
+    time: 0
+    ease: 0
+  _rewPartCollectScaleAnim:
+    value: {x: 1, y: 1, z: 1}
+    time: 0.1
+    ease: 0
+  _rewPartsMoveOffsetMinVector: {x: 0, y: 0, z: 0}
+  _rewPartsMoveOffsetMaxVector: {x: 0, y: 0, z: 0}
+  _rewPartsMoveOffsetAnim:
+    time: 0.1
+    ease: 0
+  _rewPartSpawnScaleAnim:
+    value: {x: 1, y: 1, z: 1}
+    time: 0.1
+    ease: 0
+  _btnExitHideAnim:
+    value: {x: 0, y: 0, z: 0}
+    time: 0
+    ease: 0
+  _btnExitUnhideAnim:
+    value: {x: 0, y: 0, z: 0}
+    time: 0
+    ease: 0
+  _exitPanelMoveAnim:
+    time: 0
+    ease: 0
+  _exitShowRewsSizeDelta: 0.2
+  _exitShowRewsGridConstraint: 2
+  _exitUnshowRewsGridConstraint: 1
+  _heightFactorSizeDeltaY: 0.5
+  _heightFactorAnchorPosY: 0.125

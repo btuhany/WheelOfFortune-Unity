@@ -27,8 +27,9 @@ namespace WheelOfFortune.Settings
         [SerializeField] private Sprite _zoneSpriteSuper;
         [Header("Return Pool Config")]
         [SerializeField] private float _gridHolderRectTimeFactor = 0.3f;
-        [SerializeField] private int _returnPoolMinZoneCountFactor = 5;
-        [SerializeField] private int _returnObjectsCountMaxCountDivider = 2;
+        [SerializeField] private int _returnObjectsCount = 2;
+        [SerializeField] private int _returnObjectLimit = 5;
+        [SerializeField] private int _addObjectCount = 5;
 
         public int GroupMaxActiveSize { get => _groupMaxActiveSize; }
         public Color ZoneSafeColor { get => _zoneSafeColor; }
@@ -43,10 +44,11 @@ namespace WheelOfFortune.Settings
         public float StartLocalPosFactor { get => _startLocalPosFactor; }
         public int PrewFilterMaxGroupSizeDif { get => _prewFilterMaxGroupSizeDif; }
         public float GridHolderRectTimeFactor { get => _gridHolderRectTimeFactor; }
-        public int ReturnPoolMinZoneCountFactor { get => _returnPoolMinZoneCountFactor; }
-        public int ReturnObjectsCountMaxCountDivider { get => _returnObjectsCountMaxCountDivider; }
+        public int ReturnObjectCount { get => _returnObjectsCount; }
         public TweenVector3 ScrollAnim { get => scrollAnim; }
         public TweenColor ZoneBgClrFadeAnim { get => _zoneBgClrFadeAnim; }
+        public int AddObjectCount { get => _addObjectCount; }
+        public int ReturnObjectLimit { get => _returnObjectLimit; }
     }
 }
 
