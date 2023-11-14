@@ -23,6 +23,7 @@ namespace WheelOfFortune.Panels
 
         private List<TextMeshProUGUI> _zonesList = new List<TextMeshProUGUI>();
         private Vector3 _gridHolderInitialPos;
+        private int _counterReturnedPoolObj = 0;
         private int _counterZone = 1;
         private int _counterZoneGroupRtrnPool = 0;
         private float _zoneRectWidth;
@@ -80,7 +81,7 @@ namespace WheelOfFortune.Panels
                 TextMeshProUGUI zoneText = UITextZonePool.Instance.GetObject(true);
                 zoneText.transform.SetParent(_zonesGridLayout.transform);
 
-                zoneText.text = i.ToString();
+                zoneText.text = (_zonesList.Count + 1).ToString();
 
                 _zonesList.Add(zoneText);
 
@@ -155,9 +156,13 @@ namespace WheelOfFortune.Panels
         }
         private void HandleScrollOnZonesReturnPool()
         {
-            int returnObjectCount = _settings.GroupMaxActiveSize / _settings.ReturnObjectsCountMaxCountDivider;
+            int returnObjectCount = _settings.ReturnObjectCount;
             for (int i = 0; i < returnObjectCount; i++)
-                UITextZonePool.Instance.ReturnObject(_zonesList[_counterZone - returnObjectCount - i]);
+            {
+                UITextZonePool.Instance.ReturnObject(_zonesList[_counterReturnedPoolObj + i]);
+            }
+            AddZones(_settings.AddObjectCount);
+            _counterReturnedPoolObj += returnObjectCount;
             _gridHolderRect.DOLocalMove(
             _gridHolderRect.localPosition - _settings.ScrollAnim.value * _zoneRectWidth * returnObjectCount,
             _settings.ScrollAnim.time * _settings.GridHolderRectTimeFactor)
@@ -173,7 +178,7 @@ namespace WheelOfFortune.Panels
             _counterZone += value;
             _counterZoneGroupRtrnPool++;
 
-            if (_counterZoneGroupRtrnPool > _settings.GroupMaxActiveSize * _settings.ReturnPoolMinZoneCountFactor)
+            if (_counterZoneGroupRtrnPool > _settings.ReturnObjectLimit)
             {
                 HandleScrollOnZonesReturnPool();
                 _counterZoneGroupRtrnPool = 0;
@@ -187,12 +192,15 @@ namespace WheelOfFortune.Panels
         {
             foreach (TextMeshProUGUI text in _zonesList)
             {
-                if (text.gameObject != null)
+                if (text != null && text.gameObject != null)
                     Destroy(text.gameObject);
             }
             _zonesList.Clear();
             _counterZone = 1;
+            _counterZoneGroupRtrnPool = 0;
+            _counterReturnedPoolObj = 0;
             AddZones(_settings.GroupMaxActiveSize * _settings.GroupsAtStart);
+            UpdateZoneTextColor();
             _gridHolderRect.anchoredPosition = _gridHolderInitialPos;
             OnZoneChangedEvent?.Invoke(GetZoneType(_counterZone));
         }
